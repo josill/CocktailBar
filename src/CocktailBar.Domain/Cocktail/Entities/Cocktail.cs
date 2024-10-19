@@ -2,17 +2,15 @@ using Ardalis.GuardClauses;
 using CocktailBar.Domain.Base;
 using CocktailBar.Domain.Cocktail.ValueObjects.Ids;
 
-namespace CocktailBar.Domain.Cocktail;
+namespace CocktailBar.Domain.Cocktail.Entities;
 
-public class Cocktail: ValueObject<Cocktail>
+public class Cocktail : AggregateRoot<CocktailId>
 {
     public string Name { get; private set; }
     public string Description { get; private set; }
-    // TODO: strength, category etc...
     public RecipeId RecipeId { get; private set; }
-    // public Recipe Recipe { get; private set; }
 
-    public Cocktail(string name, string description, RecipeId recipeId)
+    public Cocktail(string name, string description, RecipeId recipeId) : base(CocktailId.CreateUnique())
     {
         Validate(name, description);
         Name = name;
@@ -20,15 +18,10 @@ public class Cocktail: ValueObject<Cocktail>
         RecipeId = recipeId; 
     }
 
-    private void Validate(string name, string description)
+    private static void Validate(string name, string description)
     {
         Guard.Against.Requires<CocktailNameCanNotBeEmpty>(string.IsNullOrWhiteSpace(name));
         Guard.Against.Requires<CocktailDescriptionCanNotBeEmpty>(string.IsNullOrWhiteSpace(description));
-    }
-    
-    protected override IEnumerable<object> GetAttributesToIncludeInEqualityCheck()
-    {
-        throw new NotImplementedException();
     }
 }
 

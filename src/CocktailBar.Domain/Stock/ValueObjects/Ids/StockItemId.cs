@@ -1,17 +1,17 @@
 using CocktailBar.Domain.Base;
 
-namespace CocktailBar.Domain.Cocktail.ValueObjects.Ids;
+namespace CocktailBar.Domain.Stock.ValueObjects.Ids;
 
-public sealed class IngredientId : ValueObject<IngredientId>
+public class StockItemId : ValueObject<StockItemId>
 {
     public Guid Value { get; }
 
-    private IngredientId(Guid value)
+    private StockItemId(Guid value)
     {
         Value = value;
     }
-    
-    public static IngredientId CreateUnique()
+
+    public static StockItemId CreateUnique()
     {
         return new(Guid.NewGuid());
     }

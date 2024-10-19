@@ -2,16 +2,16 @@ using CocktailBar.Domain.Base;
 
 namespace CocktailBar.Domain.Cocktail.ValueObjects.Ids;
 
-public sealed class IngredientId : ValueObject<IngredientId>
+public sealed class CocktailId : ValueObject<CocktailId>
 {
     public Guid Value { get; }
 
-    private IngredientId(Guid value)
+    private CocktailId(Guid value)
     {
         Value = value;
     }
-    
-    public static IngredientId CreateUnique()
+
+    public static CocktailId CreateUnique()
     {
         return new(Guid.NewGuid());
     }

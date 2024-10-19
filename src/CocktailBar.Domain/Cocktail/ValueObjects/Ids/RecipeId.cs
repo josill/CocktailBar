@@ -2,10 +2,15 @@ using CocktailBar.Domain.Base;
 
 namespace CocktailBar.Domain.Cocktail.ValueObjects.Ids;
 
-public class RecipeId(Guid value) : ValueObject<RecipeId>
+public sealed class RecipeId : ValueObject<RecipeId>
 {
-    private Guid Value { get; } = value;
+    private Guid Value { get; }
 
+    private RecipeId(Guid value)
+    {
+        Value = value;
+    }
+    
     public static RecipeId CreateUnique()
     {
         return new(Guid.NewGuid());
@@ -13,6 +18,6 @@ public class RecipeId(Guid value) : ValueObject<RecipeId>
 
     protected override IEnumerable<object> GetAttributesToIncludeInEqualityCheck()
     {
-        throw new NotImplementedException();
+        yield return Value;
     }
 }
