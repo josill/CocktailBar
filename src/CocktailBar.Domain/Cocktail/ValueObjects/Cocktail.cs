@@ -1,5 +1,6 @@
 using Ardalis.GuardClauses;
 using CocktailBar.Domain.Base;
+using CocktailBar.Domain.Cocktail.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.Cocktail;
 

@@ -1,4 +1,5 @@
 using CocktailBar.Domain.Base;
+using CocktailBar.Domain.Cocktail.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.Cocktail;
 
@@ -10,5 +11,3 @@ public class Recipe : EntityWithMetadata<RecipeId>
     {
     }
 }
-
-public readonly record struct RecipeId(Guid Value);

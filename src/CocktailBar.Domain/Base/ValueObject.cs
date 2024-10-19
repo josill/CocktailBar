@@ -25,7 +25,8 @@ public abstract class ValueObject<T> where T : ValueObject<T>
         }
 
         var other = (ValueObject<T>)obj;
-        return GetAttributesToIncludeInEqualityCheck().SequenceEqual(other.GetAttributesToIncludeInEqualityCheck());
+        return GetAttributesToIncludeInEqualityCheck()
+            .SequenceEqual(other.GetAttributesToIncludeInEqualityCheck());
     }
 
     /// <summary>
