@@ -6,17 +6,20 @@ namespace CocktailBar.Domain.Cocktail.Entities;
 
 public class Cocktail : AggregateRoot<CocktailId>
 {
-    public string Name { get; private set; }
-    public string Description { get; private set; }
-    public RecipeId RecipeId { get; private set; }
+    public string Name { get; }
+    public string Description { get; }
+    public RecipeId RecipeId { get; }
 
-    public Cocktail(string name, string description, RecipeId recipeId) : base(CocktailId.CreateUnique())
+    private Cocktail(string name, string description, RecipeId recipeId) : base(CocktailId.CreateUnique())
     {
         Validate(name, description);
         Name = name;
         Description = description;
         RecipeId = recipeId; 
     }
+    
+    public static Cocktail Create(
+        string name, string description, RecipeId recipeId) => new(name, description, recipeId);
 
     private static void Validate(string name, string description)
     {
@@ -24,13 +27,3 @@ public class Cocktail : AggregateRoot<CocktailId>
         Guard.Against.Requires<CocktailDescriptionCanNotBeEmpty>(string.IsNullOrWhiteSpace(description));
     }
 }
-
-/// <summary>
-/// Exception thrown when a cocktail name is empty
-/// </summary>
-public class CocktailNameCanNotBeEmpty() : Exception("Cocktail name can not be empty!");
-
-/// <summary>
-/// Exception thrown when a cocktail description is empty
-/// </summary>
-public class CocktailDescriptionCanNotBeEmpty() : Exception("Weight cannot be a negative value.");
