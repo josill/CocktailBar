@@ -25,6 +25,21 @@ public abstract class EntityWithMetadata<TId> : IEntity<TId>, IEquatable<EntityW
     }
 
     /// <summary>
+    /// Gets the unique identifier of the entity.
+    /// </summary>
+    public TId Id { get; }
+
+    /// <summary>
+    /// Gets the date and time when the entity was created.
+    /// </summary>
+    public DateTime CreatedAt { get; } = DateTime.Now;
+
+    /// <summary>
+    /// Gets the date and time when the entity was last updated, or null if it hasn't been updated.
+    /// </summary>
+    public DateTime? UpdatedAt { get; private set; }
+
+    /// <summary>
     /// Determines whether two entities are equal.
     /// </summary>
     /// <param name="left">The left entity to compare.</param>
@@ -45,21 +60,6 @@ public abstract class EntityWithMetadata<TId> : IEntity<TId>, IEquatable<EntityW
     {
         return !Equals(left, right);
     }
-
-    /// <summary>
-    /// Gets the unique identifier of the entity.
-    /// </summary>
-    public TId Id { get; }
-
-    /// <summary>
-    /// Gets the date and time when the entity was created.
-    /// </summary>
-    public DateTime CreatedAt { get; } = DateTime.Now;
-
-    /// <summary>
-    /// Gets the date and time when the entity was last updated, or null if it hasn't been updated.
-    /// </summary>
-    public DateTime? UpdatedAt { get; private set; }
 
     /// <summary>
     /// Determines whether the specified object is equal to the current object.
