@@ -1,7 +1,7 @@
 using CocktailBar.Domain.Base;
 using CocktailBar.Domain.Cocktail.ValueObjects;
 using CocktailBar.Domain.Cocktail.ValueObjects.Ids;
-using CocktailBar.Domain.Stock.ValueObjects.Ids;
+using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.Cocktail.Entities;
 

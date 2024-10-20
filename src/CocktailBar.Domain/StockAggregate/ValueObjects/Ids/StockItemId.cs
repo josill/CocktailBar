@@ -1,6 +1,6 @@
-using CocktailBar.Domain.Base;
+namespace CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 
-namespace CocktailBar.Domain.Stock.ValueObjects.Ids;
+using CocktailBar.Domain.Common;
 
 public class StockItemId : ValueObject<StockItemId>
 {

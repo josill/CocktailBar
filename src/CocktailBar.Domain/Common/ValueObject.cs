@@ -1,4 +1,4 @@
-namespace CocktailBar.Domain.Base;
+namespace CocktailBar.Domain.Common;
 
 /// <summary>
 /// Represents a base class for value objects in the domain model.
