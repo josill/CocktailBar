@@ -1,6 +1,4 @@
-using CocktailBar.Domain.Base;
-
-namespace CocktailBar.Domain.Order;
+namespace CocktailBar.Domain.OrderAggregate.Entities;
 
 public abstract record OrderItem;
 
