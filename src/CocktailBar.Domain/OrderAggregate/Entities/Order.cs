@@ -1,8 +1,8 @@
+using CocktailBar.Domain.Common;
 using CocktailBar.Domain.OrderAggregate.ValueObjects;
 
 namespace CocktailBar.Domain.OrderAggregate.Entities;
 
-using CocktailBar.Domain.Base;
 using CocktailBar.Domain.OrderAggregate.ValueObjects.Ids;
 
 /// <summary>

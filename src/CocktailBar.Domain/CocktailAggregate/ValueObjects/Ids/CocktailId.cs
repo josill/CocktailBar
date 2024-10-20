@@ -1,5 +1,3 @@
-using CocktailBar.Domain.Base;
-
 namespace CocktailBar.Domain.Cocktail.ValueObjects.Ids;
 
 public sealed class CocktailId : ValueObject<CocktailId>
