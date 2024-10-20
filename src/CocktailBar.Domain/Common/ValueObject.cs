@@ -3,6 +3,9 @@
 
 namespace CocktailBar.Domain.Common;
 
+using System.Collections.Generic;
+using System.Linq;
+
 /// <summary>
 /// Represents a base class for value objects in the domain model.
 /// </summary>

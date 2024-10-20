@@ -3,6 +3,8 @@
 
 namespace CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 
+using System;
+using System.Collections.Generic;
 using CocktailBar.Domain.Common;
 
 /// <summary>

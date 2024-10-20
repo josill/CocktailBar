@@ -3,6 +3,7 @@
 
 namespace CocktailBar.Domain.Common;
 
+using System;
 using Ardalis.GuardClauses;
 
 /// <summary>

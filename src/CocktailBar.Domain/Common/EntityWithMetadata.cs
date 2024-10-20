@@ -3,6 +3,9 @@
 
 namespace CocktailBar.Domain.Common;
 
+using System;
+using System.Collections.Generic;
+
 /// <summary>
 /// Represents an abstract base class for entities with metadata, including a unique identifier and timestamps.
 /// </summary>

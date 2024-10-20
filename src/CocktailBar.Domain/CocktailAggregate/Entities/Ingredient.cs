@@ -3,6 +3,7 @@
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 
+using System.Collections.Generic;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Common;

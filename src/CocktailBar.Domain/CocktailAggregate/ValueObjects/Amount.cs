@@ -3,8 +3,8 @@
 
 namespace CocktailBar.Domain.CocktailAggregate.ValueObjects;
 
+using System.Collections.Generic;
 using Ardalis.GuardClauses;
-using CocktailBar.Domain.Cocktail;
 using CocktailBar.Domain.CocktailAggregate.Enums;
 using CocktailBar.Domain.Common;
 

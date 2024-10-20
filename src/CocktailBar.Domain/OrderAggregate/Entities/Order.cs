@@ -1,11 +1,12 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common;
-using CocktailBar.Domain.OrderAggregate.ValueObjects;
-
 namespace CocktailBar.Domain.OrderAggregate.Entities;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using CocktailBar.Domain.Common;
 using CocktailBar.Domain.OrderAggregate.ValueObjects.Ids;
 
 /// <summary>

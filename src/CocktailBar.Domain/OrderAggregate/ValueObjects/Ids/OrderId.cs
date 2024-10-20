@@ -3,6 +3,8 @@
 
 namespace CocktailBar.Domain.OrderAggregate.ValueObjects.Ids;
 
+using System;
+using System.Collections.Generic;
 using CocktailBar.Domain.Common;
 
 /// <summary>
