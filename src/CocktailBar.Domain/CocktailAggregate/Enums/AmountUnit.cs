@@ -1,4 +1,4 @@
-namespace CocktailBar.Domain;
+namespace CocktailBar.Domain.CocktailAggregate.Enums;
 
 /// <summary>
 /// Represents the units of measurement for weight.
@@ -19,9 +19,9 @@ public enum AmountUnit
     /// Weight in millilitres.
     /// </summary>
     Ml,
-    
+
     /// <summary>
     /// Weight in litres.
     /// </summary>
-    L
+    L,
 }

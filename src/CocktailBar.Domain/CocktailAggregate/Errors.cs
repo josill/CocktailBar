@@ -3,7 +3,7 @@ namespace CocktailBar.Domain.Cocktail;
 /// <summary>
 /// Exception thrown when a cocktail name is empty
 /// </summary>
-public class CocktailNameCanNotBeEmpty() : Exception("Cocktail name can not be empty!");
+public class CocktailNameCanNotBeEmpty() : Exception("Cocktail name can not be empty.");
 
 /// <summary>
 /// Exception thrown when a cocktail description is empty
@@ -20,4 +20,8 @@ public class MoreThanThreeDecimalPlacesInWeightValueException() : Exception("Wei
 /// </summary>
 public class WeightCannotBeNegativeException() : Exception("Weight cannot be a negative value.");
 
-public class RecipeInstructionsCannotBeEmpty() : Exception("Recipe instructions cannot be empty");
+public class RecipeInstructionsCannotBeEmpty() : Exception("Recipe instructions cannot be empty.");
+
+public class IngredientAlreadyExistsInTheRecipe() : Exception("Ingredient is already used in the recipe.");
+
+public class IngredientDoesntExistInTheRecipe() : Exception("Ingredient not found in the recipe.");

@@ -24,7 +24,7 @@ public abstract class EntityWithMetadata<TId> : IEntity<TId>, IEquatable<EntityW
     /// <param name="left">The left entity to compare.</param>
     /// <param name="right">The right entity to compare.</param>
     /// <returns>true if the entities are equal; otherwise, false.</returns>
-    public static bool operator ==(EntityWithMetadata<TId> left, EntityWithMetadata<TId> right)
+    public static bool operator ==(EntityWithMetadata<TId>? left, EntityWithMetadata<TId>? right)
     {
         return Equals(left, right);
     }
@@ -35,7 +35,7 @@ public abstract class EntityWithMetadata<TId> : IEntity<TId>, IEquatable<EntityW
     /// <param name="left">The left entity to compare.</param>
     /// <param name="right">The right entity to compare.</param>
     /// <returns>true if the entities are not equal; otherwise, false.</returns>
-    public static bool operator !=(EntityWithMetadata<TId> left, EntityWithMetadata<TId> right)
+    public static bool operator !=(EntityWithMetadata<TId>? left, EntityWithMetadata<TId>? right)
     {
         return !Equals(left, right);
     }
