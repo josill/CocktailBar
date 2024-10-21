@@ -66,8 +66,7 @@ public class ApiController : ControllerBase
         {
             modelStateDict.AddModelError(
                 e.Code,
-                e.Description
-            );
+                e.Description);
         }
 
         return ValidationProblem(modelStateDict);
