@@ -9,15 +9,29 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
+/// <summary>
+/// Provides dependency injection extension methods for setting up application services.
+/// </summary>
 public static class DependencyInjection
 {
+    /// <summary>
+    /// Adds application-specific services to the dependency injection container.
+    /// </summary>
+    /// <remarks>
+    /// This method registers:
+    /// - MediatR for CQRS pattern implementation.
+    /// - Validation behaviors for request validation.
+    /// - FluentValidation validators from the current assembly.
+    /// </remarks>
+    /// <param name="services">The service collection to add services to.</param>
+    /// <returns>The same service collection for method chaining.</returns>
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services
             .AddMediatR(options =>
             {
                 options.RegisterServicesFromAssembly(typeof(DependencyInjection)
-                    .Assembly); // Automatically inject all commands and queries
+                    .Assembly);
             })
             .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
