@@ -21,7 +21,7 @@ public class CocktailController : ApiController
     /// <returns>Returns the created cocktail information.</returns>
     /// <response code="200">Returns the newly created cocktail.</response>
     /// <response code="400">If the request is invalid.</response>
-    [HttpPost]
+    [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public IActionResult CreateCocktail(CreateCocktailRequest request, string recipeId)
