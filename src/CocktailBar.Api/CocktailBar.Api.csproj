@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CocktailBar.Application\CocktailBar.Application.csproj" />
       <ProjectReference Include="..\CocktailBar.Contracts\CocktailBar.Contracts.csproj" />
     </ItemGroup>
 </Project>
