@@ -20,6 +20,7 @@ var app = builder.Build();
     app.UseHttpsRedirection();
     app.MapControllers();
     app.UseCors("origins");
+    app.UseExceptionHandler("/error");
 
     app.Run();
 }

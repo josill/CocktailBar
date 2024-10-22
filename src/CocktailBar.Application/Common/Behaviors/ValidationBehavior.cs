@@ -18,7 +18,7 @@ using MediatR;
 /// Validation errors are converted to ErrorOr types for consistent error handling throughout the application.
 /// </remarks>
 public class ValidationBehavior<TRequest, TResponse>(
-    IValidator<TRequest>? validator)
+    IValidator<TRequest>? validator = null)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
     where TResponse : IErrorOr
@@ -38,8 +38,7 @@ public class ValidationBehavior<TRequest, TResponse>(
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        // Skip validation if no validator is provided
-        if (validator == null) return await next();
+        if (validator is null) return await next();
 
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (validationResult.IsValid) return await next();

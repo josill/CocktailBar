@@ -31,7 +31,7 @@ public static class DependencyInjection
             .AddMediatR(options =>
             {
                 options.RegisterServicesFromAssembly(typeof(DependencyInjection)
-                    .Assembly);
+                    .Assembly); // Automatically inject all commands and queries
             })
             .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
