@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocktailBar.Domain", "src\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocktailBar.Contracts", "src\CocktailBar.Contracts\CocktailBar.Contracts.csproj", "{1CD4A6DC-1332-4705-B2FA-C5BA233FAC23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocktailBar.Application", "src\CocktailBar.Application\CocktailBar.Application.csproj", "{1B56BA20-AD4C-4B8A-B4E2-52CE2D743CDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +33,15 @@ Global
 		{1CD4A6DC-1332-4705-B2FA-C5BA233FAC23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD4A6DC-1332-4705-B2FA-C5BA233FAC23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD4A6DC-1332-4705-B2FA-C5BA233FAC23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B56BA20-AD4C-4B8A-B4E2-52CE2D743CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B56BA20-AD4C-4B8A-B4E2-52CE2D743CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B56BA20-AD4C-4B8A-B4E2-52CE2D743CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B56BA20-AD4C-4B8A-B4E2-52CE2D743CDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{956DFE06-5048-46F4-8ED7-4DCADC2A3570} = {C2CFC6FD-2BFD-42FB-8D02-99F0C797161F}
 		{058E9003-9CA9-463C-A812-E0E3A8AE345A} = {C2CFC6FD-2BFD-42FB-8D02-99F0C797161F}
 		{1CD4A6DC-1332-4705-B2FA-C5BA233FAC23} = {C2CFC6FD-2BFD-42FB-8D02-99F0C797161F}
+		{1B56BA20-AD4C-4B8A-B4E2-52CE2D743CDE} = {C2CFC6FD-2BFD-42FB-8D02-99F0C797161F}
 	EndGlobalSection
 EndGlobal
