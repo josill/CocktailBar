@@ -8,11 +8,9 @@ namespace CocktailBar.Contracts.Cocktails;
 /// </summary>
 /// <param name="Name">The name of the cocktail.</param>
 /// <param name="Description">A brief description of the cocktail.</param>
-/// <param name="Recipe">The recipe for making the cocktail.</param>
 public record CreateCocktailRequest(
     string Name,
-    string Description,
-    Recipe Recipe);
+    string Description);
 
 /// <summary>
 /// Represents a recipe for making a cocktail.
