@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 /// </summary>
 /// /// <param name="mediatr">The MediatR sender used to dispatch commands and queries.</param>
 [Route("cocktails")]
-public class CocktailController(ISender mediatr) : ApiController
+public class CocktailsController(ISender mediatr) : ApiController
 {
     /// <summary>
     /// Creates a new cocktail with the specified recipe.
@@ -24,7 +24,7 @@ public class CocktailController(ISender mediatr) : ApiController
     /// <response code="200">Returns the newly created cocktail.</response>
     /// <response code="400">If the request is invalid.</response>
     [HttpPost("create")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateCocktail(CreateCocktailRequest request)
     {
@@ -32,7 +32,7 @@ public class CocktailController(ISender mediatr) : ApiController
         var result = await mediatr.Send(command);
 
         return result.Match(
-            cocktail => Created($"/cocktails/{cocktail.RecipeId}", cocktail), // TODO: Add the get endpoint.
+            cocktail => Created($"/cocktails/{cocktail.CocktailId}", cocktail), // TODO: Add the get endpoint.
             HandleErrors);
     }
 }

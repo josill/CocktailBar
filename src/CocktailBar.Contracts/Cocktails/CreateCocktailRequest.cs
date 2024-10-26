@@ -12,7 +12,7 @@ namespace CocktailBar.Contracts.Cocktails;
 public record CreateCocktailRequest(
     string Name,
     string Description,
-    string RecipeId);
+    Guid RecipeId);
 
 /// <summary>
 /// Represents a recipe for making a cocktail.

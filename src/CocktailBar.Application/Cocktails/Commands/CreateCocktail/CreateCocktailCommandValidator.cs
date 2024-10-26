@@ -12,6 +12,7 @@ public class CreateCocktailCommandValidator : AbstractValidator<CreateCocktailCo
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CreateCocktailCommandValidator"/> class.
+    ///     /// Configures validation rules for cocktail creation.
     /// </summary>
     public CreateCocktailCommandValidator()
     {

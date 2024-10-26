@@ -29,6 +29,7 @@ public class CreateCocktailCommandHandler : IRequestHandler<CreateCocktailComman
     {
         // For now, just return a successful result with the input data
         var result = new CreateCocktailResult(
+            Guid.NewGuid(),
             request.Name,
             request.Description,
             request.RecipeId);

@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CocktailBar.Contracts\CocktailBar.Contracts.csproj" />
+      <ProjectReference Include="..\CocktailBar.Domain\CocktailBar.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
