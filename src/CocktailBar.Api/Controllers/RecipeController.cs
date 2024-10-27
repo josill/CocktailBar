@@ -24,7 +24,6 @@ public class RecipesController(ISender mediatr) : ApiController
     /// 201 Created with the created recipe and its location if successful.
     /// 400 Bad Request if the request is invalid or validation fails.
     /// </returns>
-    [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateRecipe(CreateRecipeRequest request)

@@ -23,7 +23,6 @@ public class CocktailsController(ISender mediatr) : ApiController
     /// <returns>Returns the created cocktail information.</returns>
     /// <response code="200">Returns the newly created cocktail.</response>
     /// <response code="400">If the request is invalid.</response>
-    [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateCocktail(CreateCocktailRequest request)
