@@ -15,6 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 
     // Optionally add Swagger
     builder.Services.AddEndpointsApiExplorer();
+
+    if (builder.Environment.IsDevelopment())
+    {
+        builder.Configuration.AddUserSecrets<Program>();
+    }
 }
 
 var app = builder.Build();

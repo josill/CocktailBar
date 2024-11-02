@@ -3,7 +3,7 @@
 
 namespace CocktailBar.Infrastructure.Persistence.Models;
 
-internal sealed record RecipeReadModel
+public sealed record RecipeReadModel
 {
     public Guid Id { get; set; }
 

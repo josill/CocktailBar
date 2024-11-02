@@ -1,13 +1,12 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence;
+namespace CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Read;
 
 using CocktailBar.Infrastructure.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
-internal sealed class RelationalReadDbContext : DbContext
-    // , IUnitOfWork
+internal sealed class CocktailsReadContext : DbContext, ICocktailsReadContext
 {
     public DbSet<RecipeReadModel> Recipes { get; set; }
 
@@ -16,7 +15,7 @@ internal sealed class RelationalReadDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(
-            typeof(RelationalReadDbContext).Assembly,
+            typeof(CocktailsReadContext).Assembly,
             WriteConfigurationFilter);
     }
 

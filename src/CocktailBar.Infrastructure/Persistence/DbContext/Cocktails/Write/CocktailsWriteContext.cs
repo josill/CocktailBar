@@ -1,13 +1,12 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence;
+namespace CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Write;
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 
-public class RelationalWriteDbContext : DbContext
-    // , IUnitOfWork
+public class CocktailsWriteContext : DbContext, ICocktailsWriteContext
 {
     public DbSet<Recipe> Recipes { get; set; }
 
@@ -16,7 +15,7 @@ public class RelationalWriteDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(
-            typeof(RelationalWriteDbContext).Assembly,
+            typeof(CocktailsWriteContext).Assembly,
             WriteConfigurationFilter);
     }
 
