@@ -71,8 +71,8 @@ public static class DependencyInjection
            var cocktailsDbContext = scope.ServiceProvider
                .GetRequiredService<CocktailsWriteContext>();
 
-           cocktailsDbContext.Database.EnsureDeleted();
-           cocktailsDbContext.Database.EnsureCreated();
+           // cocktailsDbContext.Database.EnsureDeleted();
+           // cocktailsDbContext.Database.EnsureCreated();
        }
 
        return services;

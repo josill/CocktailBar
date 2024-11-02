@@ -3,6 +3,8 @@
 
 namespace CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Read;
 
+using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Infrastructure.Persistence.Configurations.Write;
 using CocktailBar.Infrastructure.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,21 @@ using Microsoft.EntityFrameworkCore;
 /// </summary>
 internal sealed class CocktailsReadContext : DbContext, ICocktailsReadContext
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CocktailsReadContext"/> class.
+    /// This constructor creates a read-only context for accessing cocktail and recipe data.
+    /// </summary>
+    /// <param name="options">The options to be used by the DbContext for configuration,
+    /// typically containing read-specific settings such as connection strings and query tracking behavior.</param>
+    /// <remarks>
+    /// Following CQRS principles, this context is optimized for read operations
+    /// and should not be used for data modifications.
+    /// </remarks>
+    public CocktailsReadContext(DbContextOptions<CocktailsReadContext> options)
+        : base(options)
+    {
+    }
+
     /// <summary>
     /// Gets or sets the DbSet for recipe read models.
     /// This property provides read-only access to recipe data in the database.
@@ -31,9 +48,7 @@ internal sealed class CocktailsReadContext : DbContext, ICocktailsReadContext
     /// <param name="modelBuilder">The model builder instance used to construct the model.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(
-            typeof(CocktailsReadContext).Assembly,
-            WriteConfigurationFilter);
+        new CocktailsReadModelConfiguration().Configure(modelBuilder.Entity<Cocktail>());
     }
 
     /// <summary>

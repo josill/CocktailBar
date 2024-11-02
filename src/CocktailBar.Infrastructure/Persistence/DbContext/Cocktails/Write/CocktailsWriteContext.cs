@@ -4,6 +4,7 @@
 namespace CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Write;
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Infrastructure.Persistence.Configurations.Write;
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>
@@ -12,6 +13,23 @@ using Microsoft.EntityFrameworkCore;
 /// </summary>
 public class CocktailsWriteContext : DbContext, ICocktailsWriteContext
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CocktailsWriteContext"/> class.
+    /// This context handles write operations for the cocktails database.
+    /// </summary>
+    /// <param name="options">The options to be used by the DbContext for configuration.
+    /// These options are typically provided by dependency injection and include the connection string
+    /// and any additional database configurations.</param>
+    /// <remarks>
+    /// This constructor is called by the dependency injection container when the context
+    /// is created. The options parameter contains essential configuration including
+    /// database provider, connection string, and other DbContext configurations.
+    /// </remarks>
+    public CocktailsWriteContext(DbContextOptions<CocktailsWriteContext> options)
+        : base(options)
+    {
+    }
+
     /// <summary>
     /// Gets or sets the DbSet for Recipe entities.
     /// This property provides access to recipe data in the database.
@@ -25,22 +43,17 @@ public class CocktailsWriteContext : DbContext, ICocktailsWriteContext
     public DbSet<Cocktail> Cocktails { get; set; }
 
     /// <summary>
-    /// Configures the database model during context initialization.
-    /// Applies entity configurations from the assembly using a filter to include only write-side configurations.
+    /// Configures the model that was discovered by convention from the entity types
+    /// exposed in <see cref="DbSet{TEntity}"/> properties on this context.
     /// </summary>
-    /// <param name="modelBuilder">The model builder instance used to construct the model.</param>
+    /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
+    /// <remarks>
+    /// This method applies the configuration for the Cocktail entity using <see cref="CocktailWriteModelConfiguration"/>.
+    /// The configuration includes setting up entity properties, relationships, and any constraints
+    /// specific to the write-side of the CQRS pattern.
+    /// </remarks>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(
-            typeof(CocktailsWriteContext).Assembly,
-            WriteConfigurationFilter);
+        new CocktailWriteModelConfiguration().Configure(modelBuilder.Entity<Cocktail>());
     }
-
-    /// <summary>
-    /// Filters entity configurations to include only those specific to write operations.
-    /// </summary>
-    /// <param name="type">The type to be evaluated.</param>
-    /// <returns>True if the type is a write configuration, false otherwise.</returns>
-    private static bool WriteConfigurationFilter(Type type) =>
-        type.FullName?.Contains("Configurations.Write") ?? false;
 }
