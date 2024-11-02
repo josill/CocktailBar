@@ -13,5 +13,6 @@
     <ItemGroup>
       <ProjectReference Include="..\CocktailBar.Application\CocktailBar.Application.csproj" />
       <ProjectReference Include="..\CocktailBar.Contracts\CocktailBar.Contracts.csproj" />
+      <ProjectReference Include="..\CocktailBar.Infrastructure\CocktailBar.Infrastructure.csproj" />
     </ItemGroup>
 </Project>

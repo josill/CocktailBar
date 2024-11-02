@@ -19,12 +19,19 @@ public class Recipe : EntityWithMetadata<RecipeId>
     /// <summary>
     /// Initializes a new instance of the <see cref="Recipe"/> class.
     /// </summary>
+    /// <param name="name">The name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
-    private Recipe(string instructions) : base(RecipeId.CreateUnique())
+    private Recipe(string name, string instructions) : base(RecipeId.CreateUnique())
     {
-        Validate(instructions);
+        Validate(name, instructions);
+        Name = name;
         Instructions = instructions;
     }
+
+    /// <summary>
+    /// Gets the name of the recipe.
+    /// </summary>
+    public string Name { get; }
 
     /// <summary>
     /// Gets the instructions for preparing the cocktail.
@@ -42,9 +49,10 @@ public class Recipe : EntityWithMetadata<RecipeId>
     /// <summary>
     /// Creates a new instance of the <see cref="Recipe"/> class.
     /// </summary>
+    /// <param name="name">The name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <returns>A new <see cref="Recipe"/> instance.</returns>
-    public static Recipe Create(string instructions) => new(instructions);
+    public static Recipe Create(string name, string instructions) => new(name, instructions);
 
     /// <summary>
     /// Adds an ingredient to the recipe if it doesn't already exist.
@@ -75,10 +83,12 @@ public class Recipe : EntityWithMetadata<RecipeId>
     /// <summary>
     /// Validates the recipe instructions.
     /// </summary>
+    /// <param name="name">The name to validate.</param>
     /// <param name="instructions">The instructions to validate.</param>
     /// <exception cref="RecipeInstructionsCannotBeEmpty">Thrown when instructions are null, empty, or whitespace.</exception>
-    private static void Validate(string instructions)
+    private static void Validate(string name, string instructions)
     {
+        Guard.Against.Requires<RecipeInstructionsCannotBeEmpty>(!string.IsNullOrWhiteSpace(name));
         Guard.Against.Requires<RecipeInstructionsCannotBeEmpty>(!string.IsNullOrWhiteSpace(instructions));
     }
 }
