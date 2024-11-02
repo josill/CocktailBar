@@ -11,54 +11,70 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+/// <summary>
+/// Provides extension methods for configuring infrastructure services in the dependency injection container.
+/// </summary>
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
-        ConfigurationManager builderConfiguration)
-    {
-        services.AddPersistence(builderConfiguration);
+   /// <summary>
+   /// Adds infrastructure services to the service collection.
+   /// </summary>
+   /// <param name="services">The service collection to add services to.</param>
+   /// <param name="builderConfiguration">The configuration manager containing application settings.</param>
+   /// <returns>The service collection for method chaining.</returns>
+   public static IServiceCollection AddInfrastructure(
+       this IServiceCollection services,
+       ConfigurationManager builderConfiguration)
+   {
+       services.AddPersistence(builderConfiguration);
 
-        return services;
-    }
+       return services;
+   }
 
-    private static IServiceCollection AddPersistence(
-        this IServiceCollection services,
-        IConfiguration configuration)
-    {
-        var connectionString = configuration.GetConnectionString("DefaultConnection")
-                               ?? throw new InvalidOperationException(
-                                   "Connection string 'DefaultConnection' not found.");
+   /// <summary>
+   /// Configures and adds persistence-related services to the service collection.
+   /// Sets up database contexts, unit of work, and handles database initialization.
+   /// </summary>
+   /// <param name="services">The service collection to add services to.</param>
+   /// <param name="configuration">The configuration containing database settings.</param>
+   /// <returns>The service collection for method chaining.</returns>
+   /// <exception cref="InvalidOperationException">Thrown when the default connection string is not found in configuration.</exception>
+   private static IServiceCollection AddPersistence(
+       this IServiceCollection services,
+       IConfiguration configuration)
+   {
+       var connectionString = configuration.GetConnectionString("DefaultConnection")
+                              ?? throw new InvalidOperationException(
+                                  "Connection string 'DefaultConnection' not found.");
 
-        services.AddDbContext<CocktailsWriteContext>(options =>
-            options.UseNpgsql(connectionString));
+       services.AddDbContext<CocktailsWriteContext>(options =>
+           options.UseNpgsql(connectionString));
 
-        services.AddScoped<ICocktailsWriteContext>(sp =>
-            sp.GetRequiredService<CocktailsWriteContext>());
+       services.AddScoped<ICocktailsWriteContext>(sp =>
+           sp.GetRequiredService<CocktailsWriteContext>());
 
-        services.AddDbContext<CocktailsReadContext>(options =>
-            options.UseNpgsql(connectionString)
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+       services.AddDbContext<CocktailsReadContext>(options =>
+           options.UseNpgsql(connectionString)
+               .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
-        services.AddScoped<ICocktailsReadContext>(sp =>
-            sp.GetRequiredService<CocktailsReadContext>());
+       services.AddScoped<ICocktailsReadContext>(sp =>
+           sp.GetRequiredService<CocktailsReadContext>());
 
-        // Register UnitOfWork
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+       services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        var databaseSettings = new DatabaseSettings();
-        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);
+       var databaseSettings = new DatabaseSettings();
+       configuration.Bind(DatabaseSettings.SectionName, databaseSettings);
 
-        if (databaseSettings.RecreateOnStartup)
-        {
-            using var scope = services.BuildServiceProvider().CreateScope();
-            var writeContext = scope.ServiceProvider
-                .GetRequiredService<CocktailsWriteContext>();
+       if (databaseSettings.RecreateOnStartup)
+       {
+           using var scope = services.BuildServiceProvider().CreateScope();
+           var cocktailsDbContext = scope.ServiceProvider
+               .GetRequiredService<CocktailsWriteContext>();
 
-            writeContext.Database.EnsureDeleted();
-            writeContext.Database.EnsureCreated();
-        }
+           cocktailsDbContext.Database.EnsureDeleted();
+           cocktailsDbContext.Database.EnsureCreated();
+       }
 
-        return services;
-    }
+       return services;
+   }
 }

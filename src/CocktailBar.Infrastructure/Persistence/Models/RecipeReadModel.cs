@@ -3,11 +3,25 @@
 
 namespace CocktailBar.Infrastructure.Persistence.Models;
 
+/// <summary>
+/// Represents a read-only view model for recipe data in the CocktailBar application.
+/// This record is designed for query operations following the CQRS pattern.
+/// </summary>
 public sealed record RecipeReadModel
 {
-    public Guid Id { get; set; }
+    /// <summary>
+    /// Gets the unique identifier for the recipe.
+    /// </summary>
+    public Guid Id { get; init; }
 
-    public string Name { get; set; }
+    /// <summary>
+    /// Gets the name of the recipe.
+    /// </summary>
+    public string Name { get; init; } = default!;
 
-    public string Instructions { get; set; }
+    /// <summary>
+    /// Gets the preparation instructions for the recipe.
+    /// Contains step-by-step directions for creating the cocktail.
+    /// </summary>
+    public string Instructions { get; init; } = default!;
 }
