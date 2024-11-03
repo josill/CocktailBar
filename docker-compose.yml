@@ -29,6 +29,6 @@ services:
       dockerfile: Dockerfile
     container_name: cocktail-bar-api
     ports:
-      - "8080:80"
+      - "8080:8080"
     depends_on:
       - cocktails-postgres

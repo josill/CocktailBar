@@ -24,7 +24,7 @@ public class CreateCocktailCommandValidator : AbstractValidator<CreateCocktailCo
             .NotEmpty()
             .MaximumLength(1000);
 
-        RuleFor(x => x.RecipeId)
-            .NotEmpty();
+        // RuleFor(x => x.RecipeId)
+        //     .NotEmpty();
     }
 }

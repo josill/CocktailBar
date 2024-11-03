@@ -6,6 +6,7 @@ namespace CocktailBar.Infrastructure;
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Infrastructure.Cocktails.Context.Read;
 using CocktailBar.Infrastructure.Cocktails.Context.Write;
+using CocktailBar.Infrastructure.Cocktails.Repository;
 using CocktailBar.Infrastructure.Common.Settings;
 using CocktailBar.Infrastructure.Common.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
@@ -62,6 +63,7 @@ public static class DependencyInjection
            sp.GetRequiredService<CocktailsReadContext>());
 
        services.AddScoped<IUnitOfWork, UnitOfWork>();
+       services.AddScoped<ICocktailsRepository, CocktailsRepository>();
 
        var databaseSettings = new DatabaseSettings();
        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);
@@ -69,8 +71,8 @@ public static class DependencyInjection
        if (databaseSettings.RecreateOnStartup)
        {
            using var scope = services.BuildServiceProvider().CreateScope();
-           var cocktailsDbContext = scope.ServiceProvider
-               .GetRequiredService<CocktailsWriteContext>();
+
+           // var cocktailsDbContext = scope.ServiceProvider.GetRequiredService<CocktailsWriteContext>();
 
            // cocktailsDbContext.Database.EnsureDeleted();
            // cocktailsDbContext.Database.EnsureCreated();
