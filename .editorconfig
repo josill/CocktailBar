@@ -112,5 +112,16 @@ dotnet_diagnostic.SA1602.severity = warning # Enumeration items must be document
 dotnet_diagnostic.SA1633.severity = none    # File must have header
 dotnet_diagnostic.SA1649.severity = none    # File name must match first type name
 
+# Namespace Rules
+dotnet_diagnostic.IDE0130.severity = warning      # Namespace does not match folder structure
+dotnet_style_namespace_match_folder = true:warning
+
+# Add a root namespace for proper folder matching
+file_header_template = unset
+dotnet_style_namespace_match_folder_structure = true:warning
+
+# Define the root namespace (adjust this to match your project)
+root_namespace_template = CocktailBar.{CompanyName}.{ProductName}
+
 [**/ValueObjects/Ids/**.cs]
 dotnet_diagnostic.SA1600.severity = none        # Elements must be documented
