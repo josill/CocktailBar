@@ -3,7 +3,6 @@
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 
-using Ardalis.GuardClauses;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Common;
 
@@ -56,11 +55,10 @@ public class Cocktail : AggregateRoot<CocktailId>
     /// </summary>
     /// <param name="name">The name to validate.</param>
     /// <param name="description">The description to validate.</param>
-    /// <exception cref="CocktailNameCanNotBeEmpty">Thrown when the name is null, empty, or whitespace.</exception>
-    /// <exception cref="CocktailDescriptionCanNotBeEmpty">Thrown when the description is null, empty, or whitespace.</exception>
+    /// <exception cref="DomainException{Cocktail}">Thrown when validation fails.</exception>
     private static void Validate(string name, string description)
     {
-        Guard.Against.Requires<CocktailNameCanNotBeEmpty>(string.IsNullOrWhiteSpace(name));
-        Guard.Against.Requires<CocktailDescriptionCanNotBeEmpty>(string.IsNullOrWhiteSpace(description));
+        DomainException.For<Cocktail>(string.IsNullOrWhiteSpace(name), "Cocktail name can not be empty.");
+        DomainException.For<Cocktail>(string.IsNullOrWhiteSpace(description), "Cocktail description can not be empty.");
     }
 }

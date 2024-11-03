@@ -4,7 +4,6 @@
 namespace CocktailBar.Domain.CocktailAggregate.ValueObjects;
 
 using System.Collections.Generic;
-using Ardalis.GuardClauses;
 using CocktailBar.Domain.CocktailAggregate.Enums;
 using CocktailBar.Domain.Common;
 
@@ -44,14 +43,12 @@ public class Amount : ValueObject<Amount>
     /// <param name="value">The numeric value of the amount.</param>
     /// <param name="unit">The unit of measurement for the amount.</param>
     /// <returns>A new <see cref="Amount"/> instance.</returns>
-    /// <exception cref="MoreThanThreeDecimalPlacesInWeightValueException">Thrown when the value has more than three decimal places.</exception>
-    /// <exception cref="WeightCannotBeNegativeException">Thrown when the value is negative.</exception>
     public static Amount Create(decimal value, AmountUnit unit) => new(value, unit);
 
     /// <summary>
     /// Gets the attributes to include in equality checks.
     /// </summary>
-    /// <returns>An enumerable of objects representing the attributes to include in equality checks.</returns>
+    /// <returns>An enumeration of objects representing the attributes to include in equality checks.</returns>
     protected override IEnumerable<object> GetAttributesToIncludeInEqualityCheck()
     {
         yield return Value;
@@ -62,11 +59,10 @@ public class Amount : ValueObject<Amount>
     /// Validates the given value.
     /// </summary>
     /// <param name="value">The value to validate.</param>
-    /// <exception cref="MoreThanThreeDecimalPlacesInWeightValueException">Thrown when the value has more than three decimal places.</exception>
-    /// <exception cref="WeightCannotBeNegativeException">Thrown when the value is negative.</exception>
+    /// <exception cref="DomainException{Weight}">Thrown when validation fails.</exception>
     private static void Validate(decimal value)
     {
-        Guard.Against.Requires<MoreThanThreeDecimalPlacesInWeightValueException>(value % 0.001m == 0);
-        Guard.Against.Requires<WeightCannotBeNegativeException>(value >= 0);
+        DomainException.For<Amount>(value % 0.001m != 0, "Weight value cannot have more than three decimal places.");
+        DomainException.For<Amount>(value < 0, "Weight cannot be a negative value.");
     }
 }
