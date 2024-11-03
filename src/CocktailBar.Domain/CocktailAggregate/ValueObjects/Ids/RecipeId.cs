@@ -4,59 +4,13 @@
 namespace CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 
 using System;
-using System.Collections.Generic;
 using CocktailBar.Domain.Common;
 
-/// <summary>
-/// Represents a unique identifier for a recipe in the cocktail domain.
-/// </summary>
-public sealed class RecipeId : ValueObject<RecipeId>
+public sealed class RecipeId : BaseId<RecipeId>, IBaseId<RecipeId>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RecipeId"/> class.
-    /// </summary>
-    /// <param name="value">The GUID value to use for this RecipeId.</param>
-    /// <remarks>
-    /// This constructor is private to enforce creation through the <see cref="CreateUnique"/> method.
-    /// </remarks>
-    private RecipeId(Guid value)
-    {
-        Value = value;
-    }
+    private RecipeId(Guid value) : base(value) { }
 
-    /// <summary>
-    /// Gets the underlying GUID value of the RecipeId.
-    /// </summary>
-    /// <remarks>
-    /// This property is private to ensure immutability and encapsulation of the RecipeId.
-    /// </remarks>
-    public Guid Value { get; }
+    public static RecipeId New() => new RecipeId(Guid.NewGuid());
 
-    /// <summary>
-    /// Creates a new unique RecipeId.
-    /// </summary>
-    /// <returns>A new instance of <see cref="RecipeId"/> with a unique GUID value.</returns>
-    public static RecipeId CreateUnique()
-    {
-        return CreateExisting(Guid.NewGuid());
-    }
-
-    /// <summary>
-    /// Creates an existing RecipeId.
-    /// </summary>
-    /// <param name="id">The GUID value to use for this RecipeId.</param>
-    /// <returns>A new instance of <see cref="RecipeId"/> with the provided GUID value.</returns>
-    public static RecipeId CreateExisting(Guid id)
-    {
-        return new RecipeId(id);
-    }
-
-    /// <summary>
-    /// Gets the attributes to include in equality checks.
-    /// </summary>
-    /// <returns>An enumeration of objects representing the attributes to include in equality checks.</returns>
-    protected override IEnumerable<object> GetAttributesToIncludeInEqualityCheck()
-    {
-        yield return Value;
-    }
+    public static RecipeId From(Guid id) => new RecipeId(id);
 }

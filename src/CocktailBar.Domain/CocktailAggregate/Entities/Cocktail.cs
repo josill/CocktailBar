@@ -17,7 +17,7 @@ public class Cocktail : AggregateRoot<CocktailId>
     /// <param name="name">The name of the cocktail.</param>
     /// <param name="description">The description of the cocktail.</param>
     /// <param name="recipeId">The unique identifier of the associated recipe.</param>
-    private Cocktail(string name, string description, RecipeId recipeId) : base(CocktailId.CreateUnique())
+    private Cocktail(string name, string description, RecipeId recipeId) : base(CocktailId.New())
     {
         Validate(name, description);
         Name = name;

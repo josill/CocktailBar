@@ -20,7 +20,7 @@ public class Recipe : EntityWithMetadata<RecipeId>
     /// </summary>
     /// <param name="name">The name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
-    private Recipe(string name, string instructions) : base(RecipeId.CreateUnique())
+    private Recipe(string name, string instructions) : base(RecipeId.New())
     {
         Validate(name, instructions);
         Name = name;

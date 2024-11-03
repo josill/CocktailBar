@@ -1,0 +1,116 @@
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
+root = true
+
+# C# files
+[*.cs]
+
+#### Core EditorConfig Options ####
+
+# Indentation and spacing
+indent_size = 4
+indent_style = space
+tab_width = 4
+
+# New line preferences
+end_of_line = crlf
+insert_final_newline = true
+
+#### .NET Coding Conventions ####
+
+# Organize usings
+dotnet_separate_import_directive_groups = false
+dotnet_sort_system_directives_first = true
+
+# this. and Me. preferences
+dotnet_style_qualification_for_event = false:suggestion
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+
+#### StyleCop Rules ####
+
+# Special Rules
+dotnet_diagnostic.SA0001.severity = warning # XML comment analysis disabled
+dotnet_diagnostic.SA0002.severity = warning # Invalid settings file
+
+# Spacing Rules
+dotnet_diagnostic.SA1000.severity = none    # Keywords spacing
+dotnet_diagnostic.SA1001.severity = warning # Commas spacing
+dotnet_diagnostic.SA1002.severity = warning # Semicolons spacing
+dotnet_diagnostic.SA1003.severity = warning # Symbols spacing
+dotnet_diagnostic.SA1004.severity = warning # Documentation line spacing
+dotnet_diagnostic.SA1005.severity = warning # Single line comments spacing
+dotnet_diagnostic.SA1006.severity = warning # Preprocessor keywords spacing
+dotnet_diagnostic.SA1007.severity = warning # Operator keyword spacing
+dotnet_diagnostic.SA1008.severity = warning # Opening parenthesis spacing
+dotnet_diagnostic.SA1009.severity = none    # Closing parenthesis spacing
+dotnet_diagnostic.SA1010.severity = warning # Opening square brackets spacing
+dotnet_diagnostic.SA1011.severity = warning # Closing square brackets spacing
+dotnet_diagnostic.SA1012.severity = warning    # Opening braces spacing
+dotnet_diagnostic.SA1013.severity = warning    # Closing braces spacing
+dotnet_diagnostic.SA1014.severity = warning # Opening generic brackets spacing
+dotnet_diagnostic.SA1015.severity = warning # Closing generic brackets spacing
+dotnet_diagnostic.SA1016.severity = warning # Opening attribute brackets spacing
+dotnet_diagnostic.SA1017.severity = warning # Closing attribute brackets spacing
+dotnet_diagnostic.SA1018.severity = warning # Nullable type symbols spacing
+dotnet_diagnostic.SA1019.severity = warning # Member access symbols spacing
+dotnet_diagnostic.SA1020.severity = warning # Increment decrement symbols spacing
+dotnet_diagnostic.SA1021.severity = warning # Negative signs spacing
+dotnet_diagnostic.SA1022.severity = warning # Positive signs spacing
+dotnet_diagnostic.SA1023.severity = warning # Dereference and access symbols spacing
+dotnet_diagnostic.SA1024.severity = warning # Colons spacing
+dotnet_diagnostic.SA1025.severity = warning # Multiple whitespace
+dotnet_diagnostic.SA1026.severity = warning # New keyword spacing
+dotnet_diagnostic.SA1027.severity = warning # Tabs usage
+dotnet_diagnostic.SA1028.severity = warning # Trailing whitespace
+
+# Readability Rules
+dotnet_diagnostic.SA1101.severity = none    # Prefix local calls with this
+dotnet_diagnostic.SA1116.severity = warning # Split parameters should start on line after declaration
+dotnet_diagnostic.SA1117.severity = warning # Parameters should be on same line or separate lines
+dotnet_diagnostic.SA1118.severity = warning # Parameter should not span multiple lines
+dotnet_diagnostic.SA1122.severity = warning # Use string.Empty for empty strings
+dotnet_diagnostic.SA1123.severity = warning # Do not place regions within elements
+dotnet_diagnostic.SA1124.severity = warning # Do not use regions
+dotnet_diagnostic.SA1125.severity = warning # Use shorthand for nullable types
+dotnet_diagnostic.SA1128.severity = none    # Put constructor initializers on their own line
+
+# Ordering Rules
+dotnet_diagnostic.SA1200.severity = none    # Using directives placement
+dotnet_diagnostic.SA1201.severity = warning # Elements ordering
+dotnet_diagnostic.SA1202.severity = warning # Elements should be ordered by access
+dotnet_diagnostic.SA1203.severity = warning # Constants before fields
+dotnet_diagnostic.SA1204.severity = warning # Static elements ordering
+
+# Naming Rules
+dotnet_diagnostic.SA1300.severity = warning # Element must begin with upper-case letter
+dotnet_diagnostic.SA1302.severity = warning # Interface names must begin with I
+dotnet_diagnostic.SA1303.severity = warning # Const field names must begin with upper-case letter
+dotnet_diagnostic.SA1304.severity = warning # Non-private readonly fields must begin with upper-case letter
+dotnet_diagnostic.SA1309.severity = none    # Field names must not begin with underscore
+dotnet_diagnostic.SA1310.severity = warning # Field names must not contain underscore
+dotnet_diagnostic.SA1313.severity = none    # Parameter names must begin with lowercase letter
+
+# Maintainability Rules
+dotnet_diagnostic.SA1400.severity = warning # Access modifier must be declared
+dotnet_diagnostic.SA1401.severity = warning # Fields must be private
+dotnet_diagnostic.SA1402.severity = none    # File may only contain a single type
+dotnet_diagnostic.SA1403.severity = warning # File may only contain a single namespace
+dotnet_diagnostic.SA1404.severity = warning # Code analysis suppression must have justification
+
+# Layout Rules
+dotnet_diagnostic.SA1500.severity = warning # Braces for multi-line statements
+dotnet_diagnostic.SA1501.severity = none    # Statement must not be on a single line
+dotnet_diagnostic.SA1502.severity = none    # Element must not be on a single line
+dotnet_diagnostic.SA1503.severity = none    # Braces must not be omitted
+dotnet_diagnostic.SA1504.severity = warning # All accessors must be single-line or multi-line
+dotnet_diagnostic.SA1516.severity = none    # Elements should be separated by a blank line
+
+# Documentation Rules
+dotnet_diagnostic.SA1600.severity = warning # Elements must be documented
+dotnet_diagnostic.SA1602.severity = warning # Enumeration items must be documented
+dotnet_diagnostic.SA1633.severity = none    # File must have header
+dotnet_diagnostic.SA1649.severity = none    # File name must match first type name
+
+[**/ValueObjects/Ids/**.cs]
+dotnet_diagnostic.SA1600.severity = none        # Elements must be documented

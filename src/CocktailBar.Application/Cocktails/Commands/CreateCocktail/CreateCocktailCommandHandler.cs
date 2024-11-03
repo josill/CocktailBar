@@ -30,7 +30,7 @@ public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
     /// </returns>
     public async Task<ErrorOr<CreateCocktailResult>> Handle(CreateCocktailCommand request, CancellationToken cancellationToken)
     {
-        var cocktail = Cocktail.Create(request.Name, request.Description, RecipeId.CreateExisting(request.RecipeId));
+        var cocktail = Cocktail.Create(request.Name, request.Description, RecipeId.From(request.RecipeId));
 
         try
         {
