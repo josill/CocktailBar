@@ -1,10 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence.UnitOfWork;
-
-using CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Read;
-using CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Write;
+namespace CocktailBar.Application.Common.Interfaces;
 
 /// <summary>
 /// Defines a contract for managing database transactions and context access in the CocktailBar application.
@@ -12,6 +9,12 @@ using CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Write;
 /// </summary>
 public interface IUnitOfWork : IAsyncDisposable
 {
+    /// <summary>
+    /// Gets the repository for managing cocktail entities.
+    /// Provides access to CRUD operations and specialized queries for cocktails.
+    /// </summary>
+    ICocktailsRepository Cocktails { get; }
+
     /// <summary>
     /// Gets the read-only database context for cocktail-related operations.
     /// This context is optimized for query operations following the CQRS pattern.

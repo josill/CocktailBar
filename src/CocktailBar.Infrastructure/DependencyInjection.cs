@@ -3,10 +3,11 @@
 
 namespace CocktailBar.Infrastructure;
 
-using CocktailBar.Infrastructure.Persistence.Configurations;
-using CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Read;
-using CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Write;
-using CocktailBar.Infrastructure.Persistence.UnitOfWork;
+using CocktailBar.Application.Common.Interfaces;
+using CocktailBar.Infrastructure.Cocktails.Context.Read;
+using CocktailBar.Infrastructure.Cocktails.Context.Write;
+using CocktailBar.Infrastructure.Common.Settings;
+using CocktailBar.Infrastructure.Common.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

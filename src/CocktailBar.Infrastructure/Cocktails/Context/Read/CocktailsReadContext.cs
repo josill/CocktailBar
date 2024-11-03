@@ -1,11 +1,12 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Read;
+namespace CocktailBar.Infrastructure.Cocktails.Context.Read;
 
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Infrastructure.Persistence.Configurations.Write;
-using CocktailBar.Infrastructure.Persistence.Models;
+using CocktailBar.Application.Common.Interfaces;
+using CocktailBar.Domain.CocktailAggregate.Read;
+using CocktailBar.Infrastructure.Cocktails.Configuration.Read;
+using CocktailBar.Infrastructure.Recipes.Models;
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>
@@ -48,7 +49,7 @@ internal sealed class CocktailsReadContext : DbContext, ICocktailsReadContext
     /// <param name="modelBuilder">The model builder instance used to construct the model.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        new CocktailsReadModelConfiguration().Configure(modelBuilder.Entity<Cocktail>());
+        new CocktailsReadModelConfiguration().Configure(modelBuilder.Entity<CocktailReadModel>());
     }
 
     /// <summary>

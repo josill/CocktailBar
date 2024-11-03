@@ -1,9 +1,10 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Read;
+namespace CocktailBar.Application.Common.Interfaces;
 
-using CocktailBar.Infrastructure.Persistence.Models;
+using CocktailBar.Domain.CocktailAggregate.Read;
+using CocktailBar.Infrastructure.Recipes.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 

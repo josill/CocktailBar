@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence.Configurations.Read;
+namespace CocktailBar.Infrastructure.Cocktails.Configuration.Read;
 
-using CocktailBar.Infrastructure.Persistence.Models;
+using CocktailBar.Infrastructure.Recipes.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

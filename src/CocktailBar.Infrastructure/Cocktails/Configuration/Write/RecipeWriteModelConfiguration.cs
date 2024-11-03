@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence.Configurations.Write;
+namespace CocktailBar.Infrastructure.Cocktails.Configuration.Write;
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using Microsoft.EntityFrameworkCore;

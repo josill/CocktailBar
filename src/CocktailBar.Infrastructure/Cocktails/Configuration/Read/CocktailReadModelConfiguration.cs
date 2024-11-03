@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence.Configurations.Read;
+namespace CocktailBar.Infrastructure.Cocktails.Configuration.Read;
 
-using CocktailBar.Infrastructure.Persistence.Models;
+using CocktailBar.Domain.CocktailAggregate.Read;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// Configures the database schema and mapping for the CocktailReadModel entity.
 /// This configuration is specifically for the read-side of the CQRS pattern.
 /// </summary>
-internal sealed class CocktailReadModelConfiguration : IEntityTypeConfiguration<CocktailReadModel>
+internal sealed class CocktailsReadModelConfiguration : IEntityTypeConfiguration<CocktailReadModel>
 {
     /// <summary>
     /// Configures the entity mapping for CocktailReadModel.

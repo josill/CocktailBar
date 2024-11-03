@@ -3,6 +3,9 @@
 
 namespace CocktailBar.Application.Cocktails.Commands.CreateCocktail;
 
+using CocktailBar.Application.Common.Interfaces;
+using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using ErrorOr;
 using MediatR;
 
@@ -13,7 +16,7 @@ using MediatR;
 /// This handler processes the CreateCocktailCommand and returns a Result containing
 /// either the created cocktail information or validation errors.
 /// </remarks>
-public class CreateCocktailCommandHandler : IRequestHandler<CreateCocktailCommand, ErrorOr<CreateCocktailResult>>
+public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<CreateCocktailCommand, ErrorOr<CreateCocktailResult>>
 {
     /// <summary>
     /// Processes the command to create a new cocktail.
@@ -25,15 +28,29 @@ public class CreateCocktailCommandHandler : IRequestHandler<CreateCocktailComman
     /// - A successful CreateCocktailResult with the created cocktail's details.
     /// - An Error if the operation fails or validation fails.
     /// </returns>
-    public Task<ErrorOr<CreateCocktailResult>> Handle(CreateCocktailCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<CreateCocktailResult>> Handle(CreateCocktailCommand request, CancellationToken cancellationToken)
     {
+        var cocktail = Cocktail.Create(request.Name, request.Description, RecipeId.CreateExisting(request.RecipeId));
+
+        try
+        {
+            await unitOfWork.BeginTransactionAsync();
+
+            await unitOfWork.Cocktails.AddAsync(cocktail);
+            await unitOfWork.CommitAsync();
+        }
+        catch (Exception)
+        {
+            await unitOfWork.RollbackAsync();
+        }
+
         // For now, just return a successful result with the input data
         var result = new CreateCocktailResult(
-            Guid.NewGuid(),
-            request.Name,
-            request.Description,
-            request.RecipeId);
+            cocktail.Id.Value,
+            cocktail.Name,
+            cocktail.Description,
+            cocktail.RecipeId.Value);
 
-        return Task.FromResult<ErrorOr<CreateCocktailResult>>(result);
+        return result;
     }
 }

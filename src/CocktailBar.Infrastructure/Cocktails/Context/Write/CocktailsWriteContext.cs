@@ -1,10 +1,11 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence.DbContext.Cocktails.Write;
+namespace CocktailBar.Infrastructure.Cocktails.Context.Write;
 
+using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Infrastructure.Persistence.Configurations.Write;
+using CocktailBar.Infrastructure.Cocktails.Configuration.Write;
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>
@@ -48,12 +49,12 @@ public class CocktailsWriteContext : DbContext, ICocktailsWriteContext
     /// </summary>
     /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
     /// <remarks>
-    /// This method applies the configuration for the Cocktail entity using <see cref="CocktailWriteModelConfiguration"/>.
+    /// This method applies the configuration for the Cocktail entity using <see cref="CocktailsWriteModelConfiguration"/>.
     /// The configuration includes setting up entity properties, relationships, and any constraints
     /// specific to the write-side of the CQRS pattern.
     /// </remarks>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        new CocktailWriteModelConfiguration().Configure(modelBuilder.Entity<Cocktail>());
+        new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<Cocktail>());
     }
 }

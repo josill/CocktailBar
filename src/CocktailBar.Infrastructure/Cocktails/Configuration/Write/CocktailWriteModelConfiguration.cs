@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Persistence.Configurations.Write;
+namespace CocktailBar.Infrastructure.Cocktails.Configuration.Write;
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// Configures the database schema and mapping for the Cocktail domain entity.
 /// This configuration is specifically for the write-side of the CQRS pattern.
 /// </summary>
-internal sealed class CocktailWriteModelConfiguration : IEntityTypeConfiguration<Cocktail>
+internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguration<Cocktail>
 {
     /// <summary>
     /// Configures the entity mapping for the Cocktail entity.

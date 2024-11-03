@@ -30,7 +30,7 @@ public sealed class RecipeId : ValueObject<RecipeId>
     /// <remarks>
     /// This property is private to ensure immutability and encapsulation of the RecipeId.
     /// </remarks>
-    private Guid Value { get; }
+    public Guid Value { get; }
 
     /// <summary>
     /// Creates a new unique RecipeId.
@@ -38,7 +38,17 @@ public sealed class RecipeId : ValueObject<RecipeId>
     /// <returns>A new instance of <see cref="RecipeId"/> with a unique GUID value.</returns>
     public static RecipeId CreateUnique()
     {
-        return new(Guid.NewGuid());
+        return CreateExisting(Guid.NewGuid());
+    }
+
+    /// <summary>
+    /// Creates an existing RecipeId.
+    /// </summary>
+    /// <param name="id">The GUID value to use for this RecipeId.</param>
+    /// <returns>A new instance of <see cref="RecipeId"/> with the provided GUID value.</returns>
+    public static RecipeId CreateExisting(Guid id)
+    {
+        return new RecipeId(id);
     }
 
     /// <summary>
