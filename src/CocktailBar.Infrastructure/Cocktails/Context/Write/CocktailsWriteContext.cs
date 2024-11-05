@@ -56,5 +56,6 @@ public sealed class CocktailsWriteContext : DbContext, ICocktailsWriteContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<Cocktail>());
+        new RecipeWriteModelConfiguration().Configure(modelBuilder.Entity<Recipe>());
     }
 }

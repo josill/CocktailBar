@@ -24,6 +24,8 @@ public abstract class EntityWithMetadata<TId> : IEntity<TId>, IEquatable<EntityW
         Id = id;
     }
 
+    protected EntityWithMetadata() { }
+
     /// <summary>
     /// Gets the unique identifier of the entity.
     /// </summary>

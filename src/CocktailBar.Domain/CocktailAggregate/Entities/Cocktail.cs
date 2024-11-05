@@ -27,6 +27,8 @@ public class Cocktail : AggregateRoot<CocktailId>
         RecipeId = recipeId;
     }
 
+    private Cocktail() { }
+
     /// <summary>
     /// Gets the name of the cocktail.
     /// </summary>

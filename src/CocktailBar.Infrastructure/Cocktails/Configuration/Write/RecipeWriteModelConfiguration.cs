@@ -32,5 +32,6 @@ internal sealed class RecipeWriteModelConfiguration : IEntityTypeConfiguration<R
     public void Configure(EntityTypeBuilder<Recipe> builder)
     {
         builder.HasKey(r => r.Id);
+        builder.ComplexProperty(r => r.Ingredients);
     }
 }
