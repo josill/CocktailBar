@@ -6,14 +6,13 @@ namespace CocktailBar.Infrastructure.Cocktails.Context.Read;
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Domain.CocktailAggregate.Read;
 using CocktailBar.Infrastructure.Cocktails.Configuration.Read;
-using CocktailBar.Infrastructure.Recipes.Models;
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>
 /// Represents the read-side database context for cocktail-related operations in the CocktailBar application.
 /// This internal context is specifically designed for read operations following the CQRS pattern.
 /// </summary>
-internal sealed class CocktailsReadContext : DbContext, ICocktailsReadContext
+public sealed class CocktailsReadContext : DbContext, ICocktailsReadContext
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CocktailsReadContext"/> class.

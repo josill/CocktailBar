@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 /// Represents the write-side database context for cocktail-related operations in the CocktailBar application.
 /// This context is specifically designed for write operations following CQRS pattern.
 /// </summary>
-public class CocktailsWriteContext : DbContext, ICocktailsWriteContext
+public sealed class CocktailsWriteContext : DbContext, ICocktailsWriteContext
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CocktailsWriteContext"/> class.

@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.Common;
+namespace CocktailBar.Domain.Common.Errors;
 
 /// <summary>
 /// Represents a domain-specific exception that is associated with a particular type.
@@ -12,9 +12,7 @@ public class DomainException : Exception
     /// Initializes a new instance of the <see cref="DomainException"/> class with a specified error message.
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
-    internal DomainException(string message) : base(message)
-    {
-    }
+    internal DomainException(string message) : base(message) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="DomainException"/> if the condition is true.
@@ -38,7 +36,5 @@ public sealed class DomainException<T> : DomainException
     /// Initializes a new instance of the <see cref="DomainException{T}"/> class with a specified error message.
     /// </summary>
     /// <param name="message">The error message.</param>
-    internal DomainException(string message) : base(message)
-    {
-    }
+    internal DomainException(string message) : base(message) { }
 }

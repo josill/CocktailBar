@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Common.Errors.Application;
+
 namespace CocktailBar.Application.Cocktails.Commands.CreateCocktail;
 
 using CocktailBar.Application.Common.Interfaces;
@@ -42,6 +44,7 @@ public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
         catch (Exception)
         {
             await unitOfWork.RollbackAsync();
+            return Errors.Common.SomethingWentWrong("Error creating the cocktail entity");
         }
 
         // For now, just return a successful result with the input data

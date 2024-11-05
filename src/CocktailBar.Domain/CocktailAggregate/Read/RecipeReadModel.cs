@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Recipes.Models;
+namespace CocktailBar.Domain.CocktailAggregate.Read;
 
 /// <summary>
 /// Represents a read-only view model for recipe data in the CocktailBar application.

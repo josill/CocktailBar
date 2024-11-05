@@ -27,7 +27,7 @@ public class CocktailsController(ISender mediatr) : ApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateCocktail(CreateCocktailRequest request)
     {
-        var command = new CreateCocktailCommand(request.Name, request.Description, Guid.Empty);
+        var command = new CreateCocktailCommand(request.Name, request.Description, request.RecipeId);
         var result = await mediatr.Send(command);
 
         return result.Match(

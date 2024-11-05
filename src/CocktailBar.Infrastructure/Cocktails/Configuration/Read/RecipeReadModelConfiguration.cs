@@ -1,9 +1,10 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.Read;
+
 namespace CocktailBar.Infrastructure.Cocktails.Configuration.Read;
 
-using CocktailBar.Infrastructure.Recipes.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

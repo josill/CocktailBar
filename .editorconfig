@@ -244,5 +244,9 @@ dotnet_diagnostic.SA1651.severity = warning # Do not use placeholder elements
 [**/ValueObjects/Ids/**.cs]
 dotnet_diagnostic.SA1600.severity = none    # Elements must be documented
 
+[**/Common/Errors/**.cs]
+dotnet_diagnostic.SA1600.severity = none    # Elements must be documented
+dotnet_diagnostic.SA1601.severity = none    # Partial Elements must be documented
+
 [**/CocktailBar.Api/**.cs]
 dotnet_diagnostic.SA1516.severity = none    # Elements should be separated by blank line

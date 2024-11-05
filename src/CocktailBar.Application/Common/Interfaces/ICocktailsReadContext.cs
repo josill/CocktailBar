@@ -4,7 +4,6 @@
 namespace CocktailBar.Application.Common.Interfaces;
 
 using CocktailBar.Domain.CocktailAggregate.Read;
-using CocktailBar.Infrastructure.Recipes.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
