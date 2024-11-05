@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.CocktailAggregate.Entities;
+namespace CocktailBar.Domain.CocktailAggregate;
 
 using System.Collections.Generic;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects;
