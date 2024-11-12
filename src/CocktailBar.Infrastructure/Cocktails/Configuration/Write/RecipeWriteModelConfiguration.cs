@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+
 namespace CocktailBar.Infrastructure.Cocktails.Configuration.Write;
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
@@ -32,6 +34,13 @@ internal sealed class RecipeWriteModelConfiguration : IEntityTypeConfiguration<R
     public void Configure(EntityTypeBuilder<Recipe> builder)
     {
         builder.HasKey(r => r.Id);
+
+        builder.Property(o => o.Id)
+            .HasConversion(
+                id => id.Value,
+                value => RecipeId.From(value))
+            .IsRequired();
+
         builder.ComplexProperty(r => r.Ingredients);
     }
 }

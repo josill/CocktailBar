@@ -23,6 +23,8 @@ public class Ingredient : ValueObject<Ingredient>
         Amount = amount;
     }
 
+    private Ingredient() { }
+
     /// <summary>
     /// Gets the unique identifier of the stock item associated with this ingredient.
     /// </summary>

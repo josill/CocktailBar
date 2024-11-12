@@ -49,6 +49,7 @@ public static class DependencyInjection
                               ?? throw new InvalidOperationException(
                                   "Connection string 'DefaultConnection' not found.");
 
+       Console.WriteLine(connectionString);
        services.AddDbContext<CocktailsWriteContext>(options =>
            options.UseNpgsql(connectionString));
 
@@ -72,10 +73,11 @@ public static class DependencyInjection
        {
            using var scope = services.BuildServiceProvider().CreateScope();
 
-           // var cocktailsDbContext = scope.ServiceProvider.GetRequiredService<CocktailsWriteContext>();
+           var cocktailsDbContext = scope.ServiceProvider.GetRequiredService<CocktailsWriteContext>();
 
-           // cocktailsDbContext.Database.EnsureDeleted();
-           // cocktailsDbContext.Database.EnsureCreated();
+           cocktailsDbContext.Database.EnsureDeleted();
+           cocktailsDbContext.Database.EnsureCreated();
+           cocktailsDbContext.Database.Migrate();
        }
 
        return services;
