@@ -49,7 +49,6 @@ public static class DependencyInjection
                               ?? throw new InvalidOperationException(
                                   "Connection string 'DefaultConnection' not found.");
 
-       Console.WriteLine(connectionString);
        services.AddDbContext<CocktailsWriteContext>(options =>
            options.UseNpgsql(connectionString));
 

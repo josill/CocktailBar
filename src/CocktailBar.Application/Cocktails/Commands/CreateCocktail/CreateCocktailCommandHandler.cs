@@ -41,7 +41,7 @@ public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
             await unitOfWork.Cocktails.AddAsync(cocktail);
             await unitOfWork.CommitAsync();
         }
-        catch (Exception)
+        catch (Exception e)
         {
             await unitOfWork.RollbackAsync();
             return Errors.Common.SomethingWentWrong("Error creating the cocktail entity");
