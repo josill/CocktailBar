@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.Common.Errors.Application;
-
 using ErrorOr;
+
+namespace CocktailBar.Domain.Common.Errors;
 
 public static partial class Errors
 {

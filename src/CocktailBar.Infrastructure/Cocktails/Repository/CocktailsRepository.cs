@@ -1,6 +1,10 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Common.Errors;
+using Microsoft.EntityFrameworkCore;
+
 namespace CocktailBar.Infrastructure.Cocktails.Repository;
 
 using CocktailBar.Application.Common.Interfaces;
@@ -9,14 +13,14 @@ using CocktailBar.Domain.CocktailAggregate.Entities;
 /// <summary>
 /// Implements the ICocktailsRepository interface to provide data access operations for cocktail entities.
 /// </summary>
-public class CocktailsRepository : ICocktailsRepository
+public class CocktailsRepository(ICocktailsWriteContext cocktailsWrite, ICocktailsReadContext cocktailsRead) : ICocktailsRepository
 {
     /// <summary>
     /// Retrieves a cocktail by its unique identifier.
     /// </summary>
     /// <param name="id">The unique identifier of the cocktail to retrieve.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the cocktail if found; otherwise, null.</returns>
-    public Task<Cocktail?> GetByIdAsync(Guid id)
+    public Task<Cocktail?> GetByIdAsync(CocktailId id)
     {
         throw new NotImplementedException();
     }
@@ -35,9 +39,12 @@ public class CocktailsRepository : ICocktailsRepository
     /// </summary>
     /// <param name="entity">The cocktail entity to add.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public Task AddAsync(Cocktail entity)
+    public async Task AddAsync(Cocktail entity)
     {
-        throw new NotImplementedException();
+        var existingEntity = await cocktailsRead.Cocktails.Where(c => c.Id == entity.Id.Value).FirstOrDefaultAsync();
+        InfrastructureException.For<Cocktail>(existingEntity != null, "Cocktail entity with the same id already exists!");
+
+        await cocktailsWrite.Cocktails.AddAsync(entity);
     }
 
     /// <summary>

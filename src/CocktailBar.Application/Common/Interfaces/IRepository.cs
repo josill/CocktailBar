@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+
 namespace CocktailBar.Application.Common.Interfaces;
 
 /// <summary>
@@ -23,7 +25,7 @@ public interface IRepository<TEntity>
     /// This method is typically used for retrieving a single entity when its ID is known.
     /// Returns null if no entity is found with the specified ID.
     /// </remarks>
-    Task<TEntity?> GetByIdAsync(Guid id);
+    Task<TEntity?> GetByIdAsync(CocktailId id);
 
     /// <summary>
     /// Retrieves all entities of type TEntity from the repository asynchronously.
