@@ -21,6 +21,8 @@ internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguratio
     /// <param name="builder">The builder used to configure the entity.</param>
     public void Configure(EntityTypeBuilder<Cocktail> builder)
     {
+        builder.ToTable("Cocktails");
+
         builder.HasKey(c => c.Id);
 
         builder.Property(o => o.Id)
@@ -29,6 +31,20 @@ internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguratio
                 value => CocktailId.From(value))
             .IsRequired();
 
-        // TODO: Configure relation to recipe id
+        builder.Property(c => c.Name)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(c => c.Description)
+            .IsRequired()
+            .HasColumnType("varchar");
+
+        builder.Property(c => c.RecipeId)
+            .IsRequired()
+            .HasConversion(
+                id => id.Value,
+                value => RecipeId.From(value));
+
+        builder.HasIndex(c => c.Name);
     }
 }

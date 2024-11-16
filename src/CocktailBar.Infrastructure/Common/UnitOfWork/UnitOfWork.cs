@@ -15,6 +15,7 @@ public sealed class UnitOfWork : IUnitOfWork
 {
     private DbTransaction? _transaction;
     private bool _disposed;
+    private bool _hasActiveTransaction;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
@@ -76,6 +77,9 @@ public sealed class UnitOfWork : IUnitOfWork
             if (_transaction is not null)
             {
                 await CocktailsWriteContext.Database.CommitTransactionAsync();
+                _hasActiveTransaction = false;
+                await _transaction.DisposeAsync();
+                _transaction = null;
             }
         }
         catch
@@ -92,11 +96,12 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <returns>A task representing the asynchronous operation.</returns>
     public async Task RollbackAsync()
     {
-        if (_transaction is not null)
+        if (_transaction is not null && _hasActiveTransaction)
         {
             await CocktailsWriteContext.Database.RollbackTransactionAsync();
-            _transaction.Dispose();
+            await _transaction.DisposeAsync();
             _transaction = null;
+            _hasActiveTransaction = false;
         }
     }
 
@@ -109,7 +114,7 @@ public sealed class UnitOfWork : IUnitOfWork
     {
         if (!_disposed)
         {
-            if (_transaction is not null)
+            if (_transaction is not null && _hasActiveTransaction)
             {
                 await RollbackAsync();
             }
