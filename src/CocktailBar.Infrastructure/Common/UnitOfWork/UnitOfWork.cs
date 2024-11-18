@@ -42,12 +42,12 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <summary>
     /// Gets the read-only database context for cocktail-related operations.
     /// </summary>
-    public ICocktailsReadContext CocktailsReadContext { get; }
+    private ICocktailsReadContext CocktailsReadContext { get; }
 
     /// <summary>
     /// Gets the write-only database context for cocktail-related operations.
     /// </summary>
-    public ICocktailsWriteContext CocktailsWriteContext { get; }
+    private ICocktailsWriteContext CocktailsWriteContext { get; }
 
     /// <summary>
     /// Begins a new database transaction asynchronously.

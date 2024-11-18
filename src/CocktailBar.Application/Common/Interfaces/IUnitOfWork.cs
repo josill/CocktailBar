@@ -16,18 +16,6 @@ public interface IUnitOfWork : IAsyncDisposable
     ICocktailsRepository Cocktails { get; }
 
     /// <summary>
-    /// Gets the read-only database context for cocktail-related operations.
-    /// This context is optimized for query operations following the CQRS pattern.
-    /// </summary>
-    ICocktailsReadContext CocktailsReadContext { get; }
-
-    /// <summary>
-    /// Gets the write-only database context for cocktail-related operations.
-    /// This context is optimized for command operations following the CQRS pattern.
-    /// </summary>
-    ICocktailsWriteContext CocktailsWriteContext { get; }
-
-    /// <summary>
     /// Begins a new database transaction asynchronously.
     /// This should be called before performing a series of related database operations.
     /// </summary>
