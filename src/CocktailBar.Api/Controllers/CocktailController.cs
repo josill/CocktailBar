@@ -50,7 +50,7 @@ public class CocktailsController(ISender mediatr) : ApiController
         var result = await mediatr.Send(command);
 
         return result.Match(
-            cocktail => Created($"/cocktails/{cocktail.CocktailId}", cocktail), // TODO: Add the get endpoint.
+            cocktail => Created($"/cocktails/{cocktail.CocktailId}", cocktail),
             HandleErrors);
     }
 }

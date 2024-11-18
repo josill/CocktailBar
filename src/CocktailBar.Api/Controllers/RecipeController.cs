@@ -20,10 +20,8 @@ public class RecipesController(ISender mediatr) : ApiController
     /// Creates a new cocktail recipe in the system.
     /// </summary>
     /// <param name="request">The recipe creation request containing the name and instructions.</param>
-    /// <returns>
-    /// 201 Created with the created recipe and its location if successful.
-    /// 400 Bad Request if the request is invalid or validation fails.
-    /// </returns>
+    /// <returns>Return the recipe information.</returns>
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateRecipe(CreateRecipeRequest request)
@@ -32,7 +30,7 @@ public class RecipesController(ISender mediatr) : ApiController
         var result = await mediatr.Send(command);
 
         return result.Match(
-            recipe => Created($"/recipes/{recipe.RecipeId}", recipe), // TODO: Add the get endpoint.
+            recipe => Created($"/recipes/{recipe.RecipeId}", recipe),
             HandleErrors);
     }
 }
