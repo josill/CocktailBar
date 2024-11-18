@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 public class CocktailsController(ISender mediatr) : ApiController
 {
     /// <summary>
-    /// Gets a new cocktail by the id.
+    /// Gets a cocktail by the id.
     /// </summary>
     /// <param name="cocktailId">The cocktail id.</param>
     /// <returns>Returns the cocktail information.</returns>
@@ -28,12 +28,10 @@ public class CocktailsController(ISender mediatr) : ApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get(Guid cocktailId)
     {
-        var command = new GetCocktailQuery(cocktailId);
-        var result = await mediatr.Send(command);
+        var query = new GetCocktailQuery(cocktailId);
+        var result = await mediatr.Send(query);
 
-        return result.Match(
-            Ok,
-            HandleErrors);
+        return result.Match(Ok, HandleErrors);
     }
 
     /// <summary>

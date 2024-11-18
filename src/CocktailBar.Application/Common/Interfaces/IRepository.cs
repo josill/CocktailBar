@@ -10,8 +10,10 @@ namespace CocktailBar.Application.Common.Interfaces;
 /// Provides basic CRUD (Create, Read, Update, Delete) operations for entities.
 /// </summary>
 /// <typeparam name="TEntity">The type of entity this repository handles. Must be a reference type.</typeparam>
-public interface IRepository<TEntity>
+/// <typeparam name="TId">The type of entity id this repository handles. Must be a reference type.</typeparam>
+public interface IRepository<TEntity, in TId>
     where TEntity : class
+    where TId : class
 {
     /// <summary>
     /// Retrieves an entity by its unique identifier asynchronously.
@@ -25,7 +27,7 @@ public interface IRepository<TEntity>
     /// This method is typically used for retrieving a single entity when its ID is known.
     /// Returns null if no entity is found with the specified ID.
     /// </remarks>
-    Task<TEntity?> GetByIdAsync(CocktailId id);
+    Task<TEntity?> GetByIdAsync(TId id);
 
     /// <summary>
     /// Retrieves all entities of type TEntity from the repository asynchronously.

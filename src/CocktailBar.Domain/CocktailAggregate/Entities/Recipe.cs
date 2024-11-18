@@ -1,6 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.Read;
 using CocktailBar.Domain.Common.Errors;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
@@ -24,7 +25,8 @@ public class Recipe : EntityWithMetadata<RecipeId>
     /// </summary>
     /// <param name="name">The name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
-    private Recipe(string name, string instructions) : base(RecipeId.New())
+    /// <param name="recipeId">The unique identifier of the recipe</param>
+    private Recipe(string name, string instructions, RecipeId? recipeId = null) : base(recipeId ?? RecipeId.New())
     {
         Validate(name, instructions);
         Name = name;
@@ -57,6 +59,13 @@ public class Recipe : EntityWithMetadata<RecipeId>
     /// <returns>A new <see cref="Recipe"/> instance.</returns>
     public static Recipe Create(string name, string instructions) => new(name, instructions);
 
+    /// <summary>
+    /// Creates a new instance of the <see cref="Recipe"/> class.
+    /// </summary>
+    /// <param name="recipe">The recipe read model.</param>
+    /// <returns>A new <see cref="Recipe"/> instance.</returns>
+    public static Recipe From(RecipeReadModel recipe) => new(recipe.Name, recipe.Instructions, RecipeId.From(recipe.Id));
+    
     /// <summary>
     /// Adds an ingredient to the recipe if it doesn't already exist.
     /// </summary>

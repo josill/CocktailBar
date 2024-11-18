@@ -9,11 +9,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CocktailBar.Infrastructure.Cocktails.Repository;
 
-public class RecipeRepository(ICocktailsReadContext readContext, ICocktailsWriteContext writeContext) : IRepository<Recipe>
+public class RecipeRepository(ICocktailsReadContext readContext, ICocktailsWriteContext writeContext) : IRepository<Recipe, RecipeId>
 {
-    public Task<Recipe?> GetByIdAsync(CocktailId id)
+    public async Task<Recipe?> GetByIdAsync(RecipeId id)
     {
-        throw new NotImplementedException();
+        var entity = await readContext.Recipes.Where(c => c.Id == id.Value).FirstOrDefaultAsync();
+
+        return entity is null ? null : Recipe.From(entity);
     }
 
     public Task<IEnumerable<Recipe>> GetAllAsync()

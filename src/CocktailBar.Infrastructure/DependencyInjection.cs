@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Infrastructure;
 
@@ -65,8 +66,8 @@ public static class DependencyInjection
            sp.GetRequiredService<CocktailsReadContext>());
 
        services.AddScoped<IUnitOfWork, UnitOfWork>();
-       services.AddScoped<IRepository<Cocktail>, CocktailsRepository>();
-       services.AddScoped<IRepository<Recipe>, RecipeRepository>();
+       services.AddScoped<IRepository<Cocktail, CocktailId>, CocktailsRepository>();
+       services.AddScoped<IRepository<Recipe, RecipeId>, RecipeRepository>();
 
        var databaseSettings = new DatabaseSettings();
        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);
