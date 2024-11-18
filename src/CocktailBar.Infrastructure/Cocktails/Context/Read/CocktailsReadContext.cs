@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 /// Represents the read-side database context for cocktail-related operations in the CocktailBar application.
 /// This internal context is specifically designed for read operations following the CQRS pattern.
 /// </summary>
-public sealed class CocktailsReadContext : DbContext, ICocktailsReadContext
+internal sealed class CocktailsReadContext : DbContext, ICocktailsReadContext
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CocktailsReadContext"/> class.

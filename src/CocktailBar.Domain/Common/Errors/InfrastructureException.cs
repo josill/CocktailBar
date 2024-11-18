@@ -30,7 +30,7 @@ public class InfrastructureException : Exception
 /// Represents a strongly-typed domain exception for a specific type.
 /// </summary>
 /// <typeparam name="T">The type associated with this infrastructure exception.</typeparam>
-public sealed class InfrastructureException<T> : DomainException
+internal sealed class InfrastructureException<T> : DomainException
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="InfrastructureException{T}"/> class with a specified error message.

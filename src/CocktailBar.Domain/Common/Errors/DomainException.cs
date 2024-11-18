@@ -30,7 +30,7 @@ public class DomainException : Exception
 /// Represents a strongly-typed domain exception for a specific type.
 /// </summary>
 /// <typeparam name="T">The type associated with this domain exception.</typeparam>
-public sealed class DomainException<T> : DomainException
+internal sealed class DomainException<T> : DomainException
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="DomainException{T}"/> class with a specified error message.
