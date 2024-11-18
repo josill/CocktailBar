@@ -5,15 +5,8 @@ namespace CocktailBar.Application.Cocktails.Commands.CreateCocktail;
 
 using FluentValidation;
 
-/// <summary>
-/// Validator for the CreateCocktailCommand.
-/// </summary>
 public class CreateCocktailCommandValidator : AbstractValidator<CreateCocktailCommand>
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CreateCocktailCommandValidator"/> class.
-    ///     /// Configures validation rules for cocktail creation.
-    /// </summary>
     public CreateCocktailCommandValidator()
     {
         RuleFor(x => x.Name)
@@ -24,7 +17,7 @@ public class CreateCocktailCommandValidator : AbstractValidator<CreateCocktailCo
             .NotEmpty()
             .MaximumLength(1000);
 
-        // RuleFor(x => x.RecipeId)
-        //     .NotEmpty();
+        RuleFor(x => x.RecipeId)
+            .NotEmpty();
     }
 }

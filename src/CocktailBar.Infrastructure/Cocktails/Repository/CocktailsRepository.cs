@@ -20,9 +20,11 @@ public class CocktailsRepository(ICocktailsWriteContext cocktailsWrite, ICocktai
     /// </summary>
     /// <param name="id">The unique identifier of the cocktail to retrieve.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the cocktail if found; otherwise, null.</returns>
-    public Task<Cocktail?> GetByIdAsync(CocktailId id)
+    public async Task<Cocktail?> GetByIdAsync(CocktailId id)
     {
-        throw new NotImplementedException();
+        var entity = await cocktailsRead.Cocktails.Where(c => c.Id == id.Value).FirstOrDefaultAsync();
+
+        return entity is null ? null : Cocktail.From(entity);
     }
 
     /// <summary>

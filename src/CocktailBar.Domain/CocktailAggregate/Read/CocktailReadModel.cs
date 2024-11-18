@@ -21,7 +21,11 @@ public sealed record CocktailReadModel
 
     /// <summary>
     /// Gets the description of the cocktail.
-    /// Note: Property name contains a typo and should be 'Description'.
     /// </summary>
     public string Description { get; init; } = default!;
+
+    /// <summary>
+    /// Gets the unique identifier of the related recipe of the cocktail.
+    /// </summary>
+    public Guid RecipeId { get; init; } = default!;
 }

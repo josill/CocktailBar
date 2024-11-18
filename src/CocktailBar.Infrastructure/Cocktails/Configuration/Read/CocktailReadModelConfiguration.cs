@@ -20,6 +20,5 @@ internal sealed class CocktailsReadModelConfiguration : IEntityTypeConfiguration
     /// <param name="builder">The entity type builder used to configure the CocktailReadModel.</param>
     public void Configure(EntityTypeBuilder<CocktailReadModel> builder)
     {
-        builder.HasKey(c => c.Id);
     }
 }

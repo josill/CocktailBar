@@ -1,6 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.Read;
 using CocktailBar.Domain.Common.Errors;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
@@ -19,7 +20,8 @@ public class Cocktail : AggregateRoot<CocktailId>
     /// <param name="name">The name of the cocktail.</param>
     /// <param name="description">The description of the cocktail.</param>
     /// <param name="recipeId">The unique identifier of the associated recipe.</param>
-    private Cocktail(string name, string description, RecipeId recipeId) : base(CocktailId.New())
+    /// <param name="cocktailId">The unique identifier of the cocktail</param>
+    private Cocktail(string name, string description, RecipeId recipeId, CocktailId? cocktailId = null) : base(cocktailId ?? CocktailId.New())
     {
         Validate(name, description);
         Name = name;
@@ -53,6 +55,17 @@ public class Cocktail : AggregateRoot<CocktailId>
     /// <returns>A new <see cref="Cocktail"/> instance.</returns>
     public static Cocktail Create(
         string name, string description, RecipeId recipeId) => new(name, description, recipeId);
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="Cocktail"/> class.
+    /// </summary>
+    /// <param name="cocktail">The cocktail read model.</param>
+    /// <returns>A new <see cref="Cocktail"/> instance.</returns>
+    public static Cocktail From(CocktailReadModel cocktail) => new(
+        cocktail.Name,
+        cocktail.Description,
+        RecipeId.From(cocktail.RecipeId),
+        CocktailId.From(cocktail.Id));
 
     /// <summary>
     /// Validates the cocktail's name and description.
