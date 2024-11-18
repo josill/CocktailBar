@@ -21,7 +21,6 @@ public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
         try
         {
             await unitOfWork.BeginTransactionAsync();
-
             await unitOfWork.Cocktails.AddAsync(cocktail);
             await unitOfWork.CommitAsync();
         }
@@ -31,7 +30,6 @@ public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
             return Errors.Common.SomethingWentWrong("Error creating the cocktail entity");
         }
 
-        var result = CocktailResult.From(cocktail);
-        return result;
+        return CocktailResult.From(cocktail);
     }
 }

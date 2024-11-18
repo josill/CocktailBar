@@ -36,8 +36,7 @@ internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguratio
             .HasMaxLength(100);
 
         builder.Property(c => c.Description)
-            .IsRequired()
-            .HasColumnType("varchar");
+            .IsRequired();
 
         builder.Property(c => c.RecipeId)
             .IsRequired()

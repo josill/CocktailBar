@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.Entities;
+
 namespace CocktailBar.Infrastructure;
 
 using CocktailBar.Application.Common.Interfaces;
@@ -63,7 +65,8 @@ public static class DependencyInjection
            sp.GetRequiredService<CocktailsReadContext>());
 
        services.AddScoped<IUnitOfWork, UnitOfWork>();
-       services.AddScoped<ICocktailsRepository, CocktailsRepository>();
+       services.AddScoped<IRepository<Cocktail>, CocktailsRepository>();
+       services.AddScoped<IRepository<Recipe>, RecipeRepository>();
 
        var databaseSettings = new DatabaseSettings();
        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);

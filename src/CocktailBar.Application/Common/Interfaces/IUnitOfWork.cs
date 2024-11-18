@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.Entities;
+
 namespace CocktailBar.Application.Common.Interfaces;
 
 /// <summary>
@@ -11,9 +13,13 @@ public interface IUnitOfWork : IAsyncDisposable
 {
     /// <summary>
     /// Gets the repository for managing cocktail entities.
-    /// Provides access to CRUD operations and specialized queries for cocktails.
     /// </summary>
-    ICocktailsRepository Cocktails { get; }
+    IRepository<Cocktail> Cocktails { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing recipe entities.
+    /// </summary>
+    IRepository<Recipe> Recipes { get; }
 
     /// <summary>
     /// Begins a new database transaction asynchronously.

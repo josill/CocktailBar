@@ -40,6 +40,15 @@ internal sealed class RecipeWriteModelConfiguration : IEntityTypeConfiguration<R
                 id => id.Value,
                 value => RecipeId.From(value))
             .IsRequired();
+        
+        builder.Property(c => c.Name)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(c => c.Instructions)
+            .IsRequired();
+        
+        // TODO: add ingredients configuration
 
         builder.ComplexProperty(r => r.Ingredients);
     }

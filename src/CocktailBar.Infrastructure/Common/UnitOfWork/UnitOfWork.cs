@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.Entities;
+
 namespace CocktailBar.Infrastructure.Common.UnitOfWork;
 
 using System.Data.Common;
@@ -21,23 +23,30 @@ public sealed class UnitOfWork : IUnitOfWork
     /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
     /// </summary>
     /// <param name="cocktailsRepository">The repository for cocktail-related operations.</param>
+    /// <param name="recipesRepository">The repository for recipe-related operations.</param>
     /// <param name="cocktailsReadContext">The read-only context for cocktail operations.</param>
     /// <param name="cocktailsWriteContext">The write-only context for cocktail operations.</param>
     public UnitOfWork(
-        ICocktailsRepository cocktailsRepository,
+        IRepository<Cocktail> cocktailsRepository,
+        IRepository<Recipe> recipesRepository,
         ICocktailsReadContext cocktailsReadContext,
         ICocktailsWriteContext cocktailsWriteContext)
     {
         Cocktails = cocktailsRepository;
+        Recipes = recipesRepository;
         CocktailsReadContext = cocktailsReadContext;
         CocktailsWriteContext = cocktailsWriteContext;
     }
 
     /// <summary>
     /// Gets the repository for managing cocktail entities.
-    /// Provides access to CRUD operations and specialized queries for cocktails.
     /// </summary>
-    public ICocktailsRepository Cocktails { get; }
+    public IRepository<Cocktail> Cocktails { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing cocktail entities.
+    /// </summary>
+    public IRepository<Recipe> Recipes { get; }
 
     /// <summary>
     /// Gets the read-only database context for cocktail-related operations.
