@@ -3,6 +3,10 @@
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockAggregate.Entities;
+using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
+using CocktailBar.Infrastructure.Stock.Context;
+using CocktailBar.Infrastructure.Stock.Repository;
 
 namespace CocktailBar.Infrastructure;
 
@@ -64,10 +68,17 @@ public static class DependencyInjection
 
        services.AddScoped<ICocktailsReadContext>(sp =>
            sp.GetRequiredService<CocktailsReadContext>());
+       
+       services.AddDbContext<StockContext>(options =>
+           options.UseNpgsql(connectionString));
+       
+       services.AddScoped<IStockContext>(sp =>
+           sp.GetRequiredService<StockContext>());
 
        services.AddScoped<IUnitOfWork, UnitOfWork>();
        services.AddScoped<IRepository<Cocktail, CocktailId>, CocktailsRepository>();
        services.AddScoped<IRepository<Recipe, RecipeId>, RecipeRepository>();
+       services.AddScoped<IRepository<StockItem, StockItemId>, StockRepository>();
 
        var databaseSettings = new DatabaseSettings();
        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);
@@ -77,10 +88,14 @@ public static class DependencyInjection
            using var scope = services.BuildServiceProvider().CreateScope();
 
            var cocktailsDbContext = scope.ServiceProvider.GetRequiredService<CocktailsWriteContext>();
+           var stockContext = scope.ServiceProvider.GetRequiredService<StockContext>();
 
            cocktailsDbContext.Database.EnsureDeleted();
            cocktailsDbContext.Database.EnsureCreated();
            cocktailsDbContext.Database.Migrate();
+           stockContext.Database.EnsureDeleted();
+           stockContext.Database.EnsureCreated();
+           stockContext.Database.Migrate();
        }
 
        return services;
