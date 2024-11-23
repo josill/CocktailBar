@@ -19,13 +19,15 @@ public class StockOrder : AggregateRoot<StockOrderId>
     /// <param name="price">The price of the order.</param>
     /// <param name="orderedAtDate">The date and time when the order was placed.</param>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
-    private StockOrder(string orderNumber, Price price, DateTime orderedAtDate, DateTime orderArriveDate) : base(
+    /// <param name="stockItems">The stock items associated with the order.</param>
+    private StockOrder(string orderNumber, Price price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null) : base(
         StockOrderId.New())
     {
         OrderNumber = orderNumber;
         Price = price;
         OrderedAtDate = orderedAtDate;
         OrderArriveDate = orderArriveDate;
+        if (stockItems is not null) _stockItems = stockItems;
     }
     
     private StockOrder() {}
@@ -65,9 +67,10 @@ public class StockOrder : AggregateRoot<StockOrderId>
     /// <param name="price">The price of the order.</param>
     /// <param name="orderedAtDate">The date and time when the order was placed.</param>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
+    /// <param name="stockItems">The stock items associated with the order.</param>
     /// <returns>A new <see cref="StockOrder"/> instance.</returns>
-    public static StockOrder Create(string orderNumber, Price price, DateTime orderedAtDate, DateTime orderArriveDate)
-        => new();
+    public static StockOrder Create(string orderNumber, Price price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null)
+        => new(orderNumber, price, orderedAtDate, orderArriveDate, stockItems);
     
     /// <summary>
     /// Adds a stock item to the order if it doesn't already exist.

@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <Folder Include="Cocktails\Context\" />
+      <Folder Include="Stock\Repository\" />
     </ItemGroup>
 
 </Project>
