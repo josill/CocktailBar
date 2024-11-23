@@ -57,7 +57,7 @@ public class Cocktail : AggregateRoot<CocktailId>
         string name, string description, RecipeId recipeId) => new(name, description, recipeId);
 
     /// <summary>
-    /// Creates a new instance of the <see cref="Cocktail"/> class.
+    /// Creates a new instance of the <see cref="Cocktail"/> class from the <see cref="CocktailReadModel"/> class.
     /// </summary>
     /// <param name="cocktail">The cocktail read model.</param>
     /// <returns>A new <see cref="Cocktail"/> instance.</returns>
