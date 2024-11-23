@@ -2,6 +2,8 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.Common;
+using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.StockAggregate.ValueObjects;
 using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.StockAggregate.Entities;
@@ -66,4 +68,30 @@ public class StockOrder : AggregateRoot<StockOrderId>
     /// <returns>A new <see cref="StockOrder"/> instance.</returns>
     public static StockOrder Create(string orderNumber, Price price, DateTime orderedAtDate, DateTime orderArriveDate)
         => new();
+    
+    /// <summary>
+    /// Adds a stock item to the order if it doesn't already exist.
+    /// </summary>
+    /// <param name="stockItem">The stock item to add.</param>
+    /// <exception cref="DomainException">Thrown when the stock item already exists in the order.</exception>
+    public void AddStockItem(StockItem stockItem)
+    {
+        var existingStockItem = _stockItems.Any(i => i.Equals(stockItem));
+        DomainException.For<StockOrder>(existingStockItem, "Stock item is already in the order.");
+
+        _stockItems.Add(stockItem);
+    }
+
+    /// <summary>
+    /// Removes a stock item from the order.
+    /// </summary>
+    /// <param name="stockItem">The stock item to remove.</param>
+    /// <exception cref="DomainException{StockOrder}">Thrown when the stock item doesn't exist in the order.</exception>
+    public void RemoveStockItem(StockItem stockItem)
+    {
+        var existingStockItem = _stockItems.FirstOrDefault(i => i.Equals(stockItem));
+        DomainException.For<StockOrder>(existingStockItem == null, "Stock item not found in the order.");
+
+        _stockItems.Remove(stockItem);
+    }
 }
