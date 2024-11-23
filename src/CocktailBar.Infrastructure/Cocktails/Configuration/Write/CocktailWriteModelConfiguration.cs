@@ -9,41 +9,33 @@ using CocktailBar.Domain.CocktailAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-/// <summary>
-/// Configures the database schema and mapping for the Cocktail domain entity.
-/// This configuration is specifically for the write-side of the CQRS pattern.
-/// </summary>
 internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguration<Cocktail>
 {
-    /// <summary>
-    /// Configures the entity mapping for the Cocktail entity.
-    /// </summary>
-    /// <param name="builder">The builder used to configure the entity.</param>
     public void Configure(EntityTypeBuilder<Cocktail> builder)
     {
         builder.ToTable("Cocktails");
 
-        builder.HasKey(c => c.Id);
+        builder.HasKey(x => x.Id);
 
-        builder.Property(o => o.Id)
+        builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
                 value => CocktailId.From(value))
             .IsRequired();
 
-        builder.Property(c => c.Name)
+        builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(100);
 
-        builder.Property(c => c.Description)
+        builder.Property(x => x.Description)
             .IsRequired();
 
-        builder.Property(c => c.RecipeId)
+        builder.Property(x => x.RecipeId)
             .IsRequired()
             .HasConversion(
                 id => id.Value,
                 value => RecipeId.From(value));
 
-        builder.HasIndex(c => c.Name);
+        builder.HasIndex(x => x.Name);
     }
 }
