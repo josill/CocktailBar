@@ -10,9 +10,6 @@ namespace CocktailBar.Infrastructure.Cocktails.Repository;
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Domain.CocktailAggregate.Entities;
 
-/// <summary>
-/// Implements the ICocktailsRepository interface to provide data access operations for cocktail entities.
-/// </summary>
 public class CocktailsRepository(ICocktailsWriteContext cocktailsWrite, ICocktailsReadContext cocktailsRead) : IRepository<Cocktail, CocktailId>
 {
     public async Task<Cocktail?> GetByIdAsync(CocktailId id)

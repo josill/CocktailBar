@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CocktailBar.Infrastructure.Stock.Context;
 
-internal sealed class StockContext : DbContext, IStockContext
+public sealed class StockContext : DbContext, IStockContext
 {
     public StockContext(DbContextOptions<StockContext> options) : base(options)
     {
