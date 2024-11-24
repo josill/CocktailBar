@@ -21,7 +21,7 @@ public class StockOrder : AggregateRoot<StockOrderId>
     /// <param name="orderedAtDate">The date and time when the order was placed.</param>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
     /// <param name="stockItems">The stock items associated with the order.</param>
-    private StockOrder(string orderNumber, Price price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null) : base(
+    private StockOrder(string orderNumber, OrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null) : base(
         StockOrderId.New())
     {
         OrderNumber = orderNumber;
@@ -41,7 +41,7 @@ public class StockOrder : AggregateRoot<StockOrderId>
     /// <summary>
     /// Gets the price of the order.
     /// </summary>
-    public Price Price { get; }
+    public OrderPrice Price { get; }
     
     /// <summary>
     /// Gets the date when the order was placed.
@@ -70,7 +70,7 @@ public class StockOrder : AggregateRoot<StockOrderId>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
     /// <param name="stockItems">The stock items associated with the order.</param>
     /// <returns>A new <see cref="StockOrder"/> instance.</returns>
-    public static StockOrder Create(string orderNumber, Price price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null)
+    public static StockOrder Create(string orderNumber, OrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null)
         => new(orderNumber, price, orderedAtDate, orderArriveDate, stockItems);
     
     /// <summary>
