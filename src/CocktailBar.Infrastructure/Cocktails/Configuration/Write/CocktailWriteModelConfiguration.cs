@@ -13,22 +13,18 @@ internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguratio
 {
     public void Configure(EntityTypeBuilder<Cocktail> builder)
     {
-        // builder.ToTable("Cocktails");
-        //
-        // builder.HasKey(x => x.Id);
-
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
                 value => CocktailId.From(value))
             .IsRequired();
 
-        // builder.Property(x => x.Name)
-        //     .IsRequired()
-        //     .HasMaxLength(100);
-        //
-        // builder.Property(x => x.Description)
-        //     .IsRequired();
+        builder.Property(x => x.Name)
+            .IsRequired()
+            .HasMaxLength(100);
+        
+        builder.Property(x => x.Description)
+            .IsRequired();
 
         builder.Property(x => x.RecipeId)
             .IsRequired()
