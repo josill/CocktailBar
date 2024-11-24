@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 
 using CocktailBar.Domain.CocktailAggregate.ValueObjects;
@@ -10,19 +12,19 @@ using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 /// <summary>
 /// Represents an ingredient in a cocktail recipe.
 /// </summary>
-public class Ingredient : ValueObject<Ingredient>
+public class Ingredient : AggregateRoot<IngredientId>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Ingredient"/> class.
     /// </summary>
     /// <param name="stockItemId">The unique identifier of the associated stock item.</param>
     /// <param name="amount">The amount of the ingredient.</param>
-    private Ingredient(StockItemId stockItemId, Amount amount)
+    private Ingredient(StockItemId stockItemId, Amount amount) : base(IngredientId.New())
     {
         StockItemId = stockItemId;
         Amount = amount;
     }
-
+    
     private Ingredient() { }
 
     /// <summary>
@@ -42,17 +44,4 @@ public class Ingredient : ValueObject<Ingredient>
     /// <param name="amount">The amount of the ingredient.</param>
     /// <returns>A new <see cref="Ingredient"/> instance.</returns>
     public static Ingredient Create(StockItemId stockItemId, Amount amount) => new(stockItemId, amount);
-
-    /// <summary>
-    /// Gets the attributes to include in equality checks.
-    /// </summary>
-    /// <returns>An enumerable of objects representing the attributes for equality comparison.</returns>
-    /// <remarks>
-    /// This method returns the StockItemId and Amount properties for use in equality comparisons.
-    /// </remarks>
-    protected override IEnumerable<object> GetAttributesToIncludeInEqualityCheck()
-    {
-        yield return StockItemId;
-        yield return Amount;
-    }
 }

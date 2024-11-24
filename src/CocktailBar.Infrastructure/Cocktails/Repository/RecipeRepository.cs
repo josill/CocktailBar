@@ -9,13 +9,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CocktailBar.Infrastructure.Cocktails.Repository;
 
-public class RecipeRepository(ICocktailsReadContext readContext, ICocktailsWriteContext writeContext) : IRepository<Recipe, RecipeId>
+public class RecipeRepository(IAppDbContext context) : IRepository<Recipe, RecipeId>
 {
     public async Task<Recipe?> GetByIdAsync(RecipeId id)
     {
-        var entity = await readContext.Recipes.Where(c => c.Id == id.Value).FirstOrDefaultAsync();
+        var entity = await context.Recipes.Where(c => c.Id == id).FirstOrDefaultAsync();
 
-        return entity is null ? null : Recipe.From(entity);
+        return entity;
     }
 
     public Task<IEnumerable<Recipe>> GetAllAsync()
@@ -25,11 +25,11 @@ public class RecipeRepository(ICocktailsReadContext readContext, ICocktailsWrite
 
     public async Task AddAsync(Recipe entity)
     {
-        var existingEntity = await readContext.Recipes.Where(c => c.Id == entity.Id.Value).FirstOrDefaultAsync();
+        var existingEntity = await context.Recipes.Where(c => c.Id == entity.Id).FirstOrDefaultAsync();
         // TODO: determine a suitable location for the error
         InfrastructureException.For<Cocktail>(existingEntity != null, "Recipe entity with the same id already exists!");
 
-        await writeContext.Recipes.AddAsync(entity);
+        await context.Recipes.AddAsync(entity);
     }
 
     public void Update(Recipe entity)

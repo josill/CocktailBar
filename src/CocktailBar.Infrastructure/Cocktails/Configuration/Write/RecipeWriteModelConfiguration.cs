@@ -33,23 +33,23 @@ internal sealed class RecipeWriteModelConfiguration : IEntityTypeConfiguration<R
     /// </remarks>
     public void Configure(EntityTypeBuilder<Recipe> builder)
     {
-        builder.HasKey(r => r.Id);
+        builder.HasKey(x => x.Id);
 
-        builder.Property(o => o.Id)
+        builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
                 value => RecipeId.From(value))
             .IsRequired();
         
-        builder.Property(c => c.Name)
+        builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(100);
 
-        builder.Property(c => c.Instructions)
+        builder.Property(x => x.Instructions)
             .IsRequired();
-        
-        // TODO: add ingredients configuration
 
-        builder.ComplexProperty(r => r.Ingredients);
+        builder.HasMany(x => x.Ingredients)
+            .WithMany()
+            .UsingEntity(entityBuilder => entityBuilder.ToTable("RecipeIngredients"));
     }
 }

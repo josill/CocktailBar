@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CocktailBar.Infrastructure.Stock.Repository;
 
-public class StockRepository(IStockContext context) : IRepository<StockItem, StockItemId>
+public class StockRepository(IAppDbContext context) : IRepository<StockItem, StockItemId>
 {
     public async Task<StockItem?> GetByIdAsync(StockItemId id)
     {

@@ -5,6 +5,7 @@ using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.StockAggregate.Entities;
 using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
+using CocktailBar.Infrastructure.Common.Context;
 using CocktailBar.Infrastructure.Stock.Context;
 using CocktailBar.Infrastructure.Stock.Repository;
 
@@ -56,24 +57,18 @@ public static class DependencyInjection
                               ?? throw new InvalidOperationException(
                                   "Connection string 'DefaultConnection' not found.");
 
-       services.AddDbContext<CocktailsWriteContext>(options =>
+       services.AddDbContext<AppDbContext>(options =>
            options.UseNpgsql(connectionString));
 
-       services.AddScoped<ICocktailsWriteContext>(sp =>
-           sp.GetRequiredService<CocktailsWriteContext>());
+       services.AddScoped<IAppDbContext>(sp =>
+           sp.GetRequiredService<AppDbContext>());
 
-       services.AddDbContext<CocktailsReadContext>(options =>
-           options.UseNpgsql(connectionString)
-               .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-
-       services.AddScoped<ICocktailsReadContext>(sp =>
-           sp.GetRequiredService<CocktailsReadContext>());
-       
-       services.AddDbContext<StockContext>(options =>
-           options.UseNpgsql(connectionString));
-       
-       services.AddScoped<IStockContext>(sp =>
-           sp.GetRequiredService<StockContext>());
+       // services.AddDbContext<IAppReadDbContext>(options =>
+       //     options.UseNpgsql(connectionString)
+       //         .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+       //
+       // services.AddScoped<IAppReadDbContext>(sp =>
+       //     sp.GetRequiredService<AppReadDbContext>());
 
        services.AddScoped<IUnitOfWork, UnitOfWork>();
        services.AddScoped<IRepository<Cocktail, CocktailId>, CocktailsRepository>();
@@ -87,13 +82,11 @@ public static class DependencyInjection
        {
            using var scope = services.BuildServiceProvider().CreateScope();
 
-           var cocktailsDbContext = scope.ServiceProvider.GetRequiredService<CocktailsWriteContext>();
-           var stockContext = scope.ServiceProvider.GetRequiredService<StockContext>();
+           var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-           cocktailsDbContext.Database.EnsureDeleted();
-           cocktailsDbContext.Database.EnsureCreated();
-           cocktailsDbContext.Database.Migrate();
-           stockContext.Database.Migrate();
+           dbContext.Database.EnsureDeleted();
+           dbContext.Database.EnsureCreated();
+           dbContext.Database.Migrate();
        }
 
        return services;

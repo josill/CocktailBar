@@ -10,13 +10,13 @@ namespace CocktailBar.Infrastructure.Cocktails.Repository;
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Domain.CocktailAggregate.Entities;
 
-public class CocktailsRepository(ICocktailsWriteContext cocktailsWrite, ICocktailsReadContext cocktailsRead) : IRepository<Cocktail, CocktailId>
+public class CocktailsRepository(IAppDbContext context) : IRepository<Cocktail, CocktailId>
 {
     public async Task<Cocktail?> GetByIdAsync(CocktailId id)
     {
-        var entity = await cocktailsRead.Cocktails.Where(c => c.Id == id.Value).FirstOrDefaultAsync();
+        var entity = await context.Cocktails.Where(c => c.Id == id).FirstOrDefaultAsync();
 
-        return entity is null ? null : Cocktail.From(entity);
+        return entity;
     }
 
     public Task<IEnumerable<Cocktail>> GetAllAsync()
@@ -26,11 +26,11 @@ public class CocktailsRepository(ICocktailsWriteContext cocktailsWrite, ICocktai
 
     public async Task AddAsync(Cocktail entity)
     {
-        var existingEntity = await cocktailsRead.Cocktails.Where(c => c.Id == entity.Id.Value).FirstOrDefaultAsync();
+        var existingEntity = await context.Cocktails.Where(c => c.Id == entity.Id).FirstOrDefaultAsync();
         // TODO: determine a suitable location for the error
         InfrastructureException.For<Cocktail>(existingEntity != null, "Cocktail entity with the same id already exists!");
 
-        await cocktailsWrite.Cocktails.AddAsync(entity);
+        await context.Cocktails.AddAsync(entity);
     }
 
     public void Update(Cocktail entity)

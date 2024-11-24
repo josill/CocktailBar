@@ -60,13 +60,6 @@ public class Recipe : EntityWithMetadata<RecipeId>
     public static Recipe Create(string name, string instructions) => new(name, instructions);
 
     /// <summary>
-    /// Creates a new instance of the <see cref="Recipe"/> class.
-    /// </summary>
-    /// <param name="recipe">The recipe read model.</param>
-    /// <returns>A new <see cref="Recipe"/> instance.</returns>
-    public static Recipe From(RecipeReadModel recipe) => new(recipe.Name, recipe.Instructions, RecipeId.From(recipe.Id));
-    
-    /// <summary>
     /// Adds an ingredient to the recipe if it doesn't already exist.
     /// </summary>
     /// <param name="ingredient">The ingredient to add.</param>
