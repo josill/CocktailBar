@@ -28,6 +28,8 @@ public class Price : ValueObject<Price>
         ShippingPrice = shippingPrice;
         Currency = currency;
     }
+    
+    private Price() {}
 
     /// <summary>
     /// Gets the base price of the order.

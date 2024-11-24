@@ -93,8 +93,6 @@ public static class DependencyInjection
            cocktailsDbContext.Database.EnsureDeleted();
            cocktailsDbContext.Database.EnsureCreated();
            cocktailsDbContext.Database.Migrate();
-           stockContext.Database.EnsureDeleted();
-           stockContext.Database.EnsureCreated();
            stockContext.Database.Migrate();
        }
 
