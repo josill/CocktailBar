@@ -1,13 +1,12 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-
-namespace CocktailBar.Infrastructure.Cocktails.Configuration.Write;
-
 using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace CocktailBar.Infrastructure.Cocktails.Configuration;
 
 internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguration<Cocktail>
 {

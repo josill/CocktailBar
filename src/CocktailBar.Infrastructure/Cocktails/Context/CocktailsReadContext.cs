@@ -2,13 +2,11 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Common.Interfaces.Context;
-
-namespace CocktailBar.Infrastructure.Cocktails.Context.Read;
-
-using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Domain.CocktailAggregate.Read;
-using CocktailBar.Infrastructure.Cocktails.Configuration.Read;
+using CocktailBar.Infrastructure.Cocktails.Configuration;
 using Microsoft.EntityFrameworkCore;
+
+namespace CocktailBar.Infrastructure.Cocktails.Context;
 
 internal sealed class CocktailsReadContext(DbContextOptions<CocktailsReadContext> options)
     : DbContext(options), ICocktailsReadContext
@@ -21,7 +19,4 @@ internal sealed class CocktailsReadContext(DbContextOptions<CocktailsReadContext
     {
         new CocktailsReadModelConfiguration().Configure(modelBuilder.Entity<CocktailReadModel>());
     }
-
-    private static bool WriteConfigurationFilter(Type type) =>
-        type.FullName?.Contains("Configurations.Read") ?? false;
 }

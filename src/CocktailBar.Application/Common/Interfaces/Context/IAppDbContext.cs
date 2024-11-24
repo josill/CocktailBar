@@ -9,6 +9,7 @@ namespace CocktailBar.Application.Common.Interfaces.Context;
 public interface IAppDbContext : 
     ICocktailsWriteContext,
     IRecipeContext,
+    IIngredientContext,
     IStockContext
 {
     /// <summary>

@@ -24,8 +24,4 @@
       <ProjectReference Include="..\CocktailBar.Domain\CocktailBar.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Cocktails\Context\" />
-    </ItemGroup>
-
 </Project>

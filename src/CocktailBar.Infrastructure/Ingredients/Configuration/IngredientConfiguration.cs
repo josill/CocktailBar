@@ -8,9 +8,9 @@ using CocktailBar.Infrastructure.Common.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CocktailBar.Infrastructure.Cocktails.Configuration.Write;
+namespace CocktailBar.Infrastructure.Ingredients.Configuration;
 
-internal sealed class IngredientWriteModelConfiguration : IEntityTypeConfiguration<Ingredient>
+internal sealed class IngredientConfiguration : IEntityTypeConfiguration<Ingredient>
 {
     public void Configure(EntityTypeBuilder<Ingredient> builder)
     {

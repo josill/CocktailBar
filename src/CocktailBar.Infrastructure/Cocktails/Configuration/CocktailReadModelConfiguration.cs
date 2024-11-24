@@ -1,11 +1,11 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Infrastructure.Cocktails.Configuration.Read;
-
 using CocktailBar.Domain.CocktailAggregate.Read;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace CocktailBar.Infrastructure.Cocktails.Configuration;
 
 /// <summary>
 /// Configures the database schema and mapping for the CocktailReadModel entity.

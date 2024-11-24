@@ -2,20 +2,19 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Common.Interfaces.Context;
-
-namespace CocktailBar.Infrastructure.Cocktails.Context.Write;
-
 using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Infrastructure.Cocktails.Configuration.Write;
+using CocktailBar.Infrastructure.Cocktails.Configuration;
 using Microsoft.EntityFrameworkCore;
+
+namespace CocktailBar.Infrastructure.Cocktails.Context;
 
 internal sealed class CocktailsWriteContext(DbContextOptions<CocktailsWriteContext> options)
     : DbContext(options), ICocktailsWriteContext
 {
     public DbSet<Cocktail> Cocktails { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<Cocktail>());
+        new CocktailsWriteModelConfiguration().Configure(builder.Entity<Cocktail>());
     }
 }

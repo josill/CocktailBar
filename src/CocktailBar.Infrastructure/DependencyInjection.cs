@@ -7,15 +7,13 @@ using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.StockAggregate.Entities;
 using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 using CocktailBar.Infrastructure.Common.Context;
+using CocktailBar.Infrastructure.Ingredients.Repository;
 using CocktailBar.Infrastructure.Recipes.Repository;
-using CocktailBar.Infrastructure.Stock.Context;
 using CocktailBar.Infrastructure.Stock.Repository;
 
 namespace CocktailBar.Infrastructure;
 
 using CocktailBar.Application.Common.Interfaces;
-using CocktailBar.Infrastructure.Cocktails.Context.Read;
-using CocktailBar.Infrastructure.Cocktails.Context.Write;
 using CocktailBar.Infrastructure.Cocktails.Repository;
 using CocktailBar.Infrastructure.Common.Settings;
 using CocktailBar.Infrastructure.Common.UnitOfWork;
@@ -75,6 +73,7 @@ public static class DependencyInjection
        services.AddScoped<IUnitOfWork, UnitOfWork>();
        services.AddScoped<IRepository<Cocktail, CocktailId>, CocktailsRepository>();
        services.AddScoped<IRepository<Recipe, RecipeId>, RecipeRepository>();
+       services.AddScoped<IRepository<Ingredient, IngredientId>, IngredientRepository>();
        services.AddScoped<IRepository<StockItem, StockItemId>, StockRepository>();
 
        var databaseSettings = new DatabaseSettings();
