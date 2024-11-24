@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Base.Classes;
+using CocktailBar.Domain.Common.Base.Interfaces;
 using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.StockAggregate.Enums;
 
@@ -10,7 +10,7 @@ namespace CocktailBar.Domain.Common.ValueObjects;
 /// <summary>
 /// Represents a base price with amount and currency.
 /// </summary>
-public class Price : ValueObject<Price>
+public class Price : ValueObject<Price>, IAddableValueObject<Price>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Price"/> class.
@@ -61,9 +61,9 @@ public class Price : ValueObject<Price>
     /// <param name="other">The price to add.</param>
     /// <returns>A new <see cref="Price"/> instance.</returns>
     /// <exception cref="DomainException{Price}">Thrown when the currencies don't match.</exception>
-    protected override Price Add(Price other)
+    public Price Add(Price other)
     {
-        DomainException.For<Price>(other.Currency != Currency, "Currencies don't match adding prices.");
+        DomainException.For<Price>(other.Currency != Currency, "Currencies don't match while adding prices.");
         return new Price(Amount + other.Amount, Currency);
     }
 

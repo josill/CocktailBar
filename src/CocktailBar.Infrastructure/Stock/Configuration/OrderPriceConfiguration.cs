@@ -11,6 +11,6 @@ public class OrderPriceConfiguration
     public void Configure(ComplexPropertyBuilder<OrderPrice> builder)
     {
         builder.Property(x => x.OrderCost);
-        builder.Property(x => x.TotalCost);
+        builder.Property(x => x.ShippingCost);
     }
 }

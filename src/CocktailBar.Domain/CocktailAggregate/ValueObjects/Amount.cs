@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Enums;
 using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.Common.ValueObjects;
 
 namespace CocktailBar.Domain.CocktailAggregate.ValueObjects;
 
@@ -64,7 +64,7 @@ public class Amount : ValueObject<Amount>
     /// <param name="other">The amount to add.</param>
     /// <returns>A new <see cref="Amount"/> instance.</returns>
     /// <exception cref="DomainException{Amount}">Thrown when units don't match.</exception>
-    protected override Amount Add(Amount other)
+    public Amount Add(Amount other)
     {
         DomainException.For<Amount>(other.Unit != Unit, "Units don't match while adding weights.");
         return new Amount(Value + other.Value, Unit);
