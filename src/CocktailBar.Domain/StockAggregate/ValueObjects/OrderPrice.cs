@@ -24,6 +24,8 @@ public class OrderPrice : ValueObject<OrderPrice>, IAddableValueObject<OrderPric
         OrderCost = orderCost;
         ShippingCost = shippingCost;
     }
+    
+    private OrderPrice() {}
 
     /// <summary>
     /// Gets the base amount of the order.
