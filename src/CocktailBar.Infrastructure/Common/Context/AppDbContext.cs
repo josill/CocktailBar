@@ -2,9 +2,11 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Common.Interfaces;
+using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.StockAggregate.Entities;
 using CocktailBar.Infrastructure.Cocktails.Configuration.Write;
+using CocktailBar.Infrastructure.Recipes.Configuration;
 using CocktailBar.Infrastructure.Stock.Configuration;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +25,7 @@ public class AppDbContext : DbContext, IAppDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<Cocktail>());
-        new RecipeWriteModelConfiguration().Configure(modelBuilder.Entity<Recipe>());
+        new RecipeConfiguration().Configure(modelBuilder.Entity<Recipe>());
         new IngredientWriteModelConfiguration().Configure(modelBuilder.Entity<Ingredient>());
         new StockOrderConfiguration().Configure(modelBuilder.Entity<StockOrder>());
         new StockItemConfiguration().Configure(modelBuilder.Entity<StockItem>());

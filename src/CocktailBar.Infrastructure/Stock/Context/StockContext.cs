@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Common.Interfaces;
+using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Domain.StockAggregate.Entities;
 using CocktailBar.Infrastructure.Stock.Configuration;
 using Microsoft.EntityFrameworkCore;

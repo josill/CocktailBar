@@ -1,12 +1,11 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Common.Base.Interfaces;
 using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.Common.ValueObjects;
 
-namespace CocktailBar.Domain.Common;
-
-using System;
+namespace CocktailBar.Domain.Common.Base.Classes;
 
 /// <summary>
 /// Base class for strongly-typed IDs in the domain.

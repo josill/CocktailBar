@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Common.Base.Classes;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 

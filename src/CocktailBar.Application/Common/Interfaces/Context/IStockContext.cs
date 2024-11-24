@@ -4,7 +4,7 @@
 using CocktailBar.Domain.StockAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CocktailBar.Application.Common.Interfaces;
+namespace CocktailBar.Application.Common.Interfaces.Context;
 
 public interface IStockContext : IDisposable
 {

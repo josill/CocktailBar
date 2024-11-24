@@ -4,9 +4,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace CocktailBar.Application.Common.Interfaces;
+namespace CocktailBar.Application.Common.Interfaces.Context;
 
-public interface IAppDbContext : IStockContext, ICocktailsWriteContext
+public interface IAppDbContext : 
+    ICocktailsWriteContext,
+    IRecipeContext,
+    IStockContext
 {
     /// <summary>
     /// Gets the database facade, providing access to database-level operations.

@@ -1,11 +1,10 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.Common;
-
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using CocktailBar.Domain.Common.Base.Interfaces;
+
+namespace CocktailBar.Domain.Common.Base.Classes;
 
 /// <summary>
 /// Represents an abstract base class for entities with metadata, including a unique identifier and timestamps.

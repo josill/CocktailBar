@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.Common;
+using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 

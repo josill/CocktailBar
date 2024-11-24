@@ -3,6 +3,7 @@
 
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Common;
+using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.StockAggregate.Entities;

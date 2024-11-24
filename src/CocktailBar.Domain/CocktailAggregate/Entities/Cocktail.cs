@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.CocktailAggregate.Read;
+using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;

@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.Common;
+namespace CocktailBar.Domain.Common.Base.Interfaces;
 
 /// <summary>
 /// Represents a generic interface for entities with an identifier.

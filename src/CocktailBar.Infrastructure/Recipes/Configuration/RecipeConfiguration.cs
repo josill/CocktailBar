@@ -1,15 +1,14 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-
-namespace CocktailBar.Infrastructure.Cocktails.Configuration.Write;
-
 using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-internal sealed class RecipeWriteModelConfiguration : IEntityTypeConfiguration<Recipe>
+namespace CocktailBar.Infrastructure.Recipes.Configuration;
+
+internal sealed class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
 {
     public void Configure(EntityTypeBuilder<Recipe> builder)
     {
