@@ -1,10 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.Common;
-
-using System.Collections.Generic;
-using System.Linq;
+namespace CocktailBar.Domain.Common.Base.Classes;
 
 /// <summary>
 /// Represents a base class for value objects in the domain model.
@@ -69,10 +66,32 @@ public abstract class ValueObject<T>
                 }
             });
     }
+    
+    /// <summary>
+    /// Adds two value objects together.
+    /// </summary>
+    /// <param name="left">The first value object.</param>
+    /// <param name="right">The second value object.</param>
+    /// <returns>A new value object representing the sum of the two value objects.</returns>
+    public static T operator +(ValueObject<T> left, ValueObject<T> right)
+    {
+        if (left is null) throw new ArgumentNullException(nameof(left));
+        if (right is null) throw new ArgumentNullException(nameof(right));
+        
+        return left.Add((T)right);
+    }
 
     /// <summary>
     /// Gets the components of the value object used for equality comparison.
     /// </summary>
     /// <returns>An enumerable collection of objects representing the equality components.</returns>
     protected abstract IEnumerable<object> GetAttributesToIncludeInEqualityCheck();
+    
+    /// <summary>
+    /// Adds another value object to this one.
+    /// Must be implemented by derived classes to define the addition behavior.
+    /// </summary>
+    /// <param name="other">The value object to add to this one.</param>
+    /// <returns>A new value object representing the sum.</returns>
+    protected abstract T Add(T other);
 }

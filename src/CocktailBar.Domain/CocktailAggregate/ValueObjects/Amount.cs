@@ -1,12 +1,13 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Common.Base.Classes;
+using CocktailBar.Domain.Common.Enums;
 using CocktailBar.Domain.Common.Errors;
 
 namespace CocktailBar.Domain.CocktailAggregate.ValueObjects;
 
 using System.Collections.Generic;
-using CocktailBar.Domain.CocktailAggregate.Enums;
 using CocktailBar.Domain.Common;
 
 /// <summary>
@@ -22,7 +23,7 @@ public class Amount : ValueObject<Amount>
     /// <remarks>
     /// This constructor is private to enforce creation through the <see cref="Create"/> method.
     /// </remarks>
-    private Amount(decimal value, AmountUnit unit)
+    private Amount(decimal value, WeightUnit unit)
     {
         Validate(value);
         Value = value;
@@ -37,7 +38,7 @@ public class Amount : ValueObject<Amount>
     /// <summary>
     /// Gets the unit of measurement for the amount.
     /// </summary>
-    public AmountUnit Unit { get; }
+    public WeightUnit Unit { get; }
 
     /// <summary>
     /// Creates a new instance of the <see cref="Amount"/> class.
@@ -45,7 +46,7 @@ public class Amount : ValueObject<Amount>
     /// <param name="value">The numeric value of the amount.</param>
     /// <param name="unit">The unit of measurement for the amount.</param>
     /// <returns>A new <see cref="Amount"/> instance.</returns>
-    public static Amount Create(decimal value, AmountUnit unit) => new(value, unit);
+    public static Amount Create(decimal value, WeightUnit unit) => new(value, unit);
 
     /// <summary>
     /// Gets the attributes to include in equality checks.
@@ -55,6 +56,18 @@ public class Amount : ValueObject<Amount>
     {
         yield return Value;
         yield return Unit;
+    }
+
+    /// <summary>
+    /// Adds two amount value objects together.
+    /// </summary>
+    /// <param name="other">The amount to add.</param>
+    /// <returns>A new <see cref="Amount"/> instance.</returns>
+    /// <exception cref="DomainException{Amount}">Thrown when units don't match.</exception>
+    protected override Amount Add(Amount other)
+    {
+        DomainException.For<Amount>(other.Unit != Unit, "Units don't match while adding weights.");
+        return new Amount(Value + other.Value, Unit);
     }
 
     /// <summary>

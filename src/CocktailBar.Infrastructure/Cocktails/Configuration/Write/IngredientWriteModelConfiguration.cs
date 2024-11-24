@@ -4,6 +4,7 @@
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
+using CocktailBar.Infrastructure.Common.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -23,10 +24,6 @@ internal sealed class IngredientWriteModelConfiguration : IEntityTypeConfigurati
                 id => id.Value,
                 value => StockItemId.From(value));
         
-        builder.ComplexProperty(x => x.Amount, ingredientBuilder =>
-        {
-            ingredientBuilder.Property(a => a.Unit);
-            ingredientBuilder.Property(a => a.Value);
-        });
+        new AmountConfiguration().Configure(builder.ComplexProperty(x => x.Amount));
     }
 }

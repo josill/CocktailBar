@@ -1,12 +1,12 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.CocktailAggregate.Enums;
+namespace CocktailBar.Domain.Common.Enums;
 
 /// <summary>
 /// Represents the units of measurement for weight.
 /// </summary>
-public enum AmountUnit
+public enum WeightUnit
 {
     /// <summary>
     /// Weight in grams.

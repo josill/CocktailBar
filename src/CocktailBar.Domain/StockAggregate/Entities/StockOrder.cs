@@ -3,6 +3,7 @@
 
 using CocktailBar.Domain.Common;
 using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.Common.ValueObjects;
 using CocktailBar.Domain.StockAggregate.ValueObjects;
 using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 

@@ -22,17 +22,19 @@ internal sealed class StockOrderConfiguration : IEntityTypeConfiguration<StockOr
             .IsRequired()
             .HasMaxLength(50);
 
-        builder.ComplexProperty(x => x.Price, priceBuilder =>
-        {
-            priceBuilder.Property(p => p.OrderPrice);
-            priceBuilder.Property(p => p.ShippingPrice);
-            priceBuilder.Property(p => p.Currency);
-        });
+        // builder.ComplexProperty(x => x.Price, priceBuilder =>
+        // {
+        //     priceBuilder.Property(p => p.OrderPrice);
+        //     priceBuilder.Property(p => p.ShippingPrice);
+        //     priceBuilder.Property(p => p.Currency);
+        // });
         
         builder.Property(x => x.OrderedAtDate)
             .IsRequired();
             
         builder.Property(x => x.OrderArriveDate)
             .IsRequired();
+        
+        
     }
 }
