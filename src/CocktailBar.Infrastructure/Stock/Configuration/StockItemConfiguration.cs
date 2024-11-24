@@ -14,9 +14,9 @@ internal sealed class StockItemConfiguration : IEntityTypeConfiguration<StockIte
     
     public void Configure(EntityTypeBuilder<StockItem> builder)
     {
-        builder.ToTable("StockItems");
-
-        builder.HasKey(x => x.Id);
+        // builder.ToTable("StockItems");
+        //
+        // builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
             .HasConversion(
@@ -42,14 +42,14 @@ internal sealed class StockItemConfiguration : IEntityTypeConfiguration<StockIte
                 value => WarehouseId.From(value))
             .IsRequired();
             
-        builder.HasOne<StockOrder>()
-            .WithMany(x => x.StockItems)
-            .HasForeignKey(x => x.StockOrderId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasOne<Warehouse>()
-            .WithMany(x => x.StockItems)
-            .HasForeignKey(x => x.WarehouseId)
-            .OnDelete(DeleteBehavior.Cascade);
+        // builder.HasOne<StockOrder>()
+        //     .WithMany(x => x.StockItems)
+        //     .HasForeignKey(x => x.StockOrderId)
+        //     .OnDelete(DeleteBehavior.Cascade);
+        //
+        // builder.HasOne<Warehouse>()
+        //     .WithMany(x => x.StockItems)
+        //     .HasForeignKey(x => x.WarehouseId)
+        //     .OnDelete(DeleteBehavior.Cascade);
     }
 }

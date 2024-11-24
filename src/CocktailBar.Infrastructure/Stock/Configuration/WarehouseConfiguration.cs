@@ -12,9 +12,9 @@ internal sealed class WarehouseConfiguration : IEntityTypeConfiguration<Warehous
 {
     public void Configure(EntityTypeBuilder<Warehouse> builder)
     {
-        builder.ToTable("Warehouses");
-
-        builder.HasKey(x => x.Id);
+        // builder.ToTable("Warehouses");
+        //
+        // builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
             .HasConversion(
@@ -22,8 +22,8 @@ internal sealed class WarehouseConfiguration : IEntityTypeConfiguration<Warehous
                 value => WarehouseId.From(value))
             .IsRequired();
         
-        builder.Property(x => x.Name)
-            .IsRequired()
-            .HasMaxLength(100);
+        // builder.Property(x => x.Name)
+        //     .IsRequired()
+        //     .HasMaxLength(100);
     }
 }

@@ -14,6 +14,8 @@ using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 /// </summary>
 public class Ingredient : AggregateRoot<IngredientId>
 {
+    private readonly List<Recipe> _recipes = new();
+    
     /// <summary>
     /// Initializes a new instance of the <see cref="Ingredient"/> class.
     /// </summary>
@@ -36,6 +38,14 @@ public class Ingredient : AggregateRoot<IngredientId>
     /// Gets the amount of the ingredient required in the recipe.
     /// </summary>
     public Amount Amount { get; }
+
+    /// <summary>
+    /// Gets a read-only list of the recipes where the ingredient is used.
+    /// </summary>
+    /// <remarks>
+    /// Returns a copy of the internal list to prevent external modification.
+    /// </remarks>
+    public List<Recipe> Recipes => _recipes.ToList();
 
     /// <summary>
     /// Creates a new instance of the <see cref="Ingredient"/> class.

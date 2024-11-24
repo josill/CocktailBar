@@ -13,9 +13,9 @@ internal sealed class IngredientWriteModelConfiguration : IEntityTypeConfigurati
 {
     public void Configure(EntityTypeBuilder<Ingredient> builder)
     {
-        builder.ToTable("Ingredients");
-
-        builder.HasKey(x => x.Id);
+        // builder.ToTable("Ingredients");
+        //
+        // builder.HasKey(x => x.Id);
         
         builder.Property(x => x.Id)
             .HasConversion(

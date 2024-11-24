@@ -13,7 +13,7 @@ internal sealed class RecipeWriteModelConfiguration : IEntityTypeConfiguration<R
 {
     public void Configure(EntityTypeBuilder<Recipe> builder)
     {
-        builder.HasKey(x => x.Id);
+        // builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
             .HasConversion(
@@ -21,15 +21,15 @@ internal sealed class RecipeWriteModelConfiguration : IEntityTypeConfiguration<R
                 value => RecipeId.From(value))
             .IsRequired();
         
-        builder.Property(x => x.Name)
-            .IsRequired()
-            .HasMaxLength(100);
-
-        builder.Property(x => x.Instructions)
-            .IsRequired();
-
+        // builder.Property(x => x.Name)
+        //     .IsRequired()
+        //     .HasMaxLength(100);
+        //
+        // builder.Property(x => x.Instructions)
+        //     .IsRequired();
+        
         builder.HasMany(x => x.Ingredients)
-            .WithMany()
-            .UsingEntity(entityBuilder => entityBuilder.ToTable("RecipeIngredients"));
+            .WithMany(x => x.Recipes)
+            .UsingEntity(j => j.ToTable("RecipeIngredients"));
     }
 }

@@ -12,19 +12,19 @@ internal sealed class StockOrderConfiguration : IEntityTypeConfiguration<StockOr
 {
     public void Configure(EntityTypeBuilder<StockOrder> builder)
     {
-        builder.ToTable("StockOrders");
-
-        builder.HasKey(x => x.Id);
+        // builder.ToTable("StockOrders");
+        //
+        // builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
                 value => StockOrderId.From(value))
             .IsRequired();
-
-        builder.Property(x => x.OrderNumber)
-            .IsRequired()
-            .HasMaxLength(50);
+        //
+        // builder.Property(x => x.OrderNumber)
+        //     .IsRequired()
+        //     .HasMaxLength(50);
 
         builder.ComplexProperty(x => x.Price, priceBuilder =>
         {
@@ -32,13 +32,11 @@ internal sealed class StockOrderConfiguration : IEntityTypeConfiguration<StockOr
             priceBuilder.Property(p => p.ShippingPrice);
             priceBuilder.Property(p => p.Currency);
         });
-        
-        builder.Property(x => x.OrderedAtDate)
-            .IsRequired();
-            
-        builder.Property(x => x.OrderArriveDate)
-            .IsRequired();
-        
-        
+        //
+        // builder.Property(x => x.OrderedAtDate)
+        //     .IsRequired();
+        //     
+        // builder.Property(x => x.OrderArriveDate)
+        //     .IsRequired();
     }
 }

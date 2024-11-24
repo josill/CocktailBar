@@ -5,6 +5,7 @@ namespace CocktailBar.Domain.Common;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 /// <summary>
 /// Represents an abstract base class for entities with metadata, including a unique identifier and timestamps.
@@ -29,6 +30,7 @@ public abstract class EntityWithMetadata<TId> : IEntity<TId>, IEquatable<EntityW
     /// <summary>
     /// Gets the unique identifier of the entity.
     /// </summary>
+    [Key]
     public TId Id { get; }
 
     /// <summary>
