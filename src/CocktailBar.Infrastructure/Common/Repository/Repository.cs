@@ -5,7 +5,7 @@ using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Common.Interfaces.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace CocktailBar.Infrastructure.Common;
+namespace CocktailBar.Infrastructure.Common.Repository;
 
 /// <summary>
 /// Base implementation of the generic repository pattern that works with Entity Framework Core.

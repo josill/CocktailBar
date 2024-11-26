@@ -4,6 +4,7 @@
 using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Infrastructure.Common;
+using CocktailBar.Infrastructure.Common.Repository;
 
 namespace CocktailBar.Infrastructure.Cocktails.Repository;
 
