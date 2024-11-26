@@ -50,7 +50,7 @@ public class Recipe : EntityWithMetadata<RecipeId>
     /// <remarks>
     /// Returns a copy of the internal list to prevent external modifications.
     /// </remarks>
-    public List<Ingredient> Ingredients => _ingredients.ToList();
+    public IEnumerable<Ingredient> Ingredients => _ingredients.AsReadOnly();
 
     /// <summary>
     /// Creates a new instance of the <see cref="Recipe"/> class.

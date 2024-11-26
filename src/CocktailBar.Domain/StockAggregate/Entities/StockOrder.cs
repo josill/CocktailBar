@@ -60,7 +60,7 @@ public class StockOrder : AggregateRoot<StockOrderId>
     /// <remarks>
     /// Returns a copy of the internal list to prevent external modifications.
     /// </remarks>
-    public List<StockItem> StockItems => _stockItems.ToList();
+    public IEnumerable<StockItem> StockItems => _stockItems.AsReadOnly();
 
     /// <summary>
     /// Creates a new instance of the <see cref="StockOrder"/> class.
