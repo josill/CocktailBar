@@ -6,15 +6,17 @@ using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.StockAggregate.Entities;
 using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
+using CocktailBar.Infrastructure.Cocktails.Repository;
 using CocktailBar.Infrastructure.Common.Context;
 using CocktailBar.Infrastructure.Ingredients.Repository;
 using CocktailBar.Infrastructure.Recipes.Repository;
-using CocktailBar.Infrastructure.Stock.Repository;
+using CocktailBar.Infrastructure.StockItems.Repository;
+using CocktailBar.Infrastructure.StockOrders.Repository;
+using CocktailBar.Infrastructure.Warehouses.Repository;
 
 namespace CocktailBar.Infrastructure;
 
 using CocktailBar.Application.Common.Interfaces;
-using CocktailBar.Infrastructure.Cocktails.Repository;
 using CocktailBar.Infrastructure.Common.Settings;
 using CocktailBar.Infrastructure.Common.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
@@ -74,7 +76,9 @@ public static class DependencyInjection
        services.AddScoped<IRepository<Cocktail, CocktailId>, CocktailsRepository>();
        services.AddScoped<IRepository<Recipe, RecipeId>, RecipeRepository>();
        services.AddScoped<IRepository<Ingredient, IngredientId>, IngredientRepository>();
-       services.AddScoped<IRepository<StockItem, StockItemId>, StockRepository>();
+       services.AddScoped<IRepository<StockOrder, StockOrderId>, StockOrderRepository>();
+       services.AddScoped<IRepository<StockItem, StockItemId>, StockItemsRepository>();
+       services.AddScoped<IRepository<Warehouse, WarehouseId>, WarehousesRepository>();
 
        var databaseSettings = new DatabaseSettings();
        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);

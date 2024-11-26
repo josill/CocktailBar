@@ -4,6 +4,8 @@
 using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockAggregate.Entities;
+using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CocktailBar.Infrastructure.Common.UnitOfWork;
@@ -31,6 +33,9 @@ public sealed class UnitOfWork : IUnitOfWork
     public UnitOfWork(
         IRepository<Cocktail, CocktailId> cocktailsRepository,
         IRepository<Recipe, RecipeId> recipesRepository,
+        IRepository<StockOrder, StockOrderId> stockOrdersRepository,
+        IRepository<StockItem, StockItemId> stockItemsRepository,
+        IRepository<Warehouse, WarehouseId> warehousesRepository,
         IAppDbContext appDbContext)
     {
         Cocktails = cocktailsRepository;
@@ -47,6 +52,21 @@ public sealed class UnitOfWork : IUnitOfWork
     /// Gets the repository for managing cocktail entities.
     /// </summary>
     public IRepository<Recipe, RecipeId> Recipes { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing stock order entities.
+    /// </summary>
+    public IRepository<StockOrder, StockOrderId> StockOrders { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing stock item entities.
+    /// </summary>
+    public IRepository<StockItem, StockItemId> StockItems { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing warehouse entities.
+    /// </summary>
+    public IRepository<Warehouse, WarehouseId> Warehouses { get; }
 
     public IAppDbContext Context { get; }
 
