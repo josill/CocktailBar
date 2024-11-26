@@ -7,7 +7,9 @@ using CocktailBar.Domain.StockAggregate.Entities;
 using CocktailBar.Infrastructure.Cocktails.Configuration;
 using CocktailBar.Infrastructure.Ingredients.Configuration;
 using CocktailBar.Infrastructure.Recipes.Configuration;
-using CocktailBar.Infrastructure.Stock.Configuration;
+using CocktailBar.Infrastructure.StockItems.Configuration;
+using CocktailBar.Infrastructure.StockOrders.Configuration;
+using CocktailBar.Infrastructure.Warehouses.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace CocktailBar.Infrastructure.Common.Context;

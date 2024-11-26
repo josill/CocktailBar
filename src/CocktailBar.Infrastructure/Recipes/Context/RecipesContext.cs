@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CocktailBar.Infrastructure.Recipes.Context;
 
-internal sealed class RecipeContext(DbContextOptions<RecipeContext> options) : DbContext(options), IRecipeContext
+internal sealed class RecipesContext(DbContextOptions<RecipesContext> options) : DbContext(options), IRecipesContext
 {
     public DbSet<Recipe> Recipes { get; set; }
 

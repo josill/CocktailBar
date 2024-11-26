@@ -1,13 +1,14 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Domain.StockAggregate.Entities;
-using CocktailBar.Infrastructure.Stock.Configuration;
+using CocktailBar.Infrastructure.StockItems.Configuration;
+using CocktailBar.Infrastructure.StockOrders.Configuration;
+using CocktailBar.Infrastructure.Warehouses.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace CocktailBar.Infrastructure.Stock.Context;
+namespace CocktailBar.Infrastructure.StockOrders.Context;
 
 public sealed class StockContext : DbContext, IStockContext
 {

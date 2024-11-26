@@ -6,7 +6,7 @@ using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CocktailBar.Infrastructure.Stock.Configuration;
+namespace CocktailBar.Infrastructure.Warehouses.Configuration;
 
 internal sealed class WarehouseConfiguration : IEntityTypeConfiguration<Warehouse>
 {

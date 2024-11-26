@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CocktailBar.Infrastructure.Ingredients.Context;
 
-internal sealed class IngredientContext(DbContextOptions<IngredientContext> options) 
-    : DbContext(options), IIngredientContext
+internal sealed class IngredientsContext(DbContextOptions<IngredientsContext> options) 
+    : DbContext(options), IIngredientsContext
 {
     public DbSet<Ingredient> Ingredients { get; set; }
 

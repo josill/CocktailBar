@@ -5,7 +5,7 @@ using CocktailBar.Domain.StockAggregate.ValueObjects;
 using CocktailBar.Infrastructure.Common.Configurations;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CocktailBar.Infrastructure.Stock.Configuration;
+namespace CocktailBar.Infrastructure.StockOrders.Configuration;
 
 public class OrderPriceConfiguration
 {

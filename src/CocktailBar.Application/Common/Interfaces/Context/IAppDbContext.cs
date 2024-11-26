@@ -8,9 +8,11 @@ namespace CocktailBar.Application.Common.Interfaces.Context;
 
 public interface IAppDbContext : 
     ICocktailsWriteContext,
-    IRecipeContext,
-    IIngredientContext,
-    IStockContext
+    IRecipesContext,
+    IIngredientsContext,
+    IStockOrdersContext,
+    IStockItemsContext,
+    IWarehousesContext
 {
     /// <summary>
     /// Gets the database facade, providing access to database-level operations.
