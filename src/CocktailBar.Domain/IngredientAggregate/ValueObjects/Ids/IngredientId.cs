@@ -4,10 +4,7 @@
 using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Base.Interfaces;
 
-namespace CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-
-using System;
-using CocktailBar.Domain.Common;
+namespace CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
 
 public sealed class IngredientId : BaseId<IngredientId>, IBaseId<IngredientId>
 {

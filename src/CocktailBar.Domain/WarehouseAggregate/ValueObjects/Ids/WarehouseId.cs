@@ -4,10 +4,7 @@
 using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Base.Interfaces;
 
-namespace CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
-
-using System;
-using CocktailBar.Domain.Common;
+namespace CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
 
 public sealed class WarehouseId : BaseId<WarehouseId>, IBaseId<WarehouseId>
 {

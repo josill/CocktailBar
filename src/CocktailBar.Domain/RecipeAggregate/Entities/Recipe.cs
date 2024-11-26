@@ -1,16 +1,12 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.CocktailAggregate.Read;
 using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.IngredientAggregate.Entities;
+using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
 
-namespace CocktailBar.Domain.CocktailAggregate.Entities;
-
-using System.Collections.Generic;
-using System.Linq;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.Common;
+namespace CocktailBar.Domain.RecipeAggregate.Entities;
 
 /// <summary>
 /// Represents a recipe for a cocktail, containing instructions and a list of ingredients.

@@ -3,12 +3,8 @@
 
 using CocktailBar.Domain.Common.Enums;
 using CocktailBar.Domain.Common.Errors;
-using CocktailBar.Domain.Common.ValueObjects;
 
-namespace CocktailBar.Domain.CocktailAggregate.ValueObjects;
-
-using System.Collections.Generic;
-using CocktailBar.Domain.Common;
+namespace CocktailBar.Domain.Common.ValueObjects;
 
 /// <summary>
 /// Represents an amount with a value and a unit of measurement.

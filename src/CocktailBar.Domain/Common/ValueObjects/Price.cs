@@ -3,7 +3,7 @@
 
 using CocktailBar.Domain.Common.Base.Interfaces;
 using CocktailBar.Domain.Common.Errors;
-using CocktailBar.Domain.StockAggregate.Enums;
+using TeixeiraSoftware.Finance;
 
 namespace CocktailBar.Domain.Common.ValueObjects;
 

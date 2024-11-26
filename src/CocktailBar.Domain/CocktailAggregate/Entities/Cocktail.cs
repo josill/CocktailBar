@@ -4,6 +4,7 @@
 using CocktailBar.Domain.CocktailAggregate.Read;
 using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 

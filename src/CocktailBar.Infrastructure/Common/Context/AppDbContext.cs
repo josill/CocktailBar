@@ -3,7 +3,11 @@
 
 using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.StockAggregate.Entities;
+using CocktailBar.Domain.IngredientAggregate.Entities;
+using CocktailBar.Domain.RecipeAggregate.Entities;
+using CocktailBar.Domain.StockItemAggregate.Entities;
+using CocktailBar.Domain.StockOrderAggregate.Entities;
+using CocktailBar.Domain.WarehouseAggregate.Entities;
 using CocktailBar.Infrastructure.Cocktails.Configuration;
 using CocktailBar.Infrastructure.Ingredients.Configuration;
 using CocktailBar.Infrastructure.Recipes.Configuration;

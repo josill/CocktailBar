@@ -3,7 +3,9 @@
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.IngredientAggregate.Entities;
+using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
 using CocktailBar.Infrastructure.Common.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

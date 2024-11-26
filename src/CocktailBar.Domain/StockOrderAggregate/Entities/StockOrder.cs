@@ -1,14 +1,13 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common;
 using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
-using CocktailBar.Domain.Common.ValueObjects;
-using CocktailBar.Domain.StockAggregate.ValueObjects;
-using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockItemAggregate.Entities;
+using CocktailBar.Domain.StockOrderAggregate.ValueObjects;
+using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
 
-namespace CocktailBar.Domain.StockAggregate.Entities;
+namespace CocktailBar.Domain.StockOrderAggregate.Entities;
 
 public class StockOrder : AggregateRoot<StockOrderId>
 {

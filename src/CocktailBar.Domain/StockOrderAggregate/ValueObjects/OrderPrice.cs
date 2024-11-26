@@ -1,12 +1,11 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using System.ComponentModel.DataAnnotations.Schema;
 using CocktailBar.Domain.Common.Base.Interfaces;
 using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.Common.ValueObjects;
 
-namespace CocktailBar.Domain.StockAggregate.ValueObjects;
+namespace CocktailBar.Domain.StockOrderAggregate.ValueObjects;
 
 /// <summary>
 /// Represents an order price with base price, shipping price and currency.

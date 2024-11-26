@@ -1,14 +1,15 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.Common.Base.Classes;
-
-namespace CocktailBar.Domain.CocktailAggregate.Entities;
-
+using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects;
-using CocktailBar.Domain.Common;
-using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Common.Base.Classes;
+using CocktailBar.Domain.Common.ValueObjects;
+using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.RecipeAggregate.Entities;
+using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
+
+namespace CocktailBar.Domain.IngredientAggregate.Entities;
 
 /// <summary>
 /// Represents an ingredient in a cocktail recipe.

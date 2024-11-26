@@ -1,7 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.StockAggregate.Entities;
+using CocktailBar.Domain.StockItemAggregate.Entities;
+using CocktailBar.Domain.StockOrderAggregate.Entities;
+using CocktailBar.Domain.WarehouseAggregate.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CocktailBar.Application.Common.Interfaces.Context;

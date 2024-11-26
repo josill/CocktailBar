@@ -1,12 +1,12 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common;
 using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
-using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockItemAggregate.Entities;
+using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
 
-namespace CocktailBar.Domain.StockAggregate.Entities;
+namespace CocktailBar.Domain.WarehouseAggregate.Entities;
 
 public class Warehouse : AggregateRoot<WarehouseId>
 {
