@@ -1,6 +1,12 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Application.Common.Interfaces;
+using CocktailBar.Application.Recipes.Common;
+using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.RecipeAggregate.Entities;
+
 namespace CocktailBar.Application.Recipes.Commands.CreateRecipe;
 
 using ErrorOr;
@@ -13,7 +19,7 @@ using MediatR;
 /// This handler processes the CreateRecipeCommand and returns a Result containing
 /// either the created recipe information or validation errors.
 /// </remarks>
-public class CreateRecipeCommandHandler : IRequestHandler<CreateRecipeCommand, ErrorOr<CreateRecipeResult>>
+public class CreateRecipeCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<CreateRecipeCommand, ErrorOr<RecipeResult>>
 {
     /// <summary>
     /// Processes the command to create a new recipe.
@@ -25,14 +31,22 @@ public class CreateRecipeCommandHandler : IRequestHandler<CreateRecipeCommand, E
     /// - A successful CreateRecipeResult with the created recipe's details.
     /// - An Error if the operation fails or validation fails.
     /// </returns>
-    public Task<ErrorOr<CreateRecipeResult>> Handle(CreateRecipeCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<RecipeResult>> Handle(CreateRecipeCommand request, CancellationToken cancellationToken)
     {
-        // For now, just return a successful result with the input data
-        var result = new CreateRecipeResult(
-            Guid.Empty,
-            request.Name,
-            request.Instructions);
+        var recipe = Recipe.Create(request.Name, request.Instructions);
 
-        return Task.FromResult<ErrorOr<CreateRecipeResult>>(result);
+        try
+        {
+            await unitOfWork.BeginTransactionAsync();
+            await unitOfWork.Recipes.AddAsync(recipe);
+            await unitOfWork.CommitAsync();
+        }
+        catch (Exception e)
+        {
+            await unitOfWork.RollbackAsync();
+            return Errors.Common.SomethingWentWrong("Error creating the recipe entity");
+        }
+
+        return RecipeResult.From(recipe);
     }
 }

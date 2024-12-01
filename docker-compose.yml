@@ -1,0 +1,34 @@
+---
+version: "3.1"
+
+services:
+  cocktails-postgres:
+    image: postgres:16
+    container_name: cocktails-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: josill
+      POSTGRES_PASSWORD: h4X8ej4M\hk|
+      POSTGRES_DB: cocktails-postgres
+      PGDATA: /var/lib/postgresql/data/cocktails-postgres/
+      CONNECTION_STRING: "Host=localhost;Port=5432;Database=cocktails-postgres;Username=josill;Password=h4X8ej4M\\hk|"
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-logs:/var/lib/postgresql/data/logs/
+      - ./postgres-data:/var/lib/postgresql/data
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cocktail-bar-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - cocktails-postgres
