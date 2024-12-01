@@ -3,56 +3,26 @@
 
 namespace CocktailBar.Domain.Seedwork;
 
-using MediatR;
-
 /// <summary>
 /// Base class for domain entities with generic ID type.
 /// </summary>
 /// <typeparam name="TId">The type of the entity's identifier.</typeparam>
-public abstract class Entity<TId>
+public abstract class Aggregate<TId>
 {
-    private TId _id = default!;
-
     /// <summary>
-    /// Gets or sets the entity's identifier.
+    /// Initializes a new instance of the <see cref="Aggregate{TId}"/> class.
     /// </summary>
-    public virtual TId Id
+    /// <param name="id">The unique identifier for the entity.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="id"/> is null.</exception>
+    protected Aggregate(TId id)
     {
-        get => _id;
-        protected set => _id = value;
+        Id = id;
     }
 
     /// <summary>
-    /// Gets the collection of domain events.
+    /// Gets the unique identifier of the entity.
     /// </summary>
-    public List<INotification> DomainEvents { get; } = [];
-
-    /// <summary>
-    /// Adds a domain event to the entity.
-    /// </summary>
-    /// <param name="eventItem">The event to be added.</param>
-    public void AddDomainEvent(INotification eventItem)
-    {
-        DomainEvents.Add(eventItem);
-    }
-
-    /// <summary>
-    /// Removes a domain event from the entity.
-    /// </summary>
-    /// <param name="eventItem">The event to be removed.</param>
-    public void RemoveDomainEvent(INotification eventItem)
-    {
-        DomainEvents.Remove(eventItem);
-    }
-
-    /// <summary>
-    /// Checks if the entity is transient (not persisted to database).
-    /// </summary>
-    /// <returns>If the entity is persisted in transient.</returns>
-    public bool IsTransient()
-    {
-        return EqualityComparer<TId>.Default.Equals(Id, default(TId));
-    }
+    public TId Id { get; }
 
     /// <summary>
     /// Determines whether the specified object is equal to the current object.
@@ -63,7 +33,7 @@ public abstract class Entity<TId>
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == this.GetType() && Equals((Entity<TId>)obj);
+        return obj.GetType() == this.GetType() && Equals((Aggregate<TId>)obj);
     }
 
     /// <summary>
@@ -80,7 +50,7 @@ public abstract class Entity<TId>
     /// </summary>
     /// <param name="other">The entity to compare with the current entity.</param>
     /// <returns>true if the specified entity is equal to the current entity; otherwise, false.</returns>
-    private bool Equals(Entity<TId>? other)
+    private bool Equals(Aggregate<TId>? other)
     {
         if (ReferenceEquals(null, other)) return false;
         return ReferenceEquals(this, other) || EqualityComparer<TId>.Default.Equals(Id, other.Id);
@@ -92,7 +62,7 @@ public abstract class Entity<TId>
     /// <param name="left">The left entity to compare.</param>
     /// <param name="right">The right entity to compare.</param>
     /// <returns>True if the entities are equal, false otherwise.</returns>
-    public static bool operator ==(Entity<TId>? left, Entity<TId>? right)
+    public static bool operator ==(Aggregate<TId>? left, Aggregate<TId>? right)
     {
         return Equals(left, right);
     }
@@ -103,7 +73,7 @@ public abstract class Entity<TId>
     /// <param name="left">The left entity to compare.</param>
     /// <param name="right">The right entity to compare.</param>
     /// <returns>True if the entities are not equal, false otherwise.</returns>
-    public static bool operator !=(Entity<TId>? left, Entity<TId>? right)
+    public static bool operator !=(Aggregate<TId>? left, Aggregate<TId>? right)
     {
         return !Equals(left, right);
     }

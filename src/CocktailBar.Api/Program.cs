@@ -3,6 +3,7 @@
 
 using CocktailBar.Api.Common.Errors;
 using CocktailBar.Application;
+using CocktailBar.Domain.Seedwork;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,9 @@ var app = builder.Build();
     app.MapControllers();
     app.UseCors("origins");
     app.UseExceptionHandler("/error");
+
+    var testEntity = TestEntityId.New();
+    Console.WriteLine(testEntity);
 
     app.Run();
 }
