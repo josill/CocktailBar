@@ -23,8 +23,5 @@ var app = builder.Build();
     app.UseCors("origins");
     app.UseExceptionHandler("/error");
 
-    var testEntity = TestEntityId.New();
-    Console.WriteLine(testEntity);
-
     app.Run();
 }
