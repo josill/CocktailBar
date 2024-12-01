@@ -3,7 +3,7 @@
 
 namespace CocktailBar.Domain.Seedwork;
 
-public readonly record struct TestEntityId(Guid Value)
+public record TestEntityId(Guid Value) : IId<TestEntityId, Guid>
 {
     public static TestEntityId New() => new(Guid.NewGuid());
 
