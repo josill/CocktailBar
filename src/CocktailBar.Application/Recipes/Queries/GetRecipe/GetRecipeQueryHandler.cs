@@ -1,11 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Application.Cocktails.Common;
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Recipes.Common;
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.RecipeAggregate.Entities;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
@@ -21,13 +18,14 @@ public class GetRecipeQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<Get
         try
         {
             var recipe = await unitOfWork.Recipes.GetByIdAsync(RecipeId.From(request.RecipeId));
-            DomainException.For<Recipe>(recipe == null, "Recipe with the specified id not found!");
+            if (recipe is null) throw NotFoundException.For<Recipe>($"Recipe with the specified id: {request.RecipeId} not found!");
 
             var result = RecipeResult.From(recipe!);
             return result;
         }
         catch (Exception e)
         {
-            return Errors.Common.SomethingWentWrong(e.Message);
-        }    }
+            throw SomethingWentWrongException.For<Recipe>($"Error retrieving the recipe entity: {e.Message}");
+        }    
+    }
 }

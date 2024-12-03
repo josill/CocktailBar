@@ -9,7 +9,6 @@ namespace CocktailBar.Application.Cocktails.Commands.CreateCocktail;
 
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using ErrorOr;
 using MediatR;
 
@@ -28,7 +27,7 @@ public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
         catch (Exception e)
         {
             await unitOfWork.RollbackAsync();
-            return Errors.Common.SomethingWentWrong("Error creating the cocktail entity");
+            throw SomethingWentWrongException.For<Cocktail>($"Error creating the cocktail entity: {e.Message}");
         }
 
         return CocktailResult.From(cocktail);

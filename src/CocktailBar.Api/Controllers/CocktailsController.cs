@@ -19,13 +19,13 @@ using Microsoft.AspNetCore.Mvc;
 public class CocktailsController(ISender mediatr) : ApiController
 {
     /// <summary>
-    /// Gets a cocktail by the id.
+    /// Gets a cocktail by the unique identifier.
     /// </summary>
-    /// <param name="cocktailId">The cocktail id.</param>
+    /// <param name="cocktailId">The cocktail unique identifier.</param>
     /// <returns>Returns the cocktail information.</returns>
     [HttpGet("{cocktailId:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get(Guid cocktailId)
     {
         var query = new GetCocktailQuery(cocktailId);
@@ -41,12 +41,12 @@ public class CocktailsController(ISender mediatr) : ApiController
     /// <returns>Returns the created cocktail information.</returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(CreateCocktailRequest request)
     {
         var command = new CreateCocktailCommand(request.Name, request.Description, request.RecipeId);
         var result = await mediatr.Send(command);
-
+        
         return result.Match(
             cocktail => Created($"/cocktails/{cocktail.CocktailId}", cocktail),
             HandleErrors);

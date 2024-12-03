@@ -18,14 +18,14 @@ public class GetCocktailQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<G
         try
         {
             var cocktail = await unitOfWork.Cocktails.GetByIdAsync(CocktailId.From(request.CocktailId));
-            DomainException.For<Cocktail>(cocktail == null, "Cocktail with the specified id not found!");
+            if (cocktail is null) throw NotFoundException.For<Cocktail>($"Cocktail with the specified id: {request.CocktailId} not found!");
 
             var result = CocktailResult.From(cocktail!);
             return result;
         }
         catch (Exception e)
         {
-            return Errors.Common.SomethingWentWrong(e.Message);
+            throw SomethingWentWrongException.For<Cocktail>($"Error retrieving the cocktail entity: {e.Message}");
         }
     }
 }

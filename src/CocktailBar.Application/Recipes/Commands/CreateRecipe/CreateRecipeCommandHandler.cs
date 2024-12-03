@@ -44,7 +44,7 @@ public class CreateRecipeCommandHandler(IUnitOfWork unitOfWork) : IRequestHandle
         catch (Exception e)
         {
             await unitOfWork.RollbackAsync();
-            return Errors.Common.SomethingWentWrong("Error creating the recipe entity");
+            throw SomethingWentWrongException.For<Recipe>($"Error creating the recipe entity: {e.Message}");
         }
 
         return RecipeResult.From(recipe);

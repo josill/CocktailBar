@@ -74,10 +74,10 @@ public class Cocktail : AggregateRoot<CocktailId>
     /// </summary>
     /// <param name="name">The name to validate.</param>
     /// <param name="description">The description to validate.</param>
-    /// <exception cref="DomainException{Cocktail}">Thrown when validation fails.</exception>
+    /// <exception cref="DomainException">Thrown when validation fails.</exception>
     private static void Validate(string name, string description)
     {
-        DomainException.For<Cocktail>(string.IsNullOrWhiteSpace(name), "Cocktail name can not be empty.");
-        DomainException.For<Cocktail>(string.IsNullOrWhiteSpace(description), "Cocktail description can not be empty.");
+        if (string.IsNullOrWhiteSpace(name)) throw DomainException.For<Cocktail>("Cocktail name can not be empty.");
+        if (string.IsNullOrWhiteSpace(description)) throw DomainException.For<Cocktail>("Cocktail description can not be empty.");
     }
 }

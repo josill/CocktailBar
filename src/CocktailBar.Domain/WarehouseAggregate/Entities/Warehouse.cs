@@ -54,8 +54,8 @@ public class Warehouse : AggregateRoot<WarehouseId>
     /// <exception cref="DomainException">Thrown when the stock item already exists in the warehouse.</exception>
     public void AddStockItem(StockItem stockItem)
     {
-        var existingStockItem = _stockItems.Any(i => i.Equals(stockItem));
-        DomainException.For<Warehouse>(existingStockItem, "Stock item is already in the warehouse.");
+        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
+        if (stockItemAlreadyExists) throw DomainException.For<Warehouse>("Stock item is already in the warehouse.");
 
         _stockItems.Add(stockItem);
     }
@@ -64,11 +64,11 @@ public class Warehouse : AggregateRoot<WarehouseId>
     /// Removes a stock item from the warehouse.
     /// </summary>
     /// <param name="stockItem">The stock item to remove.</param>
-    /// <exception cref="DomainException{Warehouse}">Thrown when the stock item doesn't exist in the warehouse.</exception>
+    /// <exception cref="DomainException">Thrown when the stock item doesn't exist in the warehouse.</exception>
     public void RemoveStockItem(StockItem stockItem)
     {
-        var existingStockItem = _stockItems.FirstOrDefault(i => i.Equals(stockItem));
-        DomainException.For<Warehouse>(existingStockItem == null, "Stock item not found in the warehouse.");
+        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
+        if (stockItemAlreadyExists) DomainException.For<Warehouse>("Stock item not found in the warehouse.");
 
         _stockItems.Remove(stockItem);
     }

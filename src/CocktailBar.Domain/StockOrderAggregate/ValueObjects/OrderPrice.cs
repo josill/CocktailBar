@@ -65,13 +65,11 @@ public class OrderPrice : ValueObject<OrderPrice>, IAddableValueObject<OrderPric
     /// </summary>
     /// <param name="other">The price to add.</param>
     /// <returns>A new <see cref="OrderPrice"/> instance.</returns>
-    /// <exception cref="DomainException{OrderPrice}">Thrown when the currencies don't match.</exception>
+    /// <exception cref="DomainException">Thrown when the currencies don't match.</exception>
     public OrderPrice Add(OrderPrice other)
     {
-        DomainException.For<OrderPrice>(other.OrderCost.Currency != OrderCost.Currency,
-            "Order cost currencies don't match while adding order prices.");
-        DomainException.For<OrderPrice>(other.ShippingCost.Currency != ShippingCost.Currency,
-            "Shipping cost currencies don't match while adding order prices.");
+        if (other.OrderCost.Currency != OrderCost.Currency) throw DomainException.For<OrderPrice>("Order cost currencies don't match while adding order prices.");
+        if (other.ShippingCost.Currency != ShippingCost.Currency) throw DomainException.For<OrderPrice>("Shipping cost currencies don't match while adding order prices.");
         
         return new OrderPrice(OrderCost + other.OrderCost, ShippingCost + other.ShippingCost);
     }
@@ -81,10 +79,9 @@ public class OrderPrice : ValueObject<OrderPrice>, IAddableValueObject<OrderPric
     /// </summary>
     /// <param name="orderCost">The order cost to validate.</param>
     /// <param name="shippingCost">The shipping cost to validate.</param>
-    /// <exception cref="DomainException{OrderPrice}">Thrown when validation fails.</exception>
+    /// <exception cref="DomainException">Thrown when validation fails.</exception>
     private static void Validate(Price orderCost, Price shippingCost)
     {
-        DomainException.For<OrderPrice>(orderCost.Currency != shippingCost.Currency, 
-            "Order cost and shipping cost must have the same currency.");
+        if (orderCost.Currency != shippingCost.Currency) throw DomainException.For<OrderPrice>("Order cost and shipping cost must have the same currency.");
     }
 }

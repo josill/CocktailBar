@@ -60,10 +60,10 @@ public class Price : ValueObject<Price>, IAddableValueObject<Price>
     /// </summary>
     /// <param name="other">The price to add.</param>
     /// <returns>A new <see cref="Price"/> instance.</returns>
-    /// <exception cref="DomainException{Price}">Thrown when the currencies don't match.</exception>
+    /// <exception cref="DomainException">Thrown when the currencies don't match.</exception>
     public Price Add(Price other)
     {
-        DomainException.For<Price>(other.Currency != Currency, "Currencies don't match while adding prices.");
+        if (other.Currency != Currency) throw DomainException.For<Price>("Currencies don't match while adding prices.");
         return new Price(Amount + other.Amount, Currency);
     }
 
@@ -71,10 +71,10 @@ public class Price : ValueObject<Price>, IAddableValueObject<Price>
     /// Validates the given amount value.
     /// </summary>
     /// <param name="amount">The amount to validate.</param>
-    /// <exception cref="DomainException{Price}">Thrown when validation fails.</exception>
+    /// <exception cref="DomainException">Thrown when validation fails.</exception>
     private static void ValidateAmount(decimal amount)
     {
-        DomainException.For<Price>(amount % 0.01m != 0, "Amount cannot have more than two decimal places.");
-        DomainException.For<Price>(amount < 0, "Amount cannot be a negative value.");
+        if (amount % 0.01m != 0) throw DomainException.For<Price>("Amount cannot have more than two decimal places.");
+        if (amount < 0) throw DomainException.For<Price>("Amount cannot be a negative value.");
     }
 }

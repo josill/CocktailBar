@@ -59,10 +59,10 @@ public class Amount : ValueObject<Amount>
     /// </summary>
     /// <param name="other">The amount to add.</param>
     /// <returns>A new <see cref="Amount"/> instance.</returns>
-    /// <exception cref="DomainException{Amount}">Thrown when units don't match.</exception>
+    /// <exception cref="DomainException">Thrown when units don't match.</exception>
     public Amount Add(Amount other)
     {
-        DomainException.For<Amount>(other.Unit != Unit, "Units don't match while adding weights.");
+        if (other.Unit != Unit) throw DomainException.For<Amount>("Units don't match while adding weights.");
         return new Amount(Value + other.Value, Unit);
     }
 
@@ -70,10 +70,10 @@ public class Amount : ValueObject<Amount>
     /// Validates the given value.
     /// </summary>
     /// <param name="value">The value to validate.</param>
-    /// <exception cref="DomainException{Weight}">Thrown when validation fails.</exception>
+    /// <exception cref="DomainException">Thrown when validation fails.</exception>
     private static void Validate(decimal value)
     {
-        DomainException.For<Amount>(value % 0.001m != 0, "Weight value cannot have more than three decimal places.");
-        DomainException.For<Amount>(value < 0, "Weight cannot be a negative value.");
+        if (value % 0.001m != 0) throw DomainException.For<Amount>("Weight value cannot have more than three decimal places.");
+        if (value < 0) throw DomainException.For<Amount>("Weight cannot be a negative value.");
     }
 }

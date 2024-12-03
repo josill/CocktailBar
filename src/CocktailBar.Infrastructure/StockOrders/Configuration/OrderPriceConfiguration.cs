@@ -1,7 +1,6 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.StockAggregate.ValueObjects;
 using CocktailBar.Domain.StockOrderAggregate.ValueObjects;
 using CocktailBar.Infrastructure.Common.Configurations;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

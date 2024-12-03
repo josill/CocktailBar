@@ -80,8 +80,8 @@ public class StockOrder : AggregateRoot<StockOrderId>
     /// <exception cref="DomainException">Thrown when the stock item already exists in the order.</exception>
     public void AddStockItem(StockItem stockItem)
     {
-        var existingStockItem = _stockItems.Any(i => i.Equals(stockItem));
-        DomainException.For<StockOrder>(existingStockItem, "Stock item is already in the order.");
+        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
+        if (stockItemAlreadyExists) throw DomainException.For<StockOrder>("Stock item is already in the order.");
 
         _stockItems.Add(stockItem);
     }
@@ -90,11 +90,11 @@ public class StockOrder : AggregateRoot<StockOrderId>
     /// Removes a stock item from the order.
     /// </summary>
     /// <param name="stockItem">The stock item to remove.</param>
-    /// <exception cref="DomainException{StockOrder}">Thrown when the stock item doesn't exist in the order.</exception>
+    /// <exception cref="DomainException">Thrown when the stock item doesn't exist in the order.</exception>
     public void RemoveStockItem(StockItem stockItem)
     {
-        var existingStockItem = _stockItems.FirstOrDefault(i => i.Equals(stockItem));
-        DomainException.For<StockOrder>(existingStockItem == null, "Stock item not found in the order.");
+        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
+        if (stockItemAlreadyExists) throw DomainException.For<StockOrder>("Stock item not found in the order.");
 
         _stockItems.Remove(stockItem);
     }

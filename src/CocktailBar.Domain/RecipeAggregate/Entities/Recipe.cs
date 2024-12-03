@@ -64,7 +64,7 @@ public class Recipe : EntityWithMetadata<RecipeId>
     public void AddIngredient(Ingredient ingredient)
     {
         var existingIngredient = _ingredients.Any(i => i.Equals(ingredient));
-        DomainException.For<Recipe>(existingIngredient, "Ingredient is already used in the recipe.");
+        if (existingIngredient) throw DomainException.For<Recipe>("Ingredient is already used in the recipe.");
 
         _ingredients.Add(ingredient);
     }
@@ -77,7 +77,7 @@ public class Recipe : EntityWithMetadata<RecipeId>
     public void RemoveIngredient(Ingredient ingredient)
     {
         var existingIngredient = _ingredients.FirstOrDefault(i => i.Equals(ingredient));
-        DomainException.For<Recipe>(existingIngredient == null, "Ingredient not found in the recipe.");
+        if (existingIngredient is null) throw DomainException.For<Recipe>("Ingredient not found in the recipe.");
 
         _ingredients.Remove(ingredient);
     }
@@ -87,10 +87,10 @@ public class Recipe : EntityWithMetadata<RecipeId>
     /// </summary>
     /// <param name="name">The name to validate.</param>
     /// <param name="instructions">The instructions to validate.</param>
-    /// <exception cref="DomainException{Recipe}">Thrown when validation fails.</exception>
+    /// <exception cref="DomainException">Thrown when validation fails.</exception>
     private static void Validate(string name, string instructions)
     {
-        DomainException.For<Recipe>(string.IsNullOrWhiteSpace(name), "Recipe name cannot be empty.");
-        DomainException.For<Recipe>(string.IsNullOrWhiteSpace(instructions), "Recipe instructions cannot be empty.");
+        if (string.IsNullOrWhiteSpace(name)) throw DomainException.For<Recipe>("Recipe name cannot be empty.");
+        if (string.IsNullOrWhiteSpace(instructions)) throw DomainException.For<Recipe>("Recipe instructions cannot be empty.");
     }
 }
