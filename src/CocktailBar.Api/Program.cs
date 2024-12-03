@@ -4,6 +4,7 @@
 using CocktailBar.Api.Common.Errors;
 using CocktailBar.Application;
 using CocktailBar.Infrastructure;
+
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);

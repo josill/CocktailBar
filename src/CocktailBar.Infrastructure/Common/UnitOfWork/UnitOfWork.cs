@@ -1,14 +1,23 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.RecipeAggregate.Entities;
+using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockItemAggregate.Entities;
+using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockOrderAggregate.Entities;
+using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.WarehouseAggregate.Entities;
+using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CocktailBar.Infrastructure.Common.UnitOfWork;
 
 using System.Data.Common;
 using CocktailBar.Application.Common.Interfaces;
-using Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>
 /// Implements the Unit of Work pattern to manage database transactions and context access.
@@ -30,13 +39,14 @@ public sealed class UnitOfWork : IUnitOfWork
     public UnitOfWork(
         IRepository<Cocktail, CocktailId> cocktailsRepository,
         IRepository<Recipe, RecipeId> recipesRepository,
-        ICocktailsReadContext cocktailsReadContext,
-        ICocktailsWriteContext cocktailsWriteContext)
+        IRepository<StockOrder, StockOrderId> stockOrdersRepository,
+        IRepository<StockItem, StockItemId> stockItemsRepository,
+        IRepository<Warehouse, WarehouseId> warehousesRepository,
+        IAppDbContext appDbContext)
     {
         Cocktails = cocktailsRepository;
         Recipes = recipesRepository;
-        CocktailsReadContext = cocktailsReadContext;
-        CocktailsWriteContext = cocktailsWriteContext;
+        Context = appDbContext;
     }
 
     /// <summary>
@@ -48,16 +58,23 @@ public sealed class UnitOfWork : IUnitOfWork
     /// Gets the repository for managing cocktail entities.
     /// </summary>
     public IRepository<Recipe, RecipeId> Recipes { get; }
-
+    
     /// <summary>
-    /// Gets the read-only database context for cocktail-related operations.
+    /// Gets the repository for managing stock order entities.
     /// </summary>
-    private ICocktailsReadContext CocktailsReadContext { get; }
-
+    public IRepository<StockOrder, StockOrderId> StockOrders { get; }
+    
     /// <summary>
-    /// Gets the write-only database context for cocktail-related operations.
+    /// Gets the repository for managing stock item entities.
     /// </summary>
-    private ICocktailsWriteContext CocktailsWriteContext { get; }
+    public IRepository<StockItem, StockItemId> StockItems { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing warehouse entities.
+    /// </summary>
+    public IRepository<Warehouse, WarehouseId> Warehouses { get; }
+
+    public IAppDbContext Context { get; }
 
     /// <summary>
     /// Begins a new database transaction asynchronously.
@@ -66,7 +83,7 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <returns>A task representing the asynchronous operation.</returns>
     public async Task BeginTransactionAsync()
     {
-        _transaction = (await CocktailsWriteContext.Database
+        _transaction = (await Context.Database
                 .BeginTransactionAsync())
             .GetDbTransaction();
     }
@@ -82,11 +99,11 @@ public sealed class UnitOfWork : IUnitOfWork
     {
         try
         {
-            await CocktailsWriteContext.SaveChangesAsync();
+            await Context.SaveChangesAsync();
 
             if (_transaction is not null)
             {
-                await CocktailsWriteContext.Database.CommitTransactionAsync();
+                await Context.Database.CommitTransactionAsync();
                 _hasActiveTransaction = false;
                 await _transaction.DisposeAsync();
                 _transaction = null;
@@ -108,7 +125,7 @@ public sealed class UnitOfWork : IUnitOfWork
     {
         if (_transaction is not null && _hasActiveTransaction)
         {
-            await CocktailsWriteContext.Database.RollbackTransactionAsync();
+            await Context.Database.RollbackTransactionAsync();
             await _transaction.DisposeAsync();
             _transaction = null;
             _hasActiveTransaction = false;
@@ -129,8 +146,7 @@ public sealed class UnitOfWork : IUnitOfWork
                 await RollbackAsync();
             }
 
-            CocktailsReadContext.Dispose();
-            CocktailsWriteContext.Dispose();
+            Context.Dispose();
 
             _disposed = true;
         }

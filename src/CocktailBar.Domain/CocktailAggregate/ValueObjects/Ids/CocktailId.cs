@@ -1,6 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Common.Base.Classes;
+using CocktailBar.Domain.Common.Base.Interfaces;
+
 namespace CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 
 using System;

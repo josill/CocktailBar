@@ -2,7 +2,9 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.CocktailAggregate.Read;
+using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 
@@ -57,7 +59,7 @@ public class Cocktail : AggregateRoot<CocktailId>
         string name, string description, RecipeId recipeId) => new(name, description, recipeId);
 
     /// <summary>
-    /// Creates a new instance of the <see cref="Cocktail"/> class.
+    /// Creates a new instance of the <see cref="Cocktail"/> class from the <see cref="CocktailReadModel"/> class.
     /// </summary>
     /// <param name="cocktail">The cocktail read model.</param>
     /// <returns>A new <see cref="Cocktail"/> instance.</returns>

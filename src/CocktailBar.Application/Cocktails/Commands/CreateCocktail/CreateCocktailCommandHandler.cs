@@ -3,6 +3,7 @@
 
 using CocktailBar.Application.Cocktails.Common;
 using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Application.Cocktails.Commands.CreateCocktail;
 

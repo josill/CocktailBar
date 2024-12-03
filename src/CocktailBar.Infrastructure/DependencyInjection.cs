@@ -1,15 +1,30 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.IngredientAggregate.Entities;
+using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.RecipeAggregate.Entities;
+using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockItemAggregate.Entities;
+using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockOrderAggregate.Entities;
+using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.WarehouseAggregate.Entities;
+using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
+using CocktailBar.Infrastructure.Cocktails.Repository;
+using CocktailBar.Infrastructure.Common.Context;
+using CocktailBar.Infrastructure.Ingredients.Repository;
+using CocktailBar.Infrastructure.Recipes.Repository;
+using CocktailBar.Infrastructure.StockItems.Repository;
+using CocktailBar.Infrastructure.StockOrders.Repository;
+using CocktailBar.Infrastructure.Warehouses.Repository;
 
 namespace CocktailBar.Infrastructure;
 
 using CocktailBar.Application.Common.Interfaces;
-using CocktailBar.Infrastructure.Cocktails.Context.Read;
-using CocktailBar.Infrastructure.Cocktails.Context.Write;
-using CocktailBar.Infrastructure.Cocktails.Repository;
 using CocktailBar.Infrastructure.Common.Settings;
 using CocktailBar.Infrastructure.Common.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
@@ -52,22 +67,26 @@ public static class DependencyInjection
                               ?? throw new InvalidOperationException(
                                   "Connection string 'DefaultConnection' not found.");
 
-       services.AddDbContext<CocktailsWriteContext>(options =>
+       services.AddDbContext<AppDbContext>(options =>
            options.UseNpgsql(connectionString));
 
-       services.AddScoped<ICocktailsWriteContext>(sp =>
-           sp.GetRequiredService<CocktailsWriteContext>());
+       services.AddScoped<IAppDbContext>(sp =>
+           sp.GetRequiredService<AppDbContext>());
 
-       services.AddDbContext<CocktailsReadContext>(options =>
-           options.UseNpgsql(connectionString)
-               .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-
-       services.AddScoped<ICocktailsReadContext>(sp =>
-           sp.GetRequiredService<CocktailsReadContext>());
+       // services.AddDbContext<IAppReadDbContext>(options =>
+       //     options.UseNpgsql(connectionString)
+       //         .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+       //
+       // services.AddScoped<IAppReadDbContext>(sp =>
+       //     sp.GetRequiredService<AppReadDbContext>());
 
        services.AddScoped<IUnitOfWork, UnitOfWork>();
        services.AddScoped<IRepository<Cocktail, CocktailId>, CocktailsRepository>();
        services.AddScoped<IRepository<Recipe, RecipeId>, RecipeRepository>();
+       services.AddScoped<IRepository<Ingredient, IngredientId>, IngredientRepository>();
+       services.AddScoped<IRepository<StockOrder, StockOrderId>, StockOrderRepository>();
+       services.AddScoped<IRepository<StockItem, StockItemId>, StockItemsRepository>();
+       services.AddScoped<IRepository<Warehouse, WarehouseId>, WarehousesRepository>();
 
        var databaseSettings = new DatabaseSettings();
        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);
@@ -76,11 +95,11 @@ public static class DependencyInjection
        {
            using var scope = services.BuildServiceProvider().CreateScope();
 
-           var cocktailsDbContext = scope.ServiceProvider.GetRequiredService<CocktailsWriteContext>();
+           var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-           cocktailsDbContext.Database.EnsureDeleted();
-           cocktailsDbContext.Database.EnsureCreated();
-           cocktailsDbContext.Database.Migrate();
+           dbContext.Database.EnsureDeleted();
+           dbContext.Database.EnsureCreated();
+           dbContext.Database.Migrate();
        }
 
        return services;

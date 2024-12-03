@@ -3,6 +3,7 @@
 
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Domain.RecipeAggregate.Entities;
 
 namespace CocktailBar.Application.Recipes.Common;
 
