@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Application.Cocktails.Queries.GetCocktail;
+
 namespace CocktailBar.Api.Controllers;
 
 using CocktailBar.Api.Controllers.Common;
@@ -17,21 +19,36 @@ using Microsoft.AspNetCore.Mvc;
 public class CocktailsController(ISender mediatr) : ApiController
 {
     /// <summary>
+    /// Gets a cocktail by the id.
+    /// </summary>
+    /// <param name="cocktailId">The cocktail id.</param>
+    /// <returns>Returns the cocktail information.</returns>
+    [HttpGet("{cocktailId:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Get(Guid cocktailId)
+    {
+        var query = new GetCocktailQuery(cocktailId);
+        var result = await mediatr.Send(query);
+
+        return result.Match(Ok, HandleErrors);
+    }
+
+    /// <summary>
     /// Creates a new cocktail with the specified recipe.
     /// </summary>
     /// <param name="request">The cocktail creation request containing cocktail details.</param>
     /// <returns>Returns the created cocktail information.</returns>
-    /// <response code="200">Returns the newly created cocktail.</response>
-    /// <response code="400">If the request is invalid.</response>
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateCocktail(CreateCocktailRequest request)
+    public async Task<IActionResult> Create(CreateCocktailRequest request)
     {
-        var command = new CreateCocktailCommand(request.Name, request.Description, Guid.Empty);
+        var command = new CreateCocktailCommand(request.Name, request.Description, request.RecipeId);
         var result = await mediatr.Send(command);
 
         return result.Match(
-            cocktail => Created($"/cocktails/{cocktail.CocktailId}", cocktail), // TODO: Add the get endpoint.
+            cocktail => Created($"/cocktails/{cocktail.CocktailId}", cocktail),
             HandleErrors);
     }
 }

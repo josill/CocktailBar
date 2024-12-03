@@ -3,9 +3,7 @@
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 
-using System.Collections.Generic;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Common;
 using CocktailBar.Domain.StockAggregate.ValueObjects.Ids;
 
@@ -24,6 +22,8 @@ public class Ingredient : ValueObject<Ingredient>
         StockItemId = stockItemId;
         Amount = amount;
     }
+
+    private Ingredient() { }
 
     /// <summary>
     /// Gets the unique identifier of the stock item associated with this ingredient.

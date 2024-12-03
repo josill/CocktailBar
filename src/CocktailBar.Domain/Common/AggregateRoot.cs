@@ -22,4 +22,6 @@ public abstract class AggregateRoot<TId> : EntityWithMetadata<TId>
     protected AggregateRoot(TId id) : base(id)
     {
     }
+
+    protected AggregateRoot() { }
 }

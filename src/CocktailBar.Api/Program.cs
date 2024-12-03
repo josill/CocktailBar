@@ -3,16 +3,23 @@
 
 using CocktailBar.Api.Common.Errors;
 using CocktailBar.Application;
+using CocktailBar.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddSingleton<ProblemDetailsFactory, CocktailBarProblemDetailsFactory>();
     builder.Services.AddApplication();
+    builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddControllers();
 
     // Optionally add Swagger
     builder.Services.AddEndpointsApiExplorer();
+
+    if (builder.Environment.IsDevelopment())
+    {
+        builder.Configuration.AddUserSecrets<Program>();
+    }
 }
 
 var app = builder.Build();
