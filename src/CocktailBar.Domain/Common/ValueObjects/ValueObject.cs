@@ -45,15 +45,31 @@ public abstract class ValueObject<T>
     /// <exception cref="NotSupportedException">Thrown when the value objects don't support addition.</exception>
     public static T operator +(ValueObject<T> left, ValueObject<T> right)
     {
-        if (left is null) throw new ArgumentNullException(nameof(left));
-        if (right is null) throw new ArgumentNullException(nameof(right));
-        
+        // TODO: Should allow also IArithmeticValueObject
         if (left is IAddableValueObject<T> addableLeft)
         {
             return addableLeft.Add((T)right);
         }
         
         throw new NotSupportedException($"Addition is not supported for type {typeof(T).Name}");
+    }
+    
+    /// <summary>
+    /// Subtracts two value objects together if they support subtraction.
+    /// </summary>
+    /// <param name="left">The first value object.</param>
+    /// <param name="right">The second value object.</param>
+    /// <returns>A new value object representing the sum of the two value objects.</returns>
+    /// <exception cref="NotSupportedException">Thrown when the value objects don't support addition.</exception>
+    public static T operator -(ValueObject<T> left, ValueObject<T> right)
+    {
+        // TODO: Should allow also IArithmeticValueObject
+        if (left is ISubtractableValueObject<T> addableLeft)
+        {
+            return addableLeft.Subtract((T)right);
+        }
+        
+        throw new NotSupportedException($"Subtraction is not supported for type {typeof(T).Name}");
     }
 
     /// <summary>

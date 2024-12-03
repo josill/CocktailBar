@@ -10,7 +10,7 @@ namespace CocktailBar.Domain.StockOrderAggregate.ValueObjects;
 /// <summary>
 /// Represents an order price with base price, shipping price and currency.
 /// </summary>
-public class OrderPrice : ValueObject<OrderPrice>, IAddableValueObject<OrderPrice>
+public class OrderPrice : ValueObject<OrderPrice>, IArithmeticValueObject<OrderPrice>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="OrderPrice"/> class.

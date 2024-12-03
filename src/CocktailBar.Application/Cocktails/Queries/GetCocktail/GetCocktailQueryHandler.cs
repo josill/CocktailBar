@@ -14,7 +14,7 @@ namespace CocktailBar.Application.Cocktails.Queries.GetCocktail;
 public class GetCocktailQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetCocktailQuery, ErrorOr<CocktailResult>>
 {
     public async Task<ErrorOr<CocktailResult>> Handle(GetCocktailQuery request, CancellationToken cancellationToken)
-    {
+    { 
         try
         {
             var cocktail = await unitOfWork.Cocktails.GetByIdAsync(CocktailId.From(request.CocktailId));

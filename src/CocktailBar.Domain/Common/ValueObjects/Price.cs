@@ -10,7 +10,7 @@ namespace CocktailBar.Domain.Common.ValueObjects;
 /// <summary>
 /// Represents a base price with amount and currency.
 /// </summary>
-public class Price : ValueObject<Price>, IAddableValueObject<Price>
+public class Price : ValueObject<Price>, IArithmeticValueObject<Price>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Price"/> class.
