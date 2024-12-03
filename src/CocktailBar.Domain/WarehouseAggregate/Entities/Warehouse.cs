@@ -3,12 +3,13 @@
 
 using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.Seedwork;
 using CocktailBar.Domain.StockItemAggregate.Entities;
 using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.WarehouseAggregate.Entities;
 
-public class Warehouse : AggregateRoot<WarehouseId>
+public class Warehouse : Aggregate<WarehouseId>
 {
     private readonly List<StockItem> _stockItems = new();
 

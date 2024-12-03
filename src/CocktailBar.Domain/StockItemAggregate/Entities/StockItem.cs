@@ -3,13 +3,14 @@
 
 using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Seedwork;
 using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.StockItemAggregate.Entities;
 
-public class StockItem : AggregateRoot<StockItemId>
+public class StockItem : Aggregate<StockItemId>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="StockItem"/> class.

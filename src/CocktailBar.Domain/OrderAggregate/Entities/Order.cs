@@ -2,20 +2,20 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.Common.Base.Classes;
+using CocktailBar.Domain.Seedwork;
 
 namespace CocktailBar.Domain.OrderAggregate.Entities;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CocktailBar.Domain.Common;
 using CocktailBar.Domain.OrderAggregate.ValueObjects.Ids;
 
 /// <summary>
 /// Represents an order in the cocktail bar domain.
 /// This class inherits from EntityWithMetadata and uses OrderId as its identifier.
 /// </summary>
-public class Order : EntityWithMetadata<OrderId>
+public class Order : Aggregate<OrderId>
 {
     /// <summary>
     /// Private collection of order items.

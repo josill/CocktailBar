@@ -7,6 +7,7 @@ using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.ValueObjects;
 using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.RecipeAggregate.Entities;
+using CocktailBar.Domain.Seedwork;
 using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.IngredientAggregate.Entities;
@@ -14,7 +15,7 @@ namespace CocktailBar.Domain.IngredientAggregate.Entities;
 /// <summary>
 /// Represents an ingredient in a cocktail recipe.
 /// </summary>
-public class Ingredient : AggregateRoot<IngredientId>
+public class Ingredient : Aggregate<IngredientId>
 {
     private readonly List<Recipe> _recipes = new();
     

@@ -5,6 +5,7 @@ using CocktailBar.Domain.CocktailAggregate.Read;
 using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Seedwork;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 
@@ -14,7 +15,7 @@ using CocktailBar.Domain.Common;
 /// <summary>
 /// Represents a cocktail in the domain model.
 /// </summary>
-public class Cocktail : AggregateRoot<CocktailId>
+public class Cocktail : Aggregate<CocktailId>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Cocktail"/> class.

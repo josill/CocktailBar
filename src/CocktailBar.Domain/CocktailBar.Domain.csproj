@@ -8,9 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Queue\" />
-      <Folder Include="StockAggregate\Entities\" />
-      <Folder Include="StockAggregate\Enums\" />
-      <Folder Include="StockAggregate\ValueObjects\Ids\" />
     </ItemGroup>
 
     <ItemGroup>

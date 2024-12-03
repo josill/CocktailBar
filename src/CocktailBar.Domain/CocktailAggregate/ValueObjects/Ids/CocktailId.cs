@@ -1,19 +1,16 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Base.Classes;
-using CocktailBar.Domain.Common.Base.Interfaces;
+
+using CocktailBar.Domain.Seedwork;
 
 namespace CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 
 using System;
-using CocktailBar.Domain.Common;
 
-public sealed class CocktailId : BaseId<CocktailId>, IBaseId<CocktailId>
+public record CocktailId(Guid Value) : IId<CocktailId, Guid>
 {
-    private CocktailId(Guid value) : base(value) { }
+    public static CocktailId New() => new(Guid.NewGuid());
 
-    public static CocktailId New() => new CocktailId(Guid.NewGuid());
-
-    public static CocktailId From(Guid id) => new CocktailId(id);
+    public static CocktailId From(Guid id) => new(id);
 }

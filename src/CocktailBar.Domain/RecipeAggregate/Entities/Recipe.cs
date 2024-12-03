@@ -5,13 +5,14 @@ using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.IngredientAggregate.Entities;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Seedwork;
 
 namespace CocktailBar.Domain.RecipeAggregate.Entities;
 
 /// <summary>
 /// Represents a recipe for a cocktail, containing instructions and a list of ingredients.
 /// </summary>
-public class Recipe : EntityWithMetadata<RecipeId>
+public class Recipe : Aggregate<RecipeId>
 {
     private readonly List<Ingredient> _ingredients = new();
 
@@ -60,7 +61,7 @@ public class Recipe : EntityWithMetadata<RecipeId>
     /// Adds an ingredient to the recipe if it doesn't already exist.
     /// </summary>
     /// <param name="ingredient">The ingredient to add.</param>
-    /// <exception cref="DomainException{Recipe}">Thrown when the ingredient already exists in the recipe.</exception>
+    /// <exception cref="DomainException">Thrown when the ingredient already exists in the recipe.</exception>
     public void AddIngredient(Ingredient ingredient)
     {
         var existingIngredient = _ingredients.Any(i => i.Equals(ingredient));
