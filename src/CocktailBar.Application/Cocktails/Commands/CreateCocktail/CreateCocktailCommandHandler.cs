@@ -2,8 +2,8 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Cocktails.Common;
-using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Seedwork.Errors;
 
 namespace CocktailBar.Application.Cocktails.Commands.CreateCocktail;
 

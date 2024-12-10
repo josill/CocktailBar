@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Base.Interfaces;
-using CocktailBar.Domain.Common.Errors;
-using CocktailBar.Domain.Common.ValueObjects;
+using CocktailBar.Domain.Seedwork.Errors;
+using CocktailBar.Domain.Seedwork.Interfaces;
+using CocktailBar.Domain.Seedwork.ValueObjects;
 
 namespace CocktailBar.Domain.StockOrderAggregate.ValueObjects;
 
@@ -72,6 +72,14 @@ public class OrderPrice : ValueObject<OrderPrice>, IArithmeticValueObject<OrderP
         if (other.ShippingCost.Currency != ShippingCost.Currency) throw DomainException.For<OrderPrice>("Shipping cost currencies don't match while adding order prices.");
         
         return new OrderPrice(OrderCost + other.OrderCost, ShippingCost + other.ShippingCost);
+    }
+    
+    public OrderPrice Subtract(OrderPrice other)
+    {
+        if (other.OrderCost.Currency != OrderCost.Currency) throw DomainException.For<OrderPrice>("Order cost currencies don't match while adding order prices.");
+        if (other.ShippingCost.Currency != ShippingCost.Currency) throw DomainException.For<OrderPrice>("Shipping cost currencies don't match while adding order prices.");
+        
+        return new OrderPrice(OrderCost - other.OrderCost, ShippingCost - other.ShippingCost);
     }
     
     /// <summary>

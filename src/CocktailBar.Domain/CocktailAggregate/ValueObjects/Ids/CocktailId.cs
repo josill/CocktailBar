@@ -8,9 +8,4 @@ namespace CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 
 using System;
 
-public record CocktailId(Guid Value) : IId<CocktailId, Guid>
-{
-    public static CocktailId New() => new(Guid.NewGuid());
-
-    public static CocktailId From(Guid id) => new(id);
-}
+public record CocktailId(Guid Value) : Id<Guid>(Value);

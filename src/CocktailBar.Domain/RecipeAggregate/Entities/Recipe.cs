@@ -1,11 +1,10 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Base.Classes;
-using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.IngredientAggregate.Entities;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Seedwork;
+using CocktailBar.Domain.Seedwork.Errors;
 
 namespace CocktailBar.Domain.RecipeAggregate.Entities;
 
@@ -16,15 +15,13 @@ public class Recipe : Aggregate<RecipeId>
 {
     private readonly List<Ingredient> _ingredients = new();
 
-    private Recipe() { }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="Recipe"/> class.
     /// </summary>
     /// <param name="name">The name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <param name="recipeId">The unique identifier of the recipe</param>
-    private Recipe(string name, string instructions, RecipeId? recipeId = null) : base(recipeId ?? RecipeId.New())
+    private Recipe(string name, string instructions, RecipeId? recipeId = null) : base(recipeId ?? new RecipeId(Guid.NewGuid()))
     {
         Validate(name, instructions);
         Name = name;

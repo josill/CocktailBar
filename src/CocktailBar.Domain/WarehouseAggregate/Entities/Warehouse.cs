@@ -1,9 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Base.Classes;
-using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.Seedwork;
+using CocktailBar.Domain.Seedwork.Errors;
 using CocktailBar.Domain.StockItemAggregate.Entities;
 using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
 
@@ -18,13 +17,11 @@ public class Warehouse : Aggregate<WarehouseId>
     /// </summary>
     /// <param name="name">The name of the warehouse.</param>
     /// <param name="stockItems">The stock items stored in the warehouse.</param>
-    private Warehouse(string name, List<StockItem>? stockItems = null) : base(WarehouseId.New())
+    private Warehouse(string name, List<StockItem>? stockItems = null) : base(new WarehouseId(Guid.NewGuid()))
     {
         Name = name;
         if (stockItems is not null) _stockItems = stockItems;
     }
-    
-    private Warehouse() {}
     
     /// <summary>
     /// Gets the name of the warehouse.

@@ -2,15 +2,13 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.CocktailAggregate.Read;
-using CocktailBar.Domain.Common.Base.Classes;
-using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Seedwork;
+using CocktailBar.Domain.Seedwork.Errors;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.Common;
 
 /// <summary>
 /// Represents a cocktail in the domain model.
@@ -24,15 +22,13 @@ public class Cocktail : Aggregate<CocktailId>
     /// <param name="description">The description of the cocktail.</param>
     /// <param name="recipeId">The unique identifier of the associated recipe.</param>
     /// <param name="cocktailId">The unique identifier of the cocktail</param>
-    private Cocktail(string name, string description, RecipeId recipeId, CocktailId? cocktailId = null) : base(cocktailId ?? CocktailId.New())
+    private Cocktail(string name, string description, RecipeId recipeId, CocktailId? cocktailId = null) : base(cocktailId ?? new CocktailId(Guid.NewGuid()))
     {
         Validate(name, description);
         Name = name;
         Description = description;
         RecipeId = recipeId;
     }
-
-    private Cocktail() { }
 
     /// <summary>
     /// Gets the name of the cocktail.
@@ -67,8 +63,8 @@ public class Cocktail : Aggregate<CocktailId>
     public static Cocktail From(CocktailReadModel cocktail) => new(
         cocktail.Name,
         cocktail.Description,
-        RecipeId.From(cocktail.RecipeId),
-        CocktailId.From(cocktail.Id));
+        new RecipeId(cocktail.RecipeId),
+        new CocktailId(cocktail.Id));
 
     /// <summary>
     /// Validates the cocktail's name and description.

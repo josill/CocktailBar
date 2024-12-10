@@ -8,9 +8,5 @@ namespace CocktailBar.Domain.OrderAggregate.ValueObjects.Ids;
 
 using System;
 
-public record OrderId(Guid Value) : IId<OrderId, Guid>
-{
-    public static OrderId New() => new(Guid.NewGuid());
+public record OrderId(Guid Value) : Id<Guid>(Value);
 
-    public static OrderId From(Guid id) => new(id);
-}

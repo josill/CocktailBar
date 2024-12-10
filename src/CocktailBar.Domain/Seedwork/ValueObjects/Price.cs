@@ -1,11 +1,11 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Base.Interfaces;
-using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.Seedwork.Errors;
+using CocktailBar.Domain.Seedwork.Interfaces;
 using TeixeiraSoftware.Finance;
 
-namespace CocktailBar.Domain.Common.ValueObjects;
+namespace CocktailBar.Domain.Seedwork.ValueObjects;
 
 /// <summary>
 /// Represents a base price with amount and currency.
@@ -54,17 +54,17 @@ public class Price : ValueObject<Price>, IArithmeticValueObject<Price>
         yield return Amount;
         yield return Currency;
     }
-
-    /// <summary>
-    /// Adds two price objects together.
-    /// </summary>
-    /// <param name="other">The price to add.</param>
-    /// <returns>A new <see cref="Price"/> instance.</returns>
-    /// <exception cref="DomainException">Thrown when the currencies don't match.</exception>
+    
     public Price Add(Price other)
     {
         if (other.Currency != Currency) throw DomainException.For<Price>("Currencies don't match while adding prices.");
         return new Price(Amount + other.Amount, Currency);
+    }
+    
+    public Price Subtract(Price other)
+    {
+        if (other.Currency != Currency) throw DomainException.For<Price>("Currencies don't match while adding prices.");
+        return new Price(Amount - other.Amount, Currency);
     }
 
     /// <summary>

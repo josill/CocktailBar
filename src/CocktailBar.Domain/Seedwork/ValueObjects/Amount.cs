@@ -1,10 +1,10 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Enums;
-using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.Seedwork.Enums;
+using CocktailBar.Domain.Seedwork.Errors;
 
-namespace CocktailBar.Domain.Common.ValueObjects;
+namespace CocktailBar.Domain.Seedwork.ValueObjects;
 
 /// <summary>
 /// Represents an amount with a value and a unit of measurement.

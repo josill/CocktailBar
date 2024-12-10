@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.ValueObjects;
+using CocktailBar.Domain.Seedwork.ValueObjects;
 
-namespace CocktailBar.Domain.Common.Base.Interfaces;
+namespace CocktailBar.Domain.Seedwork.Interfaces;
 
 /// <summary>
 /// Interface for value objects that support addition

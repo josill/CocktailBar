@@ -5,7 +5,7 @@ using CocktailBar.Application.Cocktails.Common;
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.Seedwork.Errors;
 using ErrorOr;
 using MediatR;
 

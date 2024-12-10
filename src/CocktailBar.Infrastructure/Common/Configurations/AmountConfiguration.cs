@@ -2,7 +2,7 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.CocktailAggregate.ValueObjects;
-using CocktailBar.Domain.Common.ValueObjects;
+using CocktailBar.Domain.Seedwork.ValueObjects;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.Common.Configurations;

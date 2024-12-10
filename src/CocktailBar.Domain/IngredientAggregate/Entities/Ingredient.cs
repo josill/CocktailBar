@@ -1,13 +1,10 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects;
-using CocktailBar.Domain.Common.Base.Classes;
-using CocktailBar.Domain.Common.ValueObjects;
 using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.RecipeAggregate.Entities;
 using CocktailBar.Domain.Seedwork;
+using CocktailBar.Domain.Seedwork.ValueObjects;
 using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Domain.IngredientAggregate.Entities;
@@ -24,13 +21,11 @@ public class Ingredient : Aggregate<IngredientId>
     /// </summary>
     /// <param name="stockItemId">The unique identifier of the associated stock item.</param>
     /// <param name="amount">The amount of the ingredient.</param>
-    private Ingredient(StockItemId stockItemId, Amount amount) : base(IngredientId.New())
+    private Ingredient(StockItemId stockItemId, Amount amount) : base(new IngredientId(Guid.NewGuid()))
     {
         StockItemId = stockItemId;
         Amount = amount;
     }
-    
-    private Ingredient() { }
 
     /// <summary>
     /// Gets the unique identifier of the stock item associated with this ingredient.

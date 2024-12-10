@@ -4,8 +4,8 @@
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Recipes.Common;
 using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.RecipeAggregate.Entities;
+using CocktailBar.Domain.Seedwork.Errors;
 
 namespace CocktailBar.Application.Recipes.Commands.CreateRecipe;
 

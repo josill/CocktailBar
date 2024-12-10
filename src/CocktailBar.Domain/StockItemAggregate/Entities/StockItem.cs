@@ -1,7 +1,6 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Base.Classes;
 using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Seedwork;
 using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
@@ -18,14 +17,12 @@ public class StockItem : Aggregate<StockItemId>
     /// <param name="ingredientId">Unique identifier of the associated ingredient</param>
     /// <param name="stockOrderId">Unique identifier of the associated stock order</param>
     /// <param name="warehouseId">Unique identifier of the associated warehouse</param>
-    private StockItem(IngredientId ingredientId, StockOrderId stockOrderId, WarehouseId warehouseId) : base(StockItemId.New())
+    private StockItem(IngredientId ingredientId, StockOrderId stockOrderId, WarehouseId warehouseId) : base(new StockItemId(Guid.NewGuid()))
     {
         IngredientId = ingredientId;
         StockOrderId = stockOrderId;
         WarehouseId = warehouseId;
     }
-    
-    private StockItem() {}
     
     /// <summary>
     /// Gets the unique identifier of the ingredient associated with this stock item.

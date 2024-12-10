@@ -1,9 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Common.Base.Classes;
-using CocktailBar.Domain.Common.Errors;
 using CocktailBar.Domain.Seedwork;
+using CocktailBar.Domain.Seedwork.Errors;
 using CocktailBar.Domain.StockItemAggregate.Entities;
 using CocktailBar.Domain.StockOrderAggregate.ValueObjects;
 using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
@@ -23,7 +22,7 @@ public class StockOrder : Aggregate<StockOrderId>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
     /// <param name="stockItems">The stock items associated with the order.</param>
     private StockOrder(string orderNumber, OrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null) : base(
-        StockOrderId.New())
+        new StockOrderId(Guid.NewGuid()))
     {
         OrderNumber = orderNumber;
         Price = price;
@@ -31,8 +30,6 @@ public class StockOrder : Aggregate<StockOrderId>
         OrderArriveDate = orderArriveDate;
         if (stockItems is not null) _stockItems = stockItems;
     }
-    
-    private StockOrder() {}
     
     /// <summary>
     /// Gets the number of the order.

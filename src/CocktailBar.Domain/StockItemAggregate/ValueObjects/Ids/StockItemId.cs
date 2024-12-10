@@ -5,9 +5,5 @@ using CocktailBar.Domain.Seedwork;
 
 namespace CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
 
-public record StockItemId(Guid Value) : IId<StockItemId, Guid>
-{
-    public static StockItemId New() => new(Guid.NewGuid());
+public record StockItemId(Guid Value) : Id<Guid>(Value);
 
-    public static StockItemId From(Guid id) => new(id);
-}
