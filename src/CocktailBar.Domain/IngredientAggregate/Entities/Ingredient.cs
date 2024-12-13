@@ -14,6 +14,8 @@ namespace CocktailBar.Domain.IngredientAggregate.Entities;
 /// </summary>
 public class Ingredient : Aggregate<IngredientId>
 {
+    private Ingredient() {} // Private constructor for EF Core
+    
     private readonly List<Recipe> _recipes = new();
     
     /// <summary>

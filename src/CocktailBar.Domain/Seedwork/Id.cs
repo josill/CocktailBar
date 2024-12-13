@@ -9,7 +9,7 @@ namespace CocktailBar.Domain.Seedwork;
 /// Base class for all strongly typed identifier.
 /// </summary>
 /// <typeparam name="T">Primitive type of the identifier.</typeparam>
-public abstract record Id<T>
+public record class Id<T>
 {
     /// <summary>
     /// Gets the validated value of the identifier.
@@ -20,7 +20,7 @@ public abstract record Id<T>
     /// Initializes a new instance of the ValidatedId with validation.
     /// </summary>
     /// <param name="value">The value to validate and store.</param>
-    protected Id(T value)
+    public Id(T value)
     {
         Validate(value);
         Value = value;

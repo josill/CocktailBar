@@ -14,7 +14,8 @@ namespace CocktailBar.Domain.CocktailAggregate.Entities;
 /// </summary>
 public class Cocktail : Aggregate<CocktailId>
 {
-    private Cocktail() {}
+    
+    private Cocktail() {} // Private constructor for EF Core
     
     /// <summary>
     /// Initializes a new instance of the <see cref="Cocktail"/> class.
@@ -34,17 +35,17 @@ public class Cocktail : Aggregate<CocktailId>
     /// <summary>
     /// Gets the name of the cocktail.
     /// </summary>
-    public string Name { get; private set; }
+    public string Name { get; }
 
     /// <summary>
     /// Gets the description of the cocktail.
     /// </summary>
-    public string Description { get; private set; }
+    public string Description { get; }
 
     /// <summary>
     /// Gets the unique identifier of the recipe associated with this cocktail.
     /// </summary>
-    public RecipeId RecipeId { get; private set; }
+    public RecipeId RecipeId { get; }
 
     /// <summary>
     /// Creates a new instance of the <see cref="Cocktail"/> class.

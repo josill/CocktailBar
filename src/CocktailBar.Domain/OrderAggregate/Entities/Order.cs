@@ -16,6 +16,8 @@ using CocktailBar.Domain.OrderAggregate.ValueObjects.Ids;
 /// </summary>
 public class Order : Aggregate<OrderId>
 {
+    private Order() {} // Private constructor for EF Core
+    
     /// <summary>
     /// Private collection of order items.
     /// This backing field allows for encapsulation of the order items list.

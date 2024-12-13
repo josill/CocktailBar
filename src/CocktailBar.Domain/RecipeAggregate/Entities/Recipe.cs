@@ -15,6 +15,8 @@ public class Recipe : Aggregate<RecipeId>
 {
     private readonly List<Ingredient> _ingredients = new();
 
+    private Recipe() {} // Private constructor for EF Core
+    
     /// <summary>
     /// Initializes a new instance of the <see cref="Recipe"/> class.
     /// </summary>

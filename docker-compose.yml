@@ -8,10 +8,10 @@ services:
     restart: always
     environment:
       POSTGRES_USER: josill
-      POSTGRES_PASSWORD: h4X8ej4M\hk|
+      POSTGRES_PASSWORD: hjkh4i32u4hi34h2
       POSTGRES_DB: cocktails-postgres
       PGDATA: /var/lib/postgresql/data/cocktails-postgres/
-      CONNECTION_STRING: "Host=localhost;Port=5432;Database=cocktails-postgres;Username=josill;Password=h4X8ej4M\\hk|"
+      CONNECTION_STRING: "Host=localhost;Port=5432;Database=cocktails-postgres;Username=josill;Password=hjkh4i32u4hi34h2"
     ports:
       - 5432:5432
     volumes:

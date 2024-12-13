@@ -12,6 +12,8 @@ namespace CocktailBar.Domain.StockOrderAggregate.Entities;
 public class StockOrder : Aggregate<StockOrderId>
 {
     private readonly List<StockItem> _stockItems = new();
+    
+    private StockOrder() {} // Private constructor for EF Core
 
     /// <summary>
     /// Initializes a new instance of the <see cref="StockOrder"/> class.

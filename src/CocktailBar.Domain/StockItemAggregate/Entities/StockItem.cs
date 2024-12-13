@@ -11,6 +11,8 @@ namespace CocktailBar.Domain.StockItemAggregate.Entities;
 
 public class StockItem : Aggregate<StockItemId>
 {
+    private StockItem() {} // Private constructor for EF Core
+    
     /// <summary>
     /// Initializes a new instance of the <see cref="StockItem"/> class.
     /// </summary>

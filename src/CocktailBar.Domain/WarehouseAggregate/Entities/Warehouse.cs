@@ -12,6 +12,8 @@ public class Warehouse : Aggregate<WarehouseId>
 {
     private readonly List<StockItem> _stockItems = new();
 
+    private Warehouse() {} // Private constructor for EF Core
+    
     /// <summary>
     /// Initializes a new instance of the <see cref="Warehouse"/> class.
     /// </summary>
