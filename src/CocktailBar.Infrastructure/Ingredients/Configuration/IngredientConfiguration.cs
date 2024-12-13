@@ -19,12 +19,12 @@ internal sealed class IngredientConfiguration : IEntityTypeConfiguration<Ingredi
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
-                value => IngredientId.From(value));
+                value => new IngredientId(value));
         
         builder.Property(x => x.StockItemId)
             .HasConversion(
                 id => id.Value,
-                value => StockItemId.From(value));
+                value => new StockItemId(value));
         
         new AmountConfiguration().Configure(builder.ComplexProperty(x => x.Amount));
     }

@@ -24,7 +24,7 @@ public abstract class Aggregate<TId>
     /// <summary>
     /// Gets the unique identifier of the entity.
     /// </summary>
-    public TId Id { get; } = default!;
+    public TId Id { get; init; } = default!;
 
     /// <summary>
     /// Determines whether the specified object is equal to the current object.

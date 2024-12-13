@@ -9,7 +9,6 @@ using CocktailBar.Domain.Seedwork.Errors;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 
-
 /// <summary>
 /// Represents a cocktail in the domain model.
 /// </summary>

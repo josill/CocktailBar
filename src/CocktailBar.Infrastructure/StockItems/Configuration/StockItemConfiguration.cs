@@ -20,25 +20,25 @@ internal sealed class StockItemConfiguration : IEntityTypeConfiguration<StockIte
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
-                value => StockItemId.From(value))
+                value => new StockItemId(value))
             .IsRequired();
         
         builder.Property(x => x.IngredientId)
             .HasConversion(
                 id => id.Value,
-                value => IngredientId.From(value))
+                value => new IngredientId(value))
             .IsRequired();
 
         builder.Property(x => x.StockOrderId)
             .HasConversion(
                 id => id.Value,
-                value => StockOrderId.From(value))
+                value => new StockOrderId(value))
             .IsRequired();
 
         builder.Property(x => x.WarehouseId)
             .HasConversion(
                 id => id.Value,
-                value => WarehouseId.From(value))
+                value => new WarehouseId(value))
             .IsRequired();
     }
 }

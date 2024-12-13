@@ -15,7 +15,7 @@ internal sealed class WarehouseConfiguration : IEntityTypeConfiguration<Warehous
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
-                value => WarehouseId.From(value))
+                value => new WarehouseId(value))
             .IsRequired();
         
         builder.Property(x => x.Name)

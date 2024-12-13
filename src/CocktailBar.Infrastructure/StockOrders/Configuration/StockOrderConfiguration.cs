@@ -15,7 +15,7 @@ internal sealed class StockOrderConfiguration : IEntityTypeConfiguration<StockOr
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
-                value => StockOrderId.From(value))
+                value => new StockOrderId(value))
             .IsRequired();
 
         builder.Property(x => x.OrderNumber)

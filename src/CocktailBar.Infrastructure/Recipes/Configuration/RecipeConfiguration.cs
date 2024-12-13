@@ -17,7 +17,7 @@ internal sealed class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
-                value => RecipeId.From(value))
+                value => new RecipeId(value))
             .IsRequired();
         
         builder.Property(x => x.Name)

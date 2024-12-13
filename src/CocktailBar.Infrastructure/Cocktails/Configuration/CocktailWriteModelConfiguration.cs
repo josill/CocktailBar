@@ -16,7 +16,7 @@ internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguratio
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
-                value => CocktailId.From(value))
+                value => new CocktailId(value))
             .IsRequired();
 
         builder.Property(x => x.Name)
@@ -30,7 +30,7 @@ internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguratio
             .IsRequired()
             .HasConversion(
                 id => id.Value,
-                value => RecipeId.From(value));
+                value => new RecipeId(value));
 
         builder.HasIndex(x => x.Name);
     }
