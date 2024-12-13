@@ -9,5 +9,5 @@ namespace CocktailBar.Application.Common.Interfaces.Context;
 
 public interface IIngredientsContext : IDisposable
 {
-    DbSet<Ingredient> Ingredients { get; set; }
+    DbSet<Ingredient> Ingredients { get; }
 }

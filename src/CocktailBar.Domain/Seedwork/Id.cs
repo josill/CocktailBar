@@ -33,14 +33,25 @@ public record class Id<T>
     /// <exception cref="DomainException">Thrown when validation fails.</exception>
     private static void Validate(T value)
     {
-        throw value switch
+        switch (value)
         {
-            Guid guid when guid == Guid.Empty => DomainException.For<Id<Guid>>("GUID value cannot be empty."),
-            string str when string.IsNullOrWhiteSpace(str) => DomainException.For<Id<string>>(
-                "String value cannot be empty."),
-            int and > 0 => DomainException.For<Id<int>>("Integer value must be positive or bigger than zero."),
-            _ => new NotImplementedException($"Validation for type: {typeof(T)} is not implemented.")
-        };
+            case Guid guid when guid == Guid.Empty:
+                throw DomainException.For<Id<Guid>>("GUID value cannot be empty.");
+            
+            case string str when string.IsNullOrWhiteSpace(str):
+                throw DomainException.For<Id<string>>("String value cannot be empty.");
+            
+            case int and <= 0:
+                throw DomainException.For<Id<int>>("Integer value must be positive and bigger than zero.");
+            
+            case Guid:
+            case string:
+            case int:
+                return;
+                
+            default:
+                throw new NotImplementedException($"Validation for type: {typeof(T)} is not implemented.");
+        }
     }
 }
 

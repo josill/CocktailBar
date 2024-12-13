@@ -8,5 +8,5 @@ namespace CocktailBar.Application.Common.Interfaces.Context;
 
 public interface IWarehousesContext : IDisposable
 {
-    DbSet<Warehouse> Warehouses { get; set; }
+    DbSet<Warehouse> Warehouses { get; }
 }

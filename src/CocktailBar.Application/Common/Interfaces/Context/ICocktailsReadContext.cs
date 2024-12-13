@@ -8,5 +8,5 @@ namespace CocktailBar.Application.Common.Interfaces.Context;
 
 public interface ICocktailsReadContext : IDisposable
 {
-    DbSet<CocktailReadModel> Cocktails { get; set; }
+    DbSet<CocktailReadModel> Cocktails { get; }
 }

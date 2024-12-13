@@ -8,5 +8,5 @@ namespace CocktailBar.Application.Common.Interfaces.Context;
 
 public interface IStockOrdersContext : IDisposable
 { 
-    DbSet<StockOrder> StockOrders { get; set; }
+    DbSet<StockOrder> StockOrders { get; }
 }
