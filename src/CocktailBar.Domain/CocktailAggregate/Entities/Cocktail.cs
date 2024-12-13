@@ -14,6 +14,8 @@ namespace CocktailBar.Domain.CocktailAggregate.Entities;
 /// </summary>
 public class Cocktail : Aggregate<CocktailId>
 {
+    private Cocktail() {}
+    
     /// <summary>
     /// Initializes a new instance of the <see cref="Cocktail"/> class.
     /// </summary>
@@ -21,7 +23,7 @@ public class Cocktail : Aggregate<CocktailId>
     /// <param name="description">The description of the cocktail.</param>
     /// <param name="recipeId">The unique identifier of the associated recipe.</param>
     /// <param name="cocktailId">The unique identifier of the cocktail</param>
-    private Cocktail(string name, string description, RecipeId recipeId, CocktailId? cocktailId = null) : base(cocktailId ?? new CocktailId(Guid.NewGuid()))
+    public Cocktail(string name, string description, RecipeId recipeId, CocktailId? cocktailId = null) : base(cocktailId ?? new CocktailId(Guid.NewGuid()))
     {
         Validate(name, description);
         Name = name;
@@ -32,17 +34,17 @@ public class Cocktail : Aggregate<CocktailId>
     /// <summary>
     /// Gets the name of the cocktail.
     /// </summary>
-    public string Name { get; }
+    public string Name { get; private set; }
 
     /// <summary>
     /// Gets the description of the cocktail.
     /// </summary>
-    public string Description { get; }
+    public string Description { get; private set; }
 
     /// <summary>
     /// Gets the unique identifier of the recipe associated with this cocktail.
     /// </summary>
-    public RecipeId RecipeId { get; }
+    public RecipeId RecipeId { get; private set; }
 
     /// <summary>
     /// Creates a new instance of the <see cref="Cocktail"/> class.

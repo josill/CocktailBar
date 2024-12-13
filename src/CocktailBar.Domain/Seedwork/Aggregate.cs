@@ -9,6 +9,11 @@ namespace CocktailBar.Domain.Seedwork;
 /// <typeparam name="TId">The type of the entity's identifier.</typeparam>
 public abstract class Aggregate<TId>
 {
+    /// <summary>
+    /// Gets the unique identifier of the entity.
+    /// </summary>
+    public TId Id { get; } = default!;
+
     protected Aggregate() {}
     
     /// <summary>
@@ -20,11 +25,6 @@ public abstract class Aggregate<TId>
     {
         Id = id;
     }
-
-    /// <summary>
-    /// Gets the unique identifier of the entity.
-    /// </summary>
-    public TId Id { get; init; } = default!;
 
     /// <summary>
     /// Determines whether the specified object is equal to the current object.

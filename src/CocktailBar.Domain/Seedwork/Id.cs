@@ -14,10 +14,8 @@ public abstract record Id<T>
     /// <summary>
     /// Gets the validated value of the identifier.
     /// </summary>
-    public T Value { get; } = default!;
+    public T Value { get; }
     
-    protected Id() {}
-
     /// <summary>
     /// Initializes a new instance of the ValidatedId with validation.
     /// </summary>
