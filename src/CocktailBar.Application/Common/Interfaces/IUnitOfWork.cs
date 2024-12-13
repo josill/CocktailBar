@@ -17,12 +17,12 @@ public interface IUnitOfWork : IAsyncDisposable
     /// <summary>
     /// Gets the repository for managing cocktail entities.
     /// </summary>
-    IRepository<Cocktail, CocktailId> Cocktails { get; }
+    IRepository<Cocktail> Cocktails { get; }
     
     /// <summary>
     /// Gets the repository for managing recipe entities.
     /// </summary>
-    IRepository<Recipe, RecipeId> Recipes { get; }
+    IRepository<Recipe> Recipes { get; }
 
     /// <summary>
     /// Begins a new database transaction asynchronously.

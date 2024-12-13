@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.Seedwork.Enums;
+namespace CocktailBar.Domain.Enumerations;
 
 /// <summary>
 /// Represents the units of measurement for weight.

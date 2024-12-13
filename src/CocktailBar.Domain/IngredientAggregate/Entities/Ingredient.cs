@@ -4,8 +4,8 @@
 using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.RecipeAggregate.Entities;
 using CocktailBar.Domain.Seedwork;
-using CocktailBar.Domain.Seedwork.ValueObjects;
 using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.ValueObjects;
 
 namespace CocktailBar.Domain.IngredientAggregate.Entities;
 

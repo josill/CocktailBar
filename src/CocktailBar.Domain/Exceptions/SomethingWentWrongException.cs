@@ -1,4 +1,4 @@
-namespace CocktailBar.Domain.Seedwork.Errors;
+namespace CocktailBar.Domain.Exceptions;
 
 /// <summary>
 /// Represents an exception that occurs when an unexpected error happens in the system.

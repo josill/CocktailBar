@@ -37,11 +37,11 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <param name="cocktailsReadContext">The read-only context for cocktail operations.</param>
     /// <param name="cocktailsWriteContext">The write-only context for cocktail operations.</param>
     public UnitOfWork(
-        IRepository<Cocktail, CocktailId> cocktailsRepository,
-        IRepository<Recipe, RecipeId> recipesRepository,
-        IRepository<StockOrder, StockOrderId> stockOrdersRepository,
-        IRepository<StockItem, StockItemId> stockItemsRepository,
-        IRepository<Warehouse, WarehouseId> warehousesRepository,
+        IRepository<Cocktail> cocktailsRepository,
+        IRepository<Recipe> recipesRepository,
+        IRepository<StockOrder> stockOrdersRepository,
+        IRepository<StockItem> stockItemsRepository,
+        IRepository<Warehouse> warehousesRepository,
         IAppDbContext appDbContext)
     {
         Cocktails = cocktailsRepository;
@@ -52,27 +52,27 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <summary>
     /// Gets the repository for managing cocktail entities.
     /// </summary>
-    public IRepository<Cocktail, CocktailId> Cocktails { get; }
+    public IRepository<Cocktail> Cocktails { get; }
     
     /// <summary>
     /// Gets the repository for managing cocktail entities.
     /// </summary>
-    public IRepository<Recipe, RecipeId> Recipes { get; }
+    public IRepository<Recipe> Recipes { get; }
     
     /// <summary>
     /// Gets the repository for managing stock order entities.
     /// </summary>
-    public IRepository<StockOrder, StockOrderId> StockOrders { get; }
+    public IRepository<StockOrder> StockOrders { get; }
     
     /// <summary>
     /// Gets the repository for managing stock item entities.
     /// </summary>
-    public IRepository<StockItem, StockItemId> StockItems { get; }
+    public IRepository<StockItem> StockItems { get; }
     
     /// <summary>
     /// Gets the repository for managing warehouse entities.
     /// </summary>
-    public IRepository<Warehouse, WarehouseId> Warehouses { get; }
+    public IRepository<Warehouse> Warehouses { get; }
 
     public IAppDbContext Context { get; }
 

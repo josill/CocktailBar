@@ -1,4 +1,4 @@
-namespace CocktailBar.Domain.Seedwork.Errors;
+namespace CocktailBar.Domain.Exceptions;
 
 /// <summary>
 /// Represents an exception that occurs when a requested resource is not found.

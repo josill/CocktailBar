@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.Seedwork.Errors;
+namespace CocktailBar.Domain.Exceptions;
 
 /// <summary>
 /// Represents a domain-specific exception that is associated with a particular type.

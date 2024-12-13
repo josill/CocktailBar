@@ -1,9 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Seedwork.ValueObjects;
-
-namespace CocktailBar.Domain.Seedwork.Interfaces;
+namespace CocktailBar.Domain.ValueObjects.Interfaces;
 
 /// <summary>
 /// Interface for value objects that support subtraction

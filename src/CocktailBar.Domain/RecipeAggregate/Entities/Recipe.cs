@@ -1,10 +1,10 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.IngredientAggregate.Entities;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Seedwork;
-using CocktailBar.Domain.Seedwork.Errors;
 
 namespace CocktailBar.Domain.RecipeAggregate.Entities;
 
@@ -26,8 +26,8 @@ public class Recipe : Aggregate<RecipeId>
     private Recipe(string name, string instructions, RecipeId? recipeId = null) : base(recipeId ?? new RecipeId(Guid.NewGuid()))
     {
         Validate(name, instructions);
-        Name = name;
-        Instructions = instructions;
+        Name = name.Trim();
+        Instructions = instructions.Trim();
     }
 
     /// <summary>

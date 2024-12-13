@@ -1,6 +1,4 @@
-using CocktailBar.Domain.Seedwork.ValueObjects;
-
-namespace CocktailBar.Domain.Seedwork.Interfaces;
+namespace CocktailBar.Domain.ValueObjects.Interfaces;
 
 /// <summary>
 /// Interface for value objects that support addition and subtraction

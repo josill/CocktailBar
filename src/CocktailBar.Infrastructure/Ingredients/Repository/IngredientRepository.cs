@@ -11,6 +11,6 @@ using CocktailBar.Infrastructure.Common.Repository;
 
 namespace CocktailBar.Infrastructure.Ingredients.Repository;
 
-public class IngredientRepository(IAppDbContext context) : Repository<Ingredient, IngredientId>(context)
+public class IngredientRepository(IAppDbContext context) : Repository<Ingredient>(context)
 {
 }

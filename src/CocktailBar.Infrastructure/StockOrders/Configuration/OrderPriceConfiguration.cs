@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.StockOrders.Configuration;
 
-public class OrderPriceConfiguration
+internal sealed class OrderPriceConfiguration
 {
     public void Configure(ComplexPropertyBuilder<OrderPrice> builder)
     {

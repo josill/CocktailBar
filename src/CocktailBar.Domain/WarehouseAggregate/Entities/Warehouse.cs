@@ -1,8 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.Seedwork;
-using CocktailBar.Domain.Seedwork.Errors;
 using CocktailBar.Domain.StockItemAggregate.Entities;
 using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
 
@@ -21,7 +21,7 @@ public class Warehouse : Aggregate<WarehouseId>
     /// <param name="stockItems">The stock items stored in the warehouse.</param>
     private Warehouse(string name, List<StockItem>? stockItems = null) : base(new WarehouseId(Guid.NewGuid()))
     {
-        Name = name;
+        Name = name.Trim();
         if (stockItems is not null) _stockItems = stockItems;
     }
     

@@ -10,6 +10,6 @@ namespace CocktailBar.Infrastructure.Cocktails.Repository;
 
 using CocktailBar.Domain.CocktailAggregate.Entities;
 
-public class CocktailsRepository(IAppDbContext context) : Repository<Cocktail, CocktailId>(context)
+public class CocktailsRepository(IAppDbContext context) : Repository<Cocktail>(context)
 {
 }

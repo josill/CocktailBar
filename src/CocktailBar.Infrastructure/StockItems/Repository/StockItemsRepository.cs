@@ -9,6 +9,6 @@ using CocktailBar.Infrastructure.Common.Repository;
 
 namespace CocktailBar.Infrastructure.StockItems.Repository;
 
-public class StockItemsRepository(IAppDbContext context) : Repository<StockItem, StockItemId>(context)
+public class StockItemsRepository(IAppDbContext context) : Repository<StockItem>(context)
 {
 }

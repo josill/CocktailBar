@@ -1,8 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.Seedwork;
-using CocktailBar.Domain.Seedwork.Errors;
 using CocktailBar.Domain.StockItemAggregate.Entities;
 using CocktailBar.Domain.StockOrderAggregate.ValueObjects;
 using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
@@ -26,7 +26,7 @@ public class StockOrder : Aggregate<StockOrderId>
     private StockOrder(string orderNumber, OrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null) : base(
         new StockOrderId(Guid.NewGuid()))
     {
-        OrderNumber = orderNumber;
+        OrderNumber = orderNumber.Trim(); // TODO: toLower as well?
         Price = price;
         OrderedAtDate = orderedAtDate;
         OrderArriveDate = orderArriveDate;
@@ -59,7 +59,7 @@ public class StockOrder : Aggregate<StockOrderId>
     /// <remarks>
     /// Returns a copy of the internal list to prevent external modifications.
     /// </remarks>
-    public IEnumerable<StockItem> StockItems => _stockItems.AsReadOnly();
+    public IEnumerable<StockItem> StockItems => _stockItems.AsReadOnly().ToList();
 
     /// <summary>
     /// Creates a new instance of the <see cref="StockOrder"/> class.

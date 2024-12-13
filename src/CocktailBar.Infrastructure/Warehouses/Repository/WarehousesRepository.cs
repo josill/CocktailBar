@@ -9,6 +9,6 @@ using CocktailBar.Infrastructure.Common.Repository;
 
 namespace CocktailBar.Infrastructure.Warehouses.Repository;
 
-public class WarehousesRepository(IAppDbContext context) : Repository<Warehouse, WarehouseId>(context)
+public class WarehousesRepository(IAppDbContext context) : Repository<Warehouse>(context)
 {
 }

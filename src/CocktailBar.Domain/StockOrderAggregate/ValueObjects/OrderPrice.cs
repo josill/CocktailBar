@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Seedwork.Errors;
-using CocktailBar.Domain.Seedwork.Interfaces;
-using CocktailBar.Domain.Seedwork.ValueObjects;
+using CocktailBar.Domain.Exceptions;
+using CocktailBar.Domain.ValueObjects;
+using CocktailBar.Domain.ValueObjects.Interfaces;
 
 namespace CocktailBar.Domain.StockOrderAggregate.ValueObjects;
 

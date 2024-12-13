@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Seedwork.Interfaces;
+using CocktailBar.Domain.ValueObjects.Interfaces;
 
-namespace CocktailBar.Domain.Seedwork.ValueObjects;
+namespace CocktailBar.Domain.ValueObjects;
 
 /// <summary>
 /// Represents a base class for value objects in the domain model.

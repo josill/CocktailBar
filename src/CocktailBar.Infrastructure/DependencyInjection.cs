@@ -73,20 +73,13 @@ public static class DependencyInjection
        services.AddScoped<IAppDbContext>(sp =>
            sp.GetRequiredService<AppDbContext>());
 
-       // services.AddDbContext<IAppReadDbContext>(options =>
-       //     options.UseNpgsql(connectionString)
-       //         .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-       //
-       // services.AddScoped<IAppReadDbContext>(sp =>
-       //     sp.GetRequiredService<AppReadDbContext>());
-
        services.AddScoped<IUnitOfWork, UnitOfWork>();
-       services.AddScoped<IRepository<Cocktail, CocktailId>, CocktailsRepository>();
-       services.AddScoped<IRepository<Recipe, RecipeId>, RecipeRepository>();
-       services.AddScoped<IRepository<Ingredient, IngredientId>, IngredientRepository>();
-       services.AddScoped<IRepository<StockOrder, StockOrderId>, StockOrderRepository>();
-       services.AddScoped<IRepository<StockItem, StockItemId>, StockItemsRepository>();
-       services.AddScoped<IRepository<Warehouse, WarehouseId>, WarehousesRepository>();
+       services.AddScoped<IRepository<Cocktail>, CocktailsRepository>();
+       services.AddScoped<IRepository<Recipe>, RecipeRepository>();
+       services.AddScoped<IRepository<Ingredient>, IngredientRepository>();
+       services.AddScoped<IRepository<StockOrder>, StockOrderRepository>();
+       services.AddScoped<IRepository<StockItem>, StockItemsRepository>();
+       services.AddScoped<IRepository<Warehouse>, WarehousesRepository>();
 
        var databaseSettings = new DatabaseSettings();
        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);

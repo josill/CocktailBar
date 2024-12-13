@@ -3,9 +3,9 @@
 
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Recipes.Common;
+using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.RecipeAggregate.Entities;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.Seedwork.Errors;
 using MediatR;
 using ErrorOr;
 

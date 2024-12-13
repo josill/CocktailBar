@@ -1,4 +1,4 @@
-namespace CocktailBar.Domain.Seedwork.Enums;
+namespace CocktailBar.Domain.Enumerations;
 
 public enum Currency
 {

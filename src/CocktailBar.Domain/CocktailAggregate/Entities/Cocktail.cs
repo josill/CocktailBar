@@ -3,9 +3,9 @@
 
 using CocktailBar.Domain.CocktailAggregate.Read;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.Seedwork;
-using CocktailBar.Domain.Seedwork.Errors;
 
 namespace CocktailBar.Domain.CocktailAggregate.Entities;
 
@@ -27,8 +27,8 @@ public class Cocktail : Aggregate<CocktailId>
     public Cocktail(string name, string description, RecipeId recipeId, CocktailId? cocktailId = null) : base(cocktailId ?? new CocktailId(Guid.NewGuid()))
     {
         Validate(name, description);
-        Name = name;
-        Description = description;
+        Name = name.Trim();
+        Description = description.Trim();
         RecipeId = recipeId;
     }
 

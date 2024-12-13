@@ -12,9 +12,8 @@ namespace CocktailBar.Infrastructure.Common.Repository;
 /// </summary>
 /// <typeparam name="TEntity">The type of entity this repository handles. Must be a reference type.</typeparam>
 /// <typeparam name="TId">The type of entity id this repository handles. Must be a reference type.</typeparam>
-public abstract class Repository<TEntity, TId>(IAppDbContext context) : IRepository<TEntity, TId>
+public abstract class Repository<TEntity>(IAppDbContext context) : IRepository<TEntity>
     where TEntity : class
-    where TId : class
 {
     /// <summary>
     /// The database context used by this repository.
@@ -26,7 +25,7 @@ public abstract class Repository<TEntity, TId>(IAppDbContext context) : IReposit
     /// </summary>
     protected readonly DbSet<TEntity> DbSet = context.Set<TEntity>();
 
-    public virtual async Task<TEntity?> GetByIdAsync(TId id)
+    public virtual async Task<TEntity?> GetByIdAsync(object id)
     {
         return await DbSet.FindAsync(id);
     }
