@@ -4,6 +4,7 @@
 using System.Data.Common;
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Common.Interfaces.Context;
+using CocktailBar.Application.Common.Interfaces.Repository;
 using CocktailBar.Domain.Aggregates.Cocktail;
 using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Domain.Aggregates.Stock;
@@ -26,11 +27,11 @@ public sealed class UnitOfWork : IUnitOfWork
     /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
     /// </summary>
     public UnitOfWork(
-        IRepository<CocktailAggregate> cocktailsRepository,
-        IRepository<RecipeAggregate> recipesRepository,
-        IRepository<StockOrder> stockOrdersRepository,
-        IRepository<StockItemAggregate> stockItemsRepository,
-        IRepository<WarehouseAggregate> warehousesRepository,
+        ICocktailRepository cocktailsRepository,
+        IRecipeRepository recipesRepository,
+        IStockOrderRepository stockOrdersRepository,
+        IStockItemRepository stockItemsRepository,
+        IWarehouseRepository warehousesRepository,
         IAppDbContext appDbContext)
     {
         Cocktails = cocktailsRepository;
@@ -44,27 +45,27 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <summary>
     /// Gets the repository for managing cocktail entities.
     /// </summary>
-    public IRepository<CocktailAggregate> Cocktails { get; }
+    public ICocktailRepository Cocktails { get; }
     
     /// <summary>
     /// Gets the repository for managing cocktail entities.
     /// </summary>
-    public IRepository<RecipeAggregate> Recipes { get; }
+    public IRecipeRepository Recipes { get; }
     
     /// <summary>
     /// Gets the repository for managing stock order entities.
     /// </summary>
-    public IRepository<StockOrder> StockOrders { get; }
+    public IStockOrderRepository StockOrders { get; }
     
     /// <summary>
     /// Gets the repository for managing stock item entities.
     /// </summary>
-    public IRepository<StockItemAggregate> StockItems { get; }
+    public IStockItemRepository StockItems { get; }
     
     /// <summary>
     /// Gets the repository for managing warehouse entities.
     /// </summary>
-    public IRepository<WarehouseAggregate> Warehouses { get; }
+    public IWarehouseRepository Warehouses { get; }
 
     public IAppDbContext Context { get; }
 

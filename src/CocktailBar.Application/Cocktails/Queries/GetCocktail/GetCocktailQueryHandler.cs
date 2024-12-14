@@ -16,7 +16,7 @@ public class GetCocktailQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<G
     { 
         try
         {
-            var cocktail = await unitOfWork.Cocktails.GetByIdAsync(new CocktailId(request.CocktailId));
+            var cocktail = await unitOfWork.Cocktails.GetByIdAsync<CocktailAggregate>(new CocktailId(request.CocktailId));
             if (cocktail is null) throw NotFoundException.For<CocktailAggregate>($"Cocktail with the specified id: {request.CocktailId} not found!");
 
             var result = CocktailResult.From(cocktail!);

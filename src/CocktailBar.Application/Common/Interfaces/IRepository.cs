@@ -7,9 +7,7 @@ namespace CocktailBar.Application.Common.Interfaces;
 /// Defines a generic repository pattern interface for entity operations.
 /// Provides basic CRUD (Create, Read, Update, Delete) operations for entities.
 /// </summary>
-/// <typeparam name="TEntity">The type of entity this repository handles. Must be a reference type.</typeparam>
-public interface IRepository<TEntity>
-    where TEntity : class
+public interface IRepository
 {
     /// <summary>
     /// Retrieves an entity by its unique identifier asynchronously.
@@ -23,7 +21,7 @@ public interface IRepository<TEntity>
     /// This method is typically used for retrieving a single entity when its ID is known.
     /// Returns null if no entity is found with the specified ID.
     /// </remarks>
-    Task<TEntity?> GetByIdAsync(object id);
+    Task<T?> GetByIdAsync<T>(object id) where T : class;
 
     /// <summary>
     /// Retrieves all entities of type TEntity from the repository asynchronously.
@@ -37,12 +35,12 @@ public interface IRepository<TEntity>
     /// Use this method with caution when dealing with large datasets.
     /// Consider implementing pagination for large collections.
     /// </remarks>
-    Task<IEnumerable<TEntity>> GetAllAsync();
+    Task<IEnumerable<T>> GetAllAsync<T>() where T : class; // TODO: paging
 
     /// <summary>
-    /// Adds a new entity to the repository asynchronously.
+    /// Adds a new aggregate to the repository asynchronously.
     /// </summary>
-    /// <param name="entity">The entity to add to the repository.</param>
+    /// <param name="aggregate">The aggregate to add to the repository.</param>
     /// <returns>
     /// A task that represents the asynchronous operation.
     /// </returns>
@@ -51,29 +49,29 @@ public interface IRepository<TEntity>
     /// The actual database insertion occurs when the unit of work commits the transaction.
     /// </remarks>
     /// <exception cref="ArgumentNullException">Thrown when entity is null.</exception>
-    Task AddAsync(TEntity entity);
+    Task AddAsync<T>(T aggregate) where T : class;
 
     /// <summary>
-    /// Updates an existing entity in the repository.
+    /// Updates an existing aggregate in the repository.
     /// </summary>
-    /// <param name="entity">The entity with updated values.</param>
+    /// <param name="aggregate">The aggregate with updated values.</param>
     /// <remarks>
     /// This method only stages the entity for update.
     /// The actual database update occurs when the unit of work commits the transaction.
     /// The entity being updated must exist in the repository and be tracked by the context.
     /// </remarks>
     /// <exception cref="ArgumentNullException">Thrown when entity is null.</exception>
-    void Update(TEntity entity);
+    void Update<T>(T aggregate) where T : class;
 
     /// <summary>
-    /// Marks an entity for deletion from the repository.
+    /// Marks an aggregate for deletion from the repository.
     /// </summary>
-    /// <param name="entity">The entity to delete.</param>
+    /// <param name="aggregate">The entity to delete.</param>
     /// <remarks>
     /// This method only stages the entity for deletion.
     /// The actual database deletion occurs when the unit of work commits the transaction.
     /// The entity being deleted must exist in the repository and be tracked by the context.
     /// </remarks>
     /// <exception cref="ArgumentNullException">Thrown when entity is null.</exception>
-    void Delete(TEntity entity);
+    void Delete<T>(T aggregate) where T : class;
 }

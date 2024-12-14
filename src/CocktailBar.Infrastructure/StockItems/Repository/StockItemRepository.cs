@@ -2,11 +2,10 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Common.Interfaces.Context;
-using CocktailBar.Domain.Aggregates.Stock;
-using CocktailBar.Infrastructure.Common.Repository;
+using CocktailBar.Application.Common.Interfaces.Repository;
 
 namespace CocktailBar.Infrastructure.StockItems.Repository;
 
-public class StockItemsRepository(IAppDbContext context) : Repository<StockItemAggregate>(context)
+public class StockItemRepository(IAppDbContext context) : Common.Repository.Repository(context), IStockItemRepository
 {
 }

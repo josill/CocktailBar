@@ -16,7 +16,7 @@ public class GetRecipeQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<Get
     {
         try
         {
-            var recipe = await unitOfWork.Recipes.GetByIdAsync(new RecipeId(request.RecipeId));
+            var recipe = await unitOfWork.Recipes.GetByIdAsync<RecipeAggregate>(new RecipeId(request.RecipeId));
             if (recipe is null) throw NotFoundException.For<RecipeAggregate>($"Recipe with the specified id: {request.RecipeId} not found!");
 
             var result = RecipeResult.From(recipe);

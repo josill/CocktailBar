@@ -3,6 +3,7 @@
 
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Common.Interfaces.Context;
+using CocktailBar.Application.Common.Interfaces.Repository;
 using CocktailBar.Domain.Aggregates.Cocktail;
 using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Aggregates.Recipe;
@@ -66,12 +67,12 @@ public static class DependencyInjection
            sp.GetRequiredService<AppDbContext>());
 
        services.AddScoped<IUnitOfWork, UnitOfWork>();
-       services.AddScoped<IRepository<CocktailAggregate>, CocktailsRepository>();
-       services.AddScoped<IRepository<RecipeAggregate>, RecipeRepository>();
-       services.AddScoped<IRepository<IngredientAggregate>, IngredientRepository>();
-       services.AddScoped<IRepository<StockOrder>, StockOrderRepository>();
-       services.AddScoped<IRepository<StockItemAggregate>, StockItemsRepository>();
-       services.AddScoped<IRepository<WarehouseAggregate>, WarehousesRepository>();
+       services.AddScoped<ICocktailRepository, CocktailsRepository>();
+       services.AddScoped<IRecipeRepository, RecipeRepository>();
+       services.AddScoped<IIngredientRepository, IngredientRepository>();
+       services.AddScoped<IStockOrderRepository, StockOrderRepository>();
+       services.AddScoped<IStockItemRepository, StockItemRepository>();
+       services.AddScoped<IWarehouseRepository, WarehousesRepository>();
 
        var databaseSettings = new DatabaseSettings();
        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);
