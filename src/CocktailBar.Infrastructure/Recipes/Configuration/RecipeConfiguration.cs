@@ -1,23 +1,21 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.RecipeAggregate.Entities;
-using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Aggregates.Recipe;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.Recipes.Configuration;
 
-internal sealed class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
+internal sealed class RecipeConfiguration : IEntityTypeConfiguration<RecipeAggregate>
 {
-    public void Configure(EntityTypeBuilder<Recipe> builder)
+    public void Configure(EntityTypeBuilder<RecipeAggregate> builder)
     {
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
                 value => new RecipeId(value))
+            .ValueGeneratedOnAdd()
             .IsRequired();
         
         builder.Property(x => x.Name)

@@ -1,9 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.StockOrderAggregate.Entities;
-using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
-using CocktailBar.Infrastructure.Common.Configurations;
+using CocktailBar.Domain.Aggregates.Stock;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,6 +15,7 @@ internal sealed class StockOrderConfiguration : IEntityTypeConfiguration<StockOr
             .HasConversion(
                 id => id.Value,
                 value => new StockOrderId(value))
+            .ValueGeneratedOnAdd()
             .IsRequired();
 
         builder.Property(x => x.OrderNumber)

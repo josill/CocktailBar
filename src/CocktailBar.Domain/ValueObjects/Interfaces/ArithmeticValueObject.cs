@@ -1,3 +1,5 @@
+using CocktailBar.Domain.Seedwork;
+
 namespace CocktailBar.Domain.ValueObjects.Interfaces;
 
 /// <summary>

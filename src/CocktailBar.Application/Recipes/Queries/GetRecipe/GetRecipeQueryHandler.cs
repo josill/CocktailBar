@@ -3,9 +3,8 @@
 
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Recipes.Common;
+using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Domain.Exceptions;
-using CocktailBar.Domain.RecipeAggregate.Entities;
-using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
 using MediatR;
 using ErrorOr;
 
@@ -18,14 +17,14 @@ public class GetRecipeQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<Get
         try
         {
             var recipe = await unitOfWork.Recipes.GetByIdAsync(new RecipeId(request.RecipeId));
-            if (recipe is null) throw NotFoundException.For<Recipe>($"Recipe with the specified id: {request.RecipeId} not found!");
+            if (recipe is null) throw NotFoundException.For<RecipeAggregate>($"Recipe with the specified id: {request.RecipeId} not found!");
 
-            var result = RecipeResult.From(recipe!);
+            var result = RecipeResult.From(recipe);
             return result;
         }
         catch (Exception e)
         {
-            throw SomethingWentWrongException.For<Recipe>($"Error retrieving the recipe entity: {e.Message}");
+            throw SomethingWentWrongException.For<RecipeAggregate>($"Error retrieving the recipe entity: {e.Message}");
         }    
     }
 }

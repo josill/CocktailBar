@@ -16,15 +16,15 @@ public abstract class Aggregate<TId>
 
     protected Aggregate() {}
     
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Aggregate{TId}"/> class.
-    /// </summary>
-    /// <param name="id">The unique identifier for the entity.</param>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="id"/> is null.</exception>
-    protected Aggregate(TId id)
-    {
-        Id = id;
-    }
+    // /// <summary>
+    // /// Initializes a new instance of the <see cref="Aggregate{TId}"/> class.
+    // /// </summary>
+    // /// <param name="id">The unique identifier for the entity.</param>
+    // /// <exception cref="ArgumentNullException">Thrown when <paramref name="id"/> is null.</exception>
+    // protected Aggregate(TId id)
+    // {
+    //     Id = id;
+    // }
 
     /// <summary>
     /// Determines whether the specified object is equal to the current object.

@@ -4,7 +4,7 @@
 using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.ValueObjects.Interfaces;
 
-namespace CocktailBar.Domain.ValueObjects;
+namespace CocktailBar.Domain.Seedwork;
 
 /// <summary>
 /// Represents a base class for value objects in the domain model.

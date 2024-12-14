@@ -1,13 +1,13 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.CocktailAggregate.Read;
+namespace CocktailBar.Domain.Aggregates.Cocktail;
 
 /// <summary>
 /// Represents a read-only view model for cocktail data in the CocktailBar application.
 /// This record is designed for query operations following the CQRS pattern.
 /// </summary>
-public sealed record CocktailReadModel
+public sealed record CocktailReadModel // TODO: CocktailReadDTO?
 {
     /// <summary>
     /// Gets the unique identifier for the cocktail.

@@ -2,9 +2,7 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Common.Interfaces.Context;
-using CocktailBar.Domain.StockOrderAggregate.Entities;
-using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
-using CocktailBar.Infrastructure.Common;
+using CocktailBar.Domain.Aggregates.Stock;
 using CocktailBar.Infrastructure.Common.Repository;
 
 namespace CocktailBar.Infrastructure.StockOrders.Repository;

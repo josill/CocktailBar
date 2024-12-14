@@ -3,15 +3,14 @@
 
 using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.Seedwork;
-using CocktailBar.Domain.StockItemAggregate.Entities;
-using CocktailBar.Domain.StockOrderAggregate.ValueObjects;
-using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
 
-namespace CocktailBar.Domain.StockOrderAggregate.Entities;
+namespace CocktailBar.Domain.Aggregates.Stock;
+
+public readonly record struct StockOrderId(Guid Value);
 
 public class StockOrder : Aggregate<StockOrderId>
 {
-    private readonly List<StockItem> _stockItems = new();
+    private readonly List<StockItemAggregate> _stockItems = new();
     
     private StockOrder() {} // Private constructor for EF Core
 
@@ -23,8 +22,7 @@ public class StockOrder : Aggregate<StockOrderId>
     /// <param name="orderedAtDate">The date and time when the order was placed.</param>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
     /// <param name="stockItems">The stock items associated with the order.</param>
-    private StockOrder(string orderNumber, OrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null) : base(
-        new StockOrderId(Guid.NewGuid()))
+    private StockOrder(string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItemAggregate>? stockItems = null)
     {
         OrderNumber = orderNumber.Trim(); // TODO: toLower as well?
         Price = price;
@@ -41,7 +39,7 @@ public class StockOrder : Aggregate<StockOrderId>
     /// <summary>
     /// Gets the price of the order.
     /// </summary>
-    public OrderPrice Price { get; }
+    public StockOrderPrice Price { get; }
     
     /// <summary>
     /// Gets the date when the order was placed.
@@ -59,7 +57,7 @@ public class StockOrder : Aggregate<StockOrderId>
     /// <remarks>
     /// Returns a copy of the internal list to prevent external modifications.
     /// </remarks>
-    public IEnumerable<StockItem> StockItems => _stockItems.AsReadOnly().ToList();
+    public IEnumerable<StockItemAggregate> StockItems => _stockItems.AsReadOnly().ToList();
 
     /// <summary>
     /// Creates a new instance of the <see cref="StockOrder"/> class.
@@ -70,32 +68,32 @@ public class StockOrder : Aggregate<StockOrderId>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
     /// <param name="stockItems">The stock items associated with the order.</param>
     /// <returns>A new <see cref="StockOrder"/> instance.</returns>
-    public static StockOrder Create(string orderNumber, OrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null)
+    public static StockOrder Create(string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItemAggregate>? stockItems = null)
         => new(orderNumber, price, orderedAtDate, orderArriveDate, stockItems);
     
     /// <summary>
     /// Adds a stock item to the order if it doesn't already exist.
     /// </summary>
-    /// <param name="stockItem">The stock item to add.</param>
+    /// <param name="stockItemAggregate">The stock item to add.</param>
     /// <exception cref="DomainException">Thrown when the stock item already exists in the order.</exception>
-    public void AddStockItem(StockItem stockItem)
+    public void AddStockItem(StockItemAggregate stockItemAggregate)
     {
-        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
+        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItemAggregate));
         if (stockItemAlreadyExists) throw DomainException.For<StockOrder>("Stock item is already in the order.");
 
-        _stockItems.Add(stockItem);
+        _stockItems.Add(stockItemAggregate);
     }
 
     /// <summary>
     /// Removes a stock item from the order.
     /// </summary>
-    /// <param name="stockItem">The stock item to remove.</param>
+    /// <param name="stockItemAggregate">The stock item to remove.</param>
     /// <exception cref="DomainException">Thrown when the stock item doesn't exist in the order.</exception>
-    public void RemoveStockItem(StockItem stockItem)
+    public void RemoveStockItem(StockItemAggregate stockItemAggregate)
     {
-        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
+        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItemAggregate));
         if (stockItemAlreadyExists) throw DomainException.For<StockOrder>("Stock item not found in the order.");
 
-        _stockItems.Remove(stockItem);
+        _stockItems.Remove(stockItemAggregate);
     }
 }

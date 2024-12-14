@@ -2,29 +2,30 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.Exceptions;
+using CocktailBar.Domain.Seedwork;
 using CocktailBar.Domain.ValueObjects;
 using CocktailBar.Domain.ValueObjects.Interfaces;
 
-namespace CocktailBar.Domain.StockOrderAggregate.ValueObjects;
+namespace CocktailBar.Domain.Aggregates.Stock;
 
 /// <summary>
 /// Represents an order price with base price, shipping price and currency.
 /// </summary>
-public class OrderPrice : ValueObject<OrderPrice>, IArithmeticValueObject<OrderPrice>
+public class StockOrderPrice : ValueObject<StockOrderPrice>, IArithmeticValueObject<StockOrderPrice>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="OrderPrice"/> class.
+    /// Initializes a new instance of the <see cref="StockOrderPrice"/> class.
     /// </summary>
     /// <param name="orderCost">The base cost of the order.</param>
     /// <param name="shippingCost">The shipping cost of the order.</param>
-    private OrderPrice(Price orderCost, Price shippingCost)
+    private StockOrderPrice(Price orderCost, Price shippingCost)
     {
         Validate(orderCost, shippingCost);
         OrderCost = orderCost;
         ShippingCost = shippingCost;
     }
     
-    private OrderPrice() {}
+    private StockOrderPrice() {}
 
     /// <summary>
     /// Gets the base amount of the order.
@@ -42,12 +43,12 @@ public class OrderPrice : ValueObject<OrderPrice>, IArithmeticValueObject<OrderP
     public Price TotalCost => OrderCost + ShippingCost;
 
     /// <summary>
-    /// Creates a new instance of the <see cref="OrderPrice"/> class.
+    /// Creates a new instance of the <see cref="StockOrderPrice"/> class.
     /// </summary>
     /// <param name="orderCost">The base cost of the order.</param>
     /// <param name="shippingCost">The shipping cost of the order.</param>
-    /// <returns>A new <see cref="OrderPrice"/> instance.</returns>
-    public static OrderPrice Create(Price orderCost, Price shippingCost) 
+    /// <returns>A new <see cref="StockOrderPrice"/> instance.</returns>
+    public static StockOrderPrice Create(Price orderCost, Price shippingCost) 
         => new(orderCost, shippingCost);
     
     /// <summary>
@@ -64,22 +65,22 @@ public class OrderPrice : ValueObject<OrderPrice>, IArithmeticValueObject<OrderP
     /// Adds two order price objects together.
     /// </summary>
     /// <param name="other">The price to add.</param>
-    /// <returns>A new <see cref="OrderPrice"/> instance.</returns>
+    /// <returns>A new <see cref="StockOrderPrice"/> instance.</returns>
     /// <exception cref="DomainException">Thrown when the currencies don't match.</exception>
-    public OrderPrice Add(OrderPrice other)
+    public StockOrderPrice Add(StockOrderPrice other)
     {
-        if (other.OrderCost.Currency != OrderCost.Currency) throw DomainException.For<OrderPrice>("Order cost currencies don't match while adding order prices.");
-        if (other.ShippingCost.Currency != ShippingCost.Currency) throw DomainException.For<OrderPrice>("Shipping cost currencies don't match while adding order prices.");
+        if (other.OrderCost.Currency != OrderCost.Currency) throw DomainException.For<StockOrderPrice>("Order cost currencies don't match while adding order prices.");
+        if (other.ShippingCost.Currency != ShippingCost.Currency) throw DomainException.For<StockOrderPrice>("Shipping cost currencies don't match while adding order prices.");
         
-        return new OrderPrice(OrderCost + other.OrderCost, ShippingCost + other.ShippingCost);
+        return new StockOrderPrice(OrderCost + other.OrderCost, ShippingCost + other.ShippingCost);
     }
     
-    public OrderPrice Subtract(OrderPrice other)
+    public StockOrderPrice Subtract(StockOrderPrice other)
     {
-        if (other.OrderCost.Currency != OrderCost.Currency) throw DomainException.For<OrderPrice>("Order cost currencies don't match while adding order prices.");
-        if (other.ShippingCost.Currency != ShippingCost.Currency) throw DomainException.For<OrderPrice>("Shipping cost currencies don't match while adding order prices.");
+        if (other.OrderCost.Currency != OrderCost.Currency) throw DomainException.For<StockOrderPrice>("Order cost currencies don't match while adding order prices.");
+        if (other.ShippingCost.Currency != ShippingCost.Currency) throw DomainException.For<StockOrderPrice>("Shipping cost currencies don't match while adding order prices.");
         
-        return new OrderPrice(OrderCost - other.OrderCost, ShippingCost - other.ShippingCost);
+        return new StockOrderPrice(OrderCost - other.OrderCost, ShippingCost - other.ShippingCost);
     }
     
     /// <summary>
@@ -90,6 +91,6 @@ public class OrderPrice : ValueObject<OrderPrice>, IArithmeticValueObject<OrderP
     /// <exception cref="DomainException">Thrown when validation fails.</exception>
     private static void Validate(Price orderCost, Price shippingCost)
     {
-        if (orderCost.Currency != shippingCost.Currency) throw DomainException.For<OrderPrice>("Order cost and shipping cost must have the same currency.");
+        if (orderCost.Currency != shippingCost.Currency) throw DomainException.For<StockOrderPrice>("Order cost and shipping cost must have the same currency.");
     }
 }

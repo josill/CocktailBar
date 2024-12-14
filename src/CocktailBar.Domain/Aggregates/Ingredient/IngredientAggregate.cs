@@ -1,29 +1,29 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.RecipeAggregate.Entities;
+using CocktailBar.Domain.Aggregates.Stock;
 using CocktailBar.Domain.Seedwork;
-using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.ValueObjects;
 
-namespace CocktailBar.Domain.IngredientAggregate.Entities;
+namespace CocktailBar.Domain.Aggregates.Ingredient;
+
+public readonly record struct IngredientId(Guid Value);
 
 /// <summary>
 /// Represents an ingredient in a cocktail recipe.
 /// </summary>
-public class Ingredient : Aggregate<IngredientId>
+public class IngredientAggregate : Aggregate<IngredientId>
 {
-    private Ingredient() {} // Private constructor for EF Core
+    private IngredientAggregate() {} // Private constructor for EF Core
     
-    private readonly List<Recipe> _recipes = new();
+    private readonly List<Recipe.RecipeAggregate> _recipes = new();
     
     /// <summary>
-    /// Initializes a new instance of the <see cref="Ingredient"/> class.
+    /// Initializes a new instance of the <see cref="IngredientAggregate"/> class.
     /// </summary>
     /// <param name="stockItemId">The unique identifier of the associated stock item.</param>
     /// <param name="amount">The amount of the ingredient.</param>
-    private Ingredient(StockItemId stockItemId, Amount amount) : base(new IngredientId(Guid.NewGuid()))
+    private IngredientAggregate(StockItemId stockItemId, Amount amount)
     {
         StockItemId = stockItemId;
         Amount = amount;
@@ -45,13 +45,13 @@ public class Ingredient : Aggregate<IngredientId>
     /// <remarks>
     /// Returns a copy of the internal list to prevent external modification.
     /// </remarks>
-    public List<Recipe> Recipes => _recipes.ToList();
+    public List<Recipe.RecipeAggregate> Recipes => _recipes.ToList();
 
     /// <summary>
-    /// Creates a new instance of the <see cref="Ingredient"/> class.
+    /// Creates a new instance of the <see cref="IngredientAggregate"/> class.
     /// </summary>
     /// <param name="stockItemId">The unique identifier of the associated stock item.</param>
     /// <param name="amount">The amount of the ingredient.</param>
-    /// <returns>A new <see cref="Ingredient"/> instance.</returns>
-    public static Ingredient Create(StockItemId stockItemId, Amount amount) => new(stockItemId, amount);
+    /// <returns>A new <see cref="IngredientAggregate"/> instance.</returns>
+    public static IngredientAggregate Create(StockItemId stockItemId, Amount amount) => new(stockItemId, amount);
 }

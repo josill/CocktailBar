@@ -1,14 +1,10 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.RecipeAggregate.Entities;
-using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.StockItemAggregate.Entities;
-using CocktailBar.Domain.StockOrderAggregate.Entities;
-using CocktailBar.Domain.WarehouseAggregate.Entities;
-using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Aggregates.Cocktail;
+using CocktailBar.Domain.Aggregates.Recipe;
+using CocktailBar.Domain.Aggregates.Stock;
+using CocktailBar.Domain.Aggregates.Warehouse;
 
 namespace CocktailBar.Application.Common.Interfaces;
 
@@ -21,12 +17,12 @@ public interface IUnitOfWork : IAsyncDisposable
     /// <summary>
     /// Gets the repository for managing cocktail aggregates.
     /// </summary>
-    IRepository<Cocktail> Cocktails { get; }
+    IRepository<CocktailAggregate> Cocktails { get; }
     
     /// <summary>
     /// Gets the repository for managing recipe aggregates.
     /// </summary>
-    IRepository<Recipe> Recipes { get; }
+    IRepository<RecipeAggregate> Recipes { get; }
     
     /// <summary>
     /// Gets the repository for managing stock order aggregates.
@@ -36,12 +32,12 @@ public interface IUnitOfWork : IAsyncDisposable
     /// <summary>
     /// Gets the repository for managing stock items aggregates.
     /// </summary>
-    IRepository<StockItem> StockItems { get; }
+    IRepository<StockItemAggregate> StockItems { get; }
     
     /// <summary>
     /// Gets the repository for managing warehouse aggregates.
     /// </summary>
-    IRepository<Warehouse> Warehouses { get; }
+    IRepository<WarehouseAggregate> Warehouses { get; }
 
     /// <summary>
     /// Begins a new database transaction asynchronously.

@@ -1,21 +1,21 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.WarehouseAggregate.Entities;
-using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Aggregates.Warehouse;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.Warehouses.Configuration;
 
-internal sealed class WarehouseConfiguration : IEntityTypeConfiguration<Warehouse>
+internal sealed class WarehouseConfiguration : IEntityTypeConfiguration<WarehouseAggregate>
 {
-    public void Configure(EntityTypeBuilder<Warehouse> builder)
+    public void Configure(EntityTypeBuilder<WarehouseAggregate> builder)
     {
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
                 value => new WarehouseId(value))
+            .ValueGeneratedOnAdd()
             .IsRequired();
         
         builder.Property(x => x.Name)

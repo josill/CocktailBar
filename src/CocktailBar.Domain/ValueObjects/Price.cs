@@ -3,6 +3,7 @@
 
 using CocktailBar.Domain.Enumerations;
 using CocktailBar.Domain.Exceptions;
+using CocktailBar.Domain.Seedwork;
 using CocktailBar.Domain.ValueObjects.Interfaces;
 
 namespace CocktailBar.Domain.ValueObjects;

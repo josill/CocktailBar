@@ -1,7 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-namespace CocktailBar.Domain.OrderAggregate.Entities;
+namespace CocktailBar.Domain.Aggregates.Order;
 
 /// <summary>
 /// Represents an abstract order item in the cocktail bar system.

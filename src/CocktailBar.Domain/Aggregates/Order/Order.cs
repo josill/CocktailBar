@@ -3,34 +3,23 @@
 
 using CocktailBar.Domain.Seedwork;
 
-namespace CocktailBar.Domain.OrderAggregate.Entities;
+namespace CocktailBar.Domain.Aggregates.Order;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using CocktailBar.Domain.OrderAggregate.ValueObjects.Ids;
+public readonly record struct OrderId(Guid Value);
 
 /// <summary>
 /// Represents an order in the cocktail bar domain.
 /// This class inherits from EntityWithMetadata and uses OrderId as its identifier.
 /// </summary>
-public class Order : Aggregate<OrderId>
+public class OrderAggregate : Aggregate<OrderId>
 {
-    private Order() {} // Private constructor for EF Core
+    private OrderAggregate() {} // Private constructor for EF Core
     
     /// <summary>
     /// Private collection of order items.
     /// This backing field allows for encapsulation of the order items list.
     /// </summary>
     private readonly List<OrderItem> _orderItems = new();
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Order"/> class.
-    /// </summary>
-    /// <param name="id">The unique identifier for the order.</param>
-    public Order(OrderId id) : base(id)
-    {
-    }
 
     /// <summary>
     /// Gets a read-only list of order items.

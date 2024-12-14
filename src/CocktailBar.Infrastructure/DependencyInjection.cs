@@ -1,35 +1,27 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Common.Interfaces.Context;
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.IngredientAggregate.Entities;
-using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.RecipeAggregate.Entities;
-using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.StockItemAggregate.Entities;
-using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.StockOrderAggregate.Entities;
-using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.WarehouseAggregate.Entities;
-using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Aggregates.Cocktail;
+using CocktailBar.Domain.Aggregates.Ingredient;
+using CocktailBar.Domain.Aggregates.Recipe;
+using CocktailBar.Domain.Aggregates.Stock;
+using CocktailBar.Domain.Aggregates.Warehouse;
 using CocktailBar.Infrastructure.Cocktails.Repository;
 using CocktailBar.Infrastructure.Common.Context;
+using CocktailBar.Infrastructure.Common.Settings;
+using CocktailBar.Infrastructure.Common.UnitOfWork;
 using CocktailBar.Infrastructure.Ingredients.Repository;
 using CocktailBar.Infrastructure.Recipes.Repository;
 using CocktailBar.Infrastructure.StockItems.Repository;
 using CocktailBar.Infrastructure.StockOrders.Repository;
 using CocktailBar.Infrastructure.Warehouses.Repository;
-
-namespace CocktailBar.Infrastructure;
-
-using CocktailBar.Application.Common.Interfaces;
-using CocktailBar.Infrastructure.Common.Settings;
-using CocktailBar.Infrastructure.Common.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+namespace CocktailBar.Infrastructure;
 
 /// <summary>
 /// Provides extension methods for configuring infrastructure services in the dependency injection container.
@@ -74,12 +66,12 @@ public static class DependencyInjection
            sp.GetRequiredService<AppDbContext>());
 
        services.AddScoped<IUnitOfWork, UnitOfWork>();
-       services.AddScoped<IRepository<Cocktail>, CocktailsRepository>();
-       services.AddScoped<IRepository<Recipe>, RecipeRepository>();
-       services.AddScoped<IRepository<Ingredient>, IngredientRepository>();
+       services.AddScoped<IRepository<CocktailAggregate>, CocktailsRepository>();
+       services.AddScoped<IRepository<RecipeAggregate>, RecipeRepository>();
+       services.AddScoped<IRepository<IngredientAggregate>, IngredientRepository>();
        services.AddScoped<IRepository<StockOrder>, StockOrderRepository>();
-       services.AddScoped<IRepository<StockItem>, StockItemsRepository>();
-       services.AddScoped<IRepository<Warehouse>, WarehousesRepository>();
+       services.AddScoped<IRepository<StockItemAggregate>, StockItemsRepository>();
+       services.AddScoped<IRepository<WarehouseAggregate>, WarehousesRepository>();
 
        var databaseSettings = new DatabaseSettings();
        configuration.Bind(DatabaseSettings.SectionName, databaseSettings);

@@ -3,9 +3,8 @@
 
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Recipes.Common;
-using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Domain.Exceptions;
-using CocktailBar.Domain.RecipeAggregate.Entities;
 
 namespace CocktailBar.Application.Recipes.Commands.CreateRecipe;
 
@@ -33,7 +32,7 @@ public class CreateRecipeCommandHandler(IUnitOfWork unitOfWork) : IRequestHandle
     /// </returns>
     public async Task<ErrorOr<RecipeResult>> Handle(CreateRecipeCommand request, CancellationToken cancellationToken)
     {
-        var recipe = Recipe.Create(request.Name, request.Instructions, []);
+        var recipe = RecipeAggregate.Create(request.Name, request.Instructions, []);
 
         try
         {
@@ -44,7 +43,7 @@ public class CreateRecipeCommandHandler(IUnitOfWork unitOfWork) : IRequestHandle
         catch (Exception e)
         {
             await unitOfWork.RollbackAsync();
-            throw SomethingWentWrongException.For<Recipe>($"Error creating the recipe entity: {e.Message}");
+            throw SomethingWentWrongException.For<RecipeAggregate>($"Error creating the recipe entity: {e.Message}");
         }
 
         return RecipeResult.From(recipe);

@@ -2,15 +2,12 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Common.Interfaces.Context;
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.IngredientAggregate.Entities;
-using CocktailBar.Domain.IngredientAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Infrastructure.Common;
 using CocktailBar.Infrastructure.Common.Repository;
 
 namespace CocktailBar.Infrastructure.Ingredients.Repository;
 
-public class IngredientRepository(IAppDbContext context) : Repository<Ingredient>(context)
+public class IngredientRepository(IAppDbContext context) : Repository<IngredientAggregate>(context)
 {
 }

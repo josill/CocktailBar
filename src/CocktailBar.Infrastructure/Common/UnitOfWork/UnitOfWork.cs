@@ -1,23 +1,16 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using System.Data.Common;
+using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Common.Interfaces.Context;
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.RecipeAggregate.Entities;
-using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.StockItemAggregate.Entities;
-using CocktailBar.Domain.StockItemAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.StockOrderAggregate.Entities;
-using CocktailBar.Domain.StockOrderAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.WarehouseAggregate.Entities;
-using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.Aggregates.Cocktail;
+using CocktailBar.Domain.Aggregates.Recipe;
+using CocktailBar.Domain.Aggregates.Stock;
+using CocktailBar.Domain.Aggregates.Warehouse;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CocktailBar.Infrastructure.Common.UnitOfWork;
-
-using System.Data.Common;
-using CocktailBar.Application.Common.Interfaces;
 
 /// <summary>
 /// Implements the Unit of Work pattern to manage database transactions and context access.
@@ -33,11 +26,11 @@ public sealed class UnitOfWork : IUnitOfWork
     /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
     /// </summary>
     public UnitOfWork(
-        IRepository<Cocktail> cocktailsRepository,
-        IRepository<Recipe> recipesRepository,
+        IRepository<CocktailAggregate> cocktailsRepository,
+        IRepository<RecipeAggregate> recipesRepository,
         IRepository<StockOrder> stockOrdersRepository,
-        IRepository<StockItem> stockItemsRepository,
-        IRepository<Warehouse> warehousesRepository,
+        IRepository<StockItemAggregate> stockItemsRepository,
+        IRepository<WarehouseAggregate> warehousesRepository,
         IAppDbContext appDbContext)
     {
         Cocktails = cocktailsRepository;
@@ -51,12 +44,12 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <summary>
     /// Gets the repository for managing cocktail entities.
     /// </summary>
-    public IRepository<Cocktail> Cocktails { get; }
+    public IRepository<CocktailAggregate> Cocktails { get; }
     
     /// <summary>
     /// Gets the repository for managing cocktail entities.
     /// </summary>
-    public IRepository<Recipe> Recipes { get; }
+    public IRepository<RecipeAggregate> Recipes { get; }
     
     /// <summary>
     /// Gets the repository for managing stock order entities.
@@ -66,12 +59,12 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <summary>
     /// Gets the repository for managing stock item entities.
     /// </summary>
-    public IRepository<StockItem> StockItems { get; }
+    public IRepository<StockItemAggregate> StockItems { get; }
     
     /// <summary>
     /// Gets the repository for managing warehouse entities.
     /// </summary>
-    public IRepository<Warehouse> Warehouses { get; }
+    public IRepository<WarehouseAggregate> Warehouses { get; }
 
     public IAppDbContext Context { get; }
 

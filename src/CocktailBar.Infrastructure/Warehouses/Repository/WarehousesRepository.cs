@@ -2,13 +2,11 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Common.Interfaces.Context;
-using CocktailBar.Domain.WarehouseAggregate.Entities;
-using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
-using CocktailBar.Infrastructure.Common;
+using CocktailBar.Domain.Aggregates.Warehouse;
 using CocktailBar.Infrastructure.Common.Repository;
 
 namespace CocktailBar.Infrastructure.Warehouses.Repository;
 
-public class WarehousesRepository(IAppDbContext context) : Repository<Warehouse>(context)
+public class WarehousesRepository(IAppDbContext context) : Repository<WarehouseAggregate>(context)
 {
 }
