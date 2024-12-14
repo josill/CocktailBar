@@ -9,7 +9,7 @@ using CocktailBar.Domain.ValueObjects.Interfaces;
 namespace CocktailBar.Domain.Aggregates.Stock;
 
 /// <summary>
-/// Represents an order price with base price, shipping price and currency.
+/// Represents a stock order price with base price, shipping price and currency.
 /// </summary>
 public class StockOrderPrice : ValueObject<StockOrderPrice>, IArithmeticValueObject<StockOrderPrice>
 {
@@ -24,7 +24,7 @@ public class StockOrderPrice : ValueObject<StockOrderPrice>, IArithmeticValueObj
         OrderCost = orderCost;
         ShippingCost = shippingCost;
     }
-    
+
     private StockOrderPrice() {}
 
     /// <summary>
@@ -38,7 +38,7 @@ public class StockOrderPrice : ValueObject<StockOrderPrice>, IArithmeticValueObj
     public Price ShippingCost { get; }
 
     /// <summary>
-    /// Gets the total cost of the order
+    /// Gets the total cost of the order.
     /// </summary>
     public Price TotalCost => OrderCost + ShippingCost;
 
@@ -48,18 +48,8 @@ public class StockOrderPrice : ValueObject<StockOrderPrice>, IArithmeticValueObj
     /// <param name="orderCost">The base cost of the order.</param>
     /// <param name="shippingCost">The shipping cost of the order.</param>
     /// <returns>A new <see cref="StockOrderPrice"/> instance.</returns>
-    public static StockOrderPrice Create(Price orderCost, Price shippingCost) 
+    public static StockOrderPrice Create(Price orderCost, Price shippingCost)
         => new(orderCost, shippingCost);
-    
-    /// <summary>
-    /// Gets the attributes to include in equality checks.
-    /// </summary>
-    /// <returns>An enumeration of objects representing the attributes to include in equality checks.</returns>
-    protected override IEnumerable<object> GetAttributesToIncludeInEqualityCheck()
-    {
-        yield return OrderCost;
-        yield return ShippingCost;
-    }
 
     /// <summary>
     /// Adds two order price objects together.
@@ -71,18 +61,34 @@ public class StockOrderPrice : ValueObject<StockOrderPrice>, IArithmeticValueObj
     {
         if (other.OrderCost.Currency != OrderCost.Currency) throw DomainException.For<StockOrderPrice>("Order cost currencies don't match while adding order prices.");
         if (other.ShippingCost.Currency != ShippingCost.Currency) throw DomainException.For<StockOrderPrice>("Shipping cost currencies don't match while adding order prices.");
-        
+
         return new StockOrderPrice(OrderCost + other.OrderCost, ShippingCost + other.ShippingCost);
     }
-    
+
+    /// <summary>
+    /// Subtracts two order items from each other.
+    /// </summary>
+    /// <param name="other">The price to subtract.</param>
+    /// <returns>A new <see cref="StockOrderPrice"/> instance.</returns>
+    /// <exception cref="DomainException">Thrown when the currencies don't match.</exception>
     public StockOrderPrice Subtract(StockOrderPrice other)
     {
         if (other.OrderCost.Currency != OrderCost.Currency) throw DomainException.For<StockOrderPrice>("Order cost currencies don't match while adding order prices.");
         if (other.ShippingCost.Currency != ShippingCost.Currency) throw DomainException.For<StockOrderPrice>("Shipping cost currencies don't match while adding order prices.");
-        
+
         return new StockOrderPrice(OrderCost - other.OrderCost, ShippingCost - other.ShippingCost);
     }
-    
+
+    /// <summary>
+    /// Gets the attributes to include in equality checks.
+    /// </summary>
+    /// <returns>An enumeration of objects representing the attributes to include in equality checks.</returns>
+    protected override IEnumerable<object> GetAttributesToIncludeInEqualityCheck()
+    {
+        yield return OrderCost;
+        yield return ShippingCost;
+    }
+
     /// <summary>
     /// Validates the order and shipping costs.
     /// </summary>

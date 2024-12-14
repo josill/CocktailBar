@@ -11,7 +11,6 @@ namespace CocktailBar.Infrastructure.StockItems.Configuration;
 
 internal sealed class StockItemConfiguration : IEntityTypeConfiguration<StockItemAggregate>
 {
-    
     public void Configure(EntityTypeBuilder<StockItemAggregate> builder)
     {
         builder.Property(x => x.Id)
@@ -20,7 +19,7 @@ internal sealed class StockItemConfiguration : IEntityTypeConfiguration<StockIte
                 value => new StockItemId(value))
             .ValueGeneratedOnAdd()
             .IsRequired();
-        
+
         builder.Property(x => x.IngredientId)
             .HasConversion(
                 id => id.Value,

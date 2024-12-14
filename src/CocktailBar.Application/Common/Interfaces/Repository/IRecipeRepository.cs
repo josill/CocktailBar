@@ -1,3 +1,5 @@
 namespace CocktailBar.Application.Common.Interfaces.Repository;
 
-public interface IRecipeRepository : IRepository;
+public interface IRecipeRepository : IRepository
+{
+}

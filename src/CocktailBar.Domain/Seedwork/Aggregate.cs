@@ -9,22 +9,14 @@ namespace CocktailBar.Domain.Seedwork;
 /// <typeparam name="TId">The type of the entity's identifier.</typeparam>
 public abstract class Aggregate<TId>
 {
+    #pragma warning disable SA1600
+    protected Aggregate() {} // Protected constructor for inheriting classes to use with EF Core
+    #pragma warning restore SA1600
+
     /// <summary>
     /// Gets the unique identifier of the entity.
     /// </summary>
     public TId Id { get; } = default!;
-
-    protected Aggregate() {}
-    
-    // /// <summary>
-    // /// Initializes a new instance of the <see cref="Aggregate{TId}"/> class.
-    // /// </summary>
-    // /// <param name="id">The unique identifier for the entity.</param>
-    // /// <exception cref="ArgumentNullException">Thrown when <paramref name="id"/> is null.</exception>
-    // protected Aggregate(TId id)
-    // {
-    //     Id = id;
-    // }
 
     /// <summary>
     /// Determines whether the specified object is equal to the current object.

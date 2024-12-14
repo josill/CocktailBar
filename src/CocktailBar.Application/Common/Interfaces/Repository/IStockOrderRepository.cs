@@ -1,3 +1,5 @@
 namespace CocktailBar.Application.Common.Interfaces.Repository;
 
-public interface IStockOrderRepository : IRepository;
+public interface IStockOrderRepository : IRepository
+{
+}

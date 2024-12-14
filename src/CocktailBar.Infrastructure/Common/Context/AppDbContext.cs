@@ -20,23 +20,28 @@ namespace CocktailBar.Infrastructure.Common.Context;
 public class AppDbContext : DbContext, IAppDbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
-    
+
     public DbSet<CocktailAggregate> Cocktails { get; set; }
+
     public DbSet<RecipeAggregate> Recipes { get; set; }
+
     public DbSet<IngredientAggregate> Ingredients { get; set; }
-    public DbSet<StockOrder> StockOrders { get; set; }
+
+    public DbSet<StockOrderAggregate> StockOrders { get; set; }
+
     public DbSet<StockItemAggregate> StockItems { get; set; }
+
     public DbSet<WarehouseAggregate> Warehouses { get; set; }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<CocktailAggregate>());
         new RecipeConfiguration().Configure(modelBuilder.Entity<RecipeAggregate>());
         new IngredientConfiguration().Configure(modelBuilder.Entity<IngredientAggregate>());
-        new StockOrderConfiguration().Configure(modelBuilder.Entity<StockOrder>());
+        new StockOrderConfiguration().Configure(modelBuilder.Entity<StockOrderAggregate>());
         new StockItemConfiguration().Configure(modelBuilder.Entity<StockItemAggregate>());
         new WarehouseConfiguration().Configure(modelBuilder.Entity<WarehouseAggregate>());
-        
+
         base.OnModelCreating(modelBuilder);
     }
 }

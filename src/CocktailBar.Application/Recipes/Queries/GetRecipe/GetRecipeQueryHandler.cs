@@ -5,8 +5,8 @@ using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Recipes.Common;
 using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Domain.Exceptions;
-using MediatR;
 using ErrorOr;
+using MediatR;
 
 namespace CocktailBar.Application.Recipes.Queries.GetRecipe;
 
@@ -25,6 +25,6 @@ public class GetRecipeQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<Get
         catch (Exception e)
         {
             throw SomethingWentWrongException.For<RecipeAggregate>($"Error retrieving the recipe entity: {e.Message}");
-        }    
+        }
     }
 }

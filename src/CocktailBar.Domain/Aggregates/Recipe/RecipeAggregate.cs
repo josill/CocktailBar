@@ -16,15 +16,15 @@ public class RecipeAggregate : Aggregate<RecipeId>
 {
     private readonly List<IngredientAggregate> _ingredients = new();
 
-    private RecipeAggregate(): base() {} // Private constructor for EF Core
-    
+    private RecipeAggregate() {} // Private constructor for EF Core
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RecipeAggregate"/> class.
     /// </summary>
     /// <param name="name">The name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <param name="ingredients">The list of <see cref="IngredientAggregate"/> aggregates necessary for preparing the cocktail.</param>
-    /// <param name="recipeId">The unique identifier of the recipe</param>
+    /// <param name="recipeId">The unique identifier of the recipe.</param>
     private RecipeAggregate(string name, string instructions, IEnumerable<IngredientAggregate> ingredients, RecipeId? recipeId = null) : base()
     {
         Validate(name, instructions);
@@ -77,7 +77,7 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// Removes an ingredient from the recipe.
     /// </summary>
     /// <param name="ingredientAggregate">The ingredient to remove.</param>
-    /// <exception cref="DomainException{Recipe}">Thrown when the ingredient doesn't exist in the recipe.</exception>
+    /// <exception cref="DomainException">Thrown when the ingredient doesn't exist in the recipe.</exception>
     public void RemoveIngredient(IngredientAggregate ingredientAggregate)
     {
         var existingIngredient = _ingredients.FirstOrDefault(i => i.Equals(ingredientAggregate));

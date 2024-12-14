@@ -46,16 +46,6 @@ public class Amount : ValueObject<Amount>
     public static Amount Create(decimal value, WeightUnit unit) => new(value, unit);
 
     /// <summary>
-    /// Gets the attributes to include in equality checks.
-    /// </summary>
-    /// <returns>An enumeration of objects representing the attributes to include in equality checks.</returns>
-    protected override IEnumerable<object> GetAttributesToIncludeInEqualityCheck()
-    {
-        yield return Value;
-        yield return Unit;
-    }
-
-    /// <summary>
     /// Adds two amount value objects together.
     /// </summary>
     /// <param name="other">The amount to add.</param>
@@ -65,6 +55,16 @@ public class Amount : ValueObject<Amount>
     {
         if (other.Unit != Unit) throw DomainException.For<Amount>("Units don't match while adding weights.");
         return new Amount(Value + other.Value, Unit);
+    }
+
+    /// <summary>
+    /// Gets the attributes to include in equality checks.
+    /// </summary>
+    /// <returns>An enumeration of objects representing the attributes to include in equality checks.</returns>
+    protected override IEnumerable<object> GetAttributesToIncludeInEqualityCheck()
+    {
+        yield return Value;
+        yield return Unit;
     }
 
     /// <summary>

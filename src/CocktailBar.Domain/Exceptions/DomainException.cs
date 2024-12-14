@@ -19,5 +19,6 @@ public class DomainException : Exception
     /// </summary>
     /// <typeparam name="T">The type associated with this domain exception.</typeparam>
     /// <param name="message">The error message.</param>
+    /// <returns>The thrown domain exception.</returns>
     public static Exception For<T>(string message) => throw new DomainException(message);
 }

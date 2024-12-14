@@ -14,10 +14,10 @@ public readonly record struct IngredientId(Guid Value);
 /// </summary>
 public class IngredientAggregate : Aggregate<IngredientId>
 {
-    private IngredientAggregate() {} // Private constructor for EF Core
-    
     private readonly List<Recipe.RecipeAggregate> _recipes = new();
-    
+
+    private IngredientAggregate() {} // Private constructor for EF Core
+
     /// <summary>
     /// Initializes a new instance of the <see cref="IngredientAggregate"/> class.
     /// </summary>

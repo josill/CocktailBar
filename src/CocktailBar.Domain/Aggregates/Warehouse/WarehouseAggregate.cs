@@ -9,12 +9,15 @@ namespace CocktailBar.Domain.Aggregates.Warehouse;
 
 public readonly record struct WarehouseId(Guid Value);
 
+/// <summary>
+/// Represents a warehouse where the stock is kept.
+/// </summary>
 public class WarehouseAggregate : Aggregate<WarehouseId>
 {
     private readonly List<StockItemAggregate> _stockItems = new();
 
     private WarehouseAggregate() {} // Private constructor for EF Core
-    
+
     /// <summary>
     /// Initializes a new instance of the <see cref="WarehouseAggregate"/> class.
     /// </summary>
@@ -25,7 +28,7 @@ public class WarehouseAggregate : Aggregate<WarehouseId>
         Name = name.Trim();
         if (stockItems is not null) _stockItems = stockItems;
     }
-    
+
     /// <summary>
     /// Gets the name of the warehouse.
     /// </summary>
@@ -47,7 +50,7 @@ public class WarehouseAggregate : Aggregate<WarehouseId>
     /// <returns>A new <see cref="WarehouseAggregate"/> instance.</returns>
     public static WarehouseAggregate Create(string name, List<StockItemAggregate>? stockItems = null)
         => new(name, stockItems);
-    
+
     /// <summary>
     /// Adds a stock item to the warehouse if it doesn't already exist.
     /// </summary>

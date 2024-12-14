@@ -15,4 +15,4 @@ public record CocktailResult(Guid CocktailId, string Name, string Description, G
             cocktailAggregate.Description,
             cocktailAggregate.RecipeId.Value);
     }
-};
+}

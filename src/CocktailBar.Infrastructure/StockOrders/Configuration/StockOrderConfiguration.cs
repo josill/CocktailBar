@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.StockOrders.Configuration;
 
-internal sealed class StockOrderConfiguration : IEntityTypeConfiguration<StockOrder>
+internal sealed class StockOrderConfiguration : IEntityTypeConfiguration<StockOrderAggregate>
 {
-    public void Configure(EntityTypeBuilder<StockOrder> builder)
+    public void Configure(EntityTypeBuilder<StockOrderAggregate> builder)
     {
         builder.Property(x => x.Id)
             .HasConversion(

@@ -5,10 +5,6 @@ using System.Data.Common;
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Application.Common.Interfaces.Repository;
-using CocktailBar.Domain.Aggregates.Cocktail;
-using CocktailBar.Domain.Aggregates.Recipe;
-using CocktailBar.Domain.Aggregates.Stock;
-using CocktailBar.Domain.Aggregates.Warehouse;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CocktailBar.Infrastructure.Common.UnitOfWork;
@@ -26,6 +22,7 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <summary>
     /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
     /// </summary>
+    #pragma warning disable SA1611
     public UnitOfWork(
         ICocktailRepository cocktailsRepository,
         IRecipeRepository recipesRepository,
@@ -41,27 +38,28 @@ public sealed class UnitOfWork : IUnitOfWork
         Warehouses = warehousesRepository;
         Context = appDbContext;
     }
+    #pragma warning restore SA1611
 
     /// <summary>
     /// Gets the repository for managing cocktail entities.
     /// </summary>
     public ICocktailRepository Cocktails { get; }
-    
+
     /// <summary>
     /// Gets the repository for managing cocktail entities.
     /// </summary>
     public IRecipeRepository Recipes { get; }
-    
+
     /// <summary>
     /// Gets the repository for managing stock order entities.
     /// </summary>
     public IStockOrderRepository StockOrders { get; }
-    
+
     /// <summary>
     /// Gets the repository for managing stock item entities.
     /// </summary>
     public IStockItemRepository StockItems { get; }
-    
+
     /// <summary>
     /// Gets the repository for managing warehouse entities.
     /// </summary>

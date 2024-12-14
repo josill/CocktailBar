@@ -14,9 +14,6 @@ public readonly record struct CocktailId(Guid Value);
 /// </summary>
 public class CocktailAggregate : Aggregate<CocktailId>
 {
-    
-    private CocktailAggregate() {} // Private constructor for EF Core
-    
     /// <summary>
     /// Initializes a new instance of the <see cref="CocktailAggregate"/> class.
     /// </summary>
@@ -30,6 +27,8 @@ public class CocktailAggregate : Aggregate<CocktailId>
         Description = description.Trim();
         RecipeId = recipeId;
     }
+
+    private CocktailAggregate() {} // Private constructor for EF Core
 
     /// <summary>
     /// Gets the name of the cocktail.

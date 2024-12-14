@@ -13,13 +13,13 @@ public readonly record struct OrderId(Guid Value);
 /// </summary>
 public class OrderAggregate : Aggregate<OrderId>
 {
-    private OrderAggregate() {} // Private constructor for EF Core
-    
     /// <summary>
     /// Private collection of order items.
     /// This backing field allows for encapsulation of the order items list.
     /// </summary>
     private readonly List<OrderItem> _orderItems = new();
+
+    private OrderAggregate() {} // Private constructor for EF Core
 
     /// <summary>
     /// Gets a read-only list of order items.

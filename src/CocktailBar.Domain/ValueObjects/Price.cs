@@ -24,7 +24,7 @@ public class Price : ValueObject<Price>, IArithmeticValueObject<Price>
         Amount = amount;
         Currency = currency;
     }
-    
+
     private Price() {}
 
     /// <summary>
@@ -43,8 +43,32 @@ public class Price : ValueObject<Price>, IArithmeticValueObject<Price>
     /// <param name="amount">The amount of the price.</param>
     /// <param name="currency">The currency of the price.</param>
     /// <returns>A new <see cref="Price"/> instance.</returns>
-    public static Price Create(decimal amount, Currency currency) 
+    public static Price Create(decimal amount, Currency currency)
         => new(amount, currency);
+
+    /// <summary>
+    /// Adds another price value to this price. Both prices must be in the same currency.
+    /// </summary>
+    /// <param name="other">The price to add to this price.</param>
+    /// <returns>A new Price instance representing the sum of the two prices.</returns>
+    /// <exception cref="DomainException">Thrown when the currencies of the two prices don't match.</exception>
+    public Price Add(Price other)
+    {
+        if (other.Currency != Currency) throw DomainException.For<Price>("Currencies don't match while adding prices.");
+        return new Price(Amount + other.Amount, Currency);
+    }
+
+    /// <summary>
+    /// Subtracts another price value from this price. Both prices must be in the same currency.
+    /// </summary>
+    /// <param name="other">The price to subtract from this price.</param>
+    /// <returns>A new Price instance representing the difference between the two prices.</returns>
+    /// <exception cref="DomainException">Thrown when the currencies of the two prices don't match.</exception>
+    public Price Subtract(Price other)
+    {
+        if (other.Currency != Currency) throw DomainException.For<Price>("Currencies don't match while adding prices.");
+        return new Price(Amount - other.Amount, Currency);
+    }
 
     /// <summary>
     /// Gets the attributes to include in equality checks.
@@ -54,18 +78,6 @@ public class Price : ValueObject<Price>, IArithmeticValueObject<Price>
     {
         yield return Amount;
         yield return Currency;
-    }
-    
-    public Price Add(Price other)
-    {
-        if (other.Currency != Currency) throw DomainException.For<Price>("Currencies don't match while adding prices.");
-        return new Price(Amount + other.Amount, Currency);
-    }
-    
-    public Price Subtract(Price other)
-    {
-        if (other.Currency != Currency) throw DomainException.For<Price>("Currencies don't match while adding prices.");
-        return new Price(Amount - other.Amount, Currency);
     }
 
     /// <summary>
