@@ -11,14 +11,13 @@ namespace CocktailBar.Infrastructure.Common.Repository;
 /// Base implementation of the generic repository pattern that works with Entity Framework Core.
 /// </summary>
 /// <typeparam name="TEntity">The type of entity this repository handles. Must be a reference type.</typeparam>
-/// <typeparam name="TId">The type of entity id this repository handles. Must be a reference type.</typeparam>
 public abstract class Repository<TEntity>(IAppDbContext context) : IRepository<TEntity>
     where TEntity : class
 {
     /// <summary>
     /// The database context used by this repository.
     /// </summary>
-    protected readonly IAppDbContext Context = context ?? throw new ArgumentNullException(nameof(context));
+    protected readonly IAppDbContext Context = context;
 
     /// <summary>
     /// The Entity Framework Core DbSet for the entity type.
@@ -42,8 +41,6 @@ public abstract class Repository<TEntity>(IAppDbContext context) : IRepository<T
 
     public virtual void Update(TEntity entity)
     {
-        ArgumentNullException.ThrowIfNull(entity);
-
         DbSet.Update(entity);
     }
 

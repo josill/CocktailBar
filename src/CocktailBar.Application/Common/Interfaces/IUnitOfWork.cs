@@ -5,6 +5,10 @@ using CocktailBar.Domain.CocktailAggregate.Entities;
 using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using CocktailBar.Domain.RecipeAggregate.Entities;
 using CocktailBar.Domain.RecipeAggregate.ValueObjects.Ids;
+using CocktailBar.Domain.StockItemAggregate.Entities;
+using CocktailBar.Domain.StockOrderAggregate.Entities;
+using CocktailBar.Domain.WarehouseAggregate.Entities;
+using CocktailBar.Domain.WarehouseAggregate.ValueObjects.Ids;
 
 namespace CocktailBar.Application.Common.Interfaces;
 
@@ -15,14 +19,29 @@ namespace CocktailBar.Application.Common.Interfaces;
 public interface IUnitOfWork : IAsyncDisposable
 {
     /// <summary>
-    /// Gets the repository for managing cocktail entities.
+    /// Gets the repository for managing cocktail aggregates.
     /// </summary>
     IRepository<Cocktail> Cocktails { get; }
     
     /// <summary>
-    /// Gets the repository for managing recipe entities.
+    /// Gets the repository for managing recipe aggregates.
     /// </summary>
     IRepository<Recipe> Recipes { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing stock order aggregates.
+    /// </summary>
+    IRepository<StockOrder> StockOrders { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing stock items aggregates.
+    /// </summary>
+    IRepository<StockItem> StockItems { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing warehouse aggregates.
+    /// </summary>
+    IRepository<Warehouse> Warehouses { get; }
 
     /// <summary>
     /// Begins a new database transaction asynchronously.

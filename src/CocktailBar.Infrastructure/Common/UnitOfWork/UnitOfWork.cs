@@ -32,10 +32,6 @@ public sealed class UnitOfWork : IUnitOfWork
     /// <summary>
     /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
     /// </summary>
-    /// <param name="cocktailsRepository">The repository for cocktail-related operations.</param>
-    /// <param name="recipesRepository">The repository for recipe-related operations.</param>
-    /// <param name="cocktailsReadContext">The read-only context for cocktail operations.</param>
-    /// <param name="cocktailsWriteContext">The write-only context for cocktail operations.</param>
     public UnitOfWork(
         IRepository<Cocktail> cocktailsRepository,
         IRepository<Recipe> recipesRepository,
@@ -46,6 +42,9 @@ public sealed class UnitOfWork : IUnitOfWork
     {
         Cocktails = cocktailsRepository;
         Recipes = recipesRepository;
+        StockOrders = stockOrdersRepository;
+        StockItems = stockItemsRepository;
+        Warehouses = warehousesRepository;
         Context = appDbContext;
     }
 

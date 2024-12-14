@@ -1,6 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.ValueObjects.Interfaces;
 
 namespace CocktailBar.Domain.ValueObjects;
@@ -45,13 +46,10 @@ public abstract class ValueObject<T>
     /// <exception cref="NotSupportedException">Thrown when the value objects don't support addition.</exception>
     public static T operator +(ValueObject<T> left, ValueObject<T> right)
     {
-        // TODO: Should allow also IArithmeticValueObject
-        if (left is IAddableValueObject<T> addableLeft)
-        {
-            return addableLeft.Add((T)right);
-        }
+        if (left is IAddableValueObject<T> addableLeft) return addableLeft.Add((T)right);
+        if (left is IArithmeticValueObject<T> arithmeticLeft) return arithmeticLeft.Add((T)right);
         
-        throw new NotSupportedException($"Addition is not supported for type {typeof(T).Name}");
+        throw DomainException.For<T>($"Addition is not supported for value objects of type {typeof(T).Name}");
     }
     
     /// <summary>
@@ -64,12 +62,10 @@ public abstract class ValueObject<T>
     public static T operator -(ValueObject<T> left, ValueObject<T> right)
     {
         // TODO: Should allow also IArithmeticValueObject
-        if (left is ISubtractableValueObject<T> addableLeft)
-        {
-            return addableLeft.Subtract((T)right);
-        }
+        if (left is ISubtractableValueObject<T> subtractableLeft) return subtractableLeft.Subtract((T)right);
+        if (left is IArithmeticValueObject<T> arithmeticLeft) return arithmeticLeft.Subtract((T)right);
         
-        throw new NotSupportedException($"Subtraction is not supported for type {typeof(T).Name}");
+        throw DomainException.For<T>($"Subtraction is not supported for value objects of type {typeof(T).Name}");
     }
 
     /// <summary>

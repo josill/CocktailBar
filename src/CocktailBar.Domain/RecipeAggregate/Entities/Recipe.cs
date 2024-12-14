@@ -22,12 +22,14 @@ public class Recipe : Aggregate<RecipeId>
     /// </summary>
     /// <param name="name">The name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
+    /// <param name="ingredients">The list of <see cref="Ingredient"/> aggregates necessary for preparing the cocktail.</param>
     /// <param name="recipeId">The unique identifier of the recipe</param>
-    private Recipe(string name, string instructions, RecipeId? recipeId = null) : base(recipeId ?? new RecipeId(Guid.NewGuid()))
+    private Recipe(string name, string instructions, IEnumerable<Ingredient> ingredients, RecipeId? recipeId = null) : base(recipeId ?? new RecipeId(Guid.NewGuid()))
     {
         Validate(name, instructions);
         Name = name.Trim();
         Instructions = instructions.Trim();
+        _ingredients.AddRange(ingredients);
     }
 
     /// <summary>
@@ -53,8 +55,9 @@ public class Recipe : Aggregate<RecipeId>
     /// </summary>
     /// <param name="name">The name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
+    /// <param name="ingredients">The list of <see cref="Ingredient"/> aggregates necessary for preparing the cocktail.</param>
     /// <returns>A new <see cref="Recipe"/> instance.</returns>
-    public static Recipe Create(string name, string instructions) => new(name, instructions);
+    public static Recipe Create(string name, string instructions, IEnumerable<Ingredient> ingredients) => new(name, instructions, ingredients);
 
     /// <summary>
     /// Adds an ingredient to the recipe if it doesn't already exist.
