@@ -19,13 +19,13 @@ using Microsoft.AspNetCore.Mvc;
 public class RecipesController(ISender mediatr) : ApiController
 {
     /// <summary>
-    /// Gets a recipe by the id.
+    /// Gets a recipe by the unique identifier.
     /// </summary>
-    /// <param name="recipeId"></param>
+    /// <param name="recipeId">The recipe unique identifier.</param>
     /// <returns>Returns the recipe information.</returns>
     [HttpGet("{recipeId:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get(Guid recipeId)
     {
         var query = new GetRecipeQuery(recipeId);
@@ -41,7 +41,7 @@ public class RecipesController(ISender mediatr) : ApiController
     /// <returns>Return the recipe information.</returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(CreateRecipeRequest request)
     {
         var command = new CreateRecipeCommand(request.Name, request.Instructions);

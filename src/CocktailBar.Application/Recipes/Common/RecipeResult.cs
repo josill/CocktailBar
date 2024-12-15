@@ -1,18 +1,17 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-
-using CocktailBar.Domain.CocktailAggregate.Entities;
+using CocktailBar.Domain.Aggregates.Recipe;
 
 namespace CocktailBar.Application.Recipes.Common;
 
 public record RecipeResult(Guid RecipeId, string Name, string Instructions)
 {
-    public static RecipeResult From(Recipe recipe)
+    public static RecipeResult From(RecipeAggregate recipeAggregate)
     {
         return new RecipeResult(
-            recipe.Id.Value,
-            recipe.Name,
-            recipe.Instructions);
+            recipeAggregate.Id.Value,
+            recipeAggregate.Name,
+            recipeAggregate.Instructions);
     }
 }

@@ -3,9 +3,8 @@
 
 using CocktailBar.Application.Cocktails.Common;
 using CocktailBar.Application.Common.Interfaces;
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
-using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.Aggregates.Cocktail;
+using CocktailBar.Domain.Exceptions;
 using ErrorOr;
 using MediatR;
 
@@ -14,18 +13,18 @@ namespace CocktailBar.Application.Cocktails.Queries.GetCocktail;
 public class GetCocktailQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetCocktailQuery, ErrorOr<CocktailResult>>
 {
     public async Task<ErrorOr<CocktailResult>> Handle(GetCocktailQuery request, CancellationToken cancellationToken)
-    {
+    { 
         try
         {
-            var cocktail = await unitOfWork.Cocktails.GetByIdAsync(CocktailId.From(request.CocktailId));
-            DomainException.For<Cocktail>(cocktail == null, "Cocktail with the specified id not found!");
+            var cocktail = await unitOfWork.Cocktails.GetByIdAsync<CocktailAggregate>(new CocktailId(request.CocktailId));
+            if (cocktail is null) throw NotFoundException.For<CocktailAggregate>($"Cocktail with the specified id: {request.CocktailId} not found!");
 
             var result = CocktailResult.From(cocktail!);
             return result;
         }
         catch (Exception e)
         {
-            return Errors.Common.SomethingWentWrong(e.Message);
+            throw SomethingWentWrongException.For<CocktailAggregate>($"Error retrieving the cocktail entity: {e.Message}");
         }
     }
 }

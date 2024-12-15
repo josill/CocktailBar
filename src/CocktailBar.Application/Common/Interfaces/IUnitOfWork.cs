@@ -1,8 +1,7 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
+using CocktailBar.Application.Common.Interfaces.Repository;
 
 namespace CocktailBar.Application.Common.Interfaces;
 
@@ -13,14 +12,29 @@ namespace CocktailBar.Application.Common.Interfaces;
 public interface IUnitOfWork : IAsyncDisposable
 {
     /// <summary>
-    /// Gets the repository for managing cocktail entities.
+    /// Gets the repository for managing cocktail aggregates.
     /// </summary>
-    IRepository<Cocktail, CocktailId> Cocktails { get; }
+    ICocktailRepository Cocktails { get; }
     
     /// <summary>
-    /// Gets the repository for managing recipe entities.
+    /// Gets the repository for managing recipe aggregates.
     /// </summary>
-    IRepository<Recipe, RecipeId> Recipes { get; }
+    IRecipeRepository Recipes { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing stock order aggregates.
+    /// </summary>
+    IStockOrderRepository StockOrders { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing stock items aggregates.
+    /// </summary>
+    IStockItemRepository StockItems { get; }
+    
+    /// <summary>
+    /// Gets the repository for managing warehouse aggregates.
+    /// </summary>
+    IWarehouseRepository Warehouses { get; }
 
     /// <summary>
     /// Begins a new database transaction asynchronously.

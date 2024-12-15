@@ -2,8 +2,8 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Recipes.Common;
-using MediatR;
 using ErrorOr;
+using MediatR;
 
 namespace CocktailBar.Application.Recipes.Queries.GetRecipe;
 

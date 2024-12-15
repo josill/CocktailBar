@@ -1,6 +1,0 @@
-@CocktailBar.Api_HostAddress = http://localhost:5177
-
-GET {{CocktailBar.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

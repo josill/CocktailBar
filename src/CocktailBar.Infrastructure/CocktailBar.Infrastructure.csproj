@@ -16,15 +16,16 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="TeixeiraSoftware.Finance.Currency" Version="4.1.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\CocktailBar.Application\CocktailBar.Application.csproj" />
       <ProjectReference Include="..\CocktailBar.Domain\CocktailBar.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Cocktails\Context\" />
     </ItemGroup>
 
 </Project>

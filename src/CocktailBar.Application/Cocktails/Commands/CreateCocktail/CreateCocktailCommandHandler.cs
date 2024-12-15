@@ -2,13 +2,13 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Application.Cocktails.Common;
-using CocktailBar.Domain.Common.Errors;
+using CocktailBar.Domain.Aggregates.Cocktail;
+using CocktailBar.Domain.Aggregates.Recipe;
+using CocktailBar.Domain.Exceptions;
 
 namespace CocktailBar.Application.Cocktails.Commands.CreateCocktail;
 
 using CocktailBar.Application.Common.Interfaces;
-using CocktailBar.Domain.CocktailAggregate.Entities;
-using CocktailBar.Domain.CocktailAggregate.ValueObjects.Ids;
 using ErrorOr;
 using MediatR;
 
@@ -16,7 +16,7 @@ public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
 {
     public async Task<ErrorOr<CocktailResult>> Handle(CreateCocktailCommand request, CancellationToken cancellationToken)
     {
-        var cocktail = Cocktail.Create(request.Name, request.Description, RecipeId.From(request.RecipeId));
+        var cocktail = CocktailAggregate.Create(request.Name, request.Description, new RecipeId(request.RecipeId));
 
         try
         {
@@ -27,7 +27,7 @@ public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
         catch (Exception e)
         {
             await unitOfWork.RollbackAsync();
-            return Errors.Common.SomethingWentWrong("Error creating the cocktail entity");
+            throw SomethingWentWrongException.For<CocktailAggregate>($"Error creating the cocktail entity: {e.Message}");
         }
 
         return CocktailResult.From(cocktail);
