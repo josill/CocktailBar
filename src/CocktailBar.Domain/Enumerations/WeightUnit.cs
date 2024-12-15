@@ -8,23 +8,18 @@ namespace CocktailBar.Domain.Enumerations;
 /// </summary>
 public enum WeightUnit
 {
-    /// <summary>
-    /// Weight in grams.
-    /// </summary>
+    /// <summary>Gram</summary>
     G,
 
-    /// <summary>
-    /// Weight in kilograms.
-    /// </summary>
+    /// <summary>Kilogram</summary>
     Kg,
 
-    /// <summary>
-    /// Weight in millilitres.
-    /// </summary>
+    /// <summary>Millilitre</summary>
     Ml,
 
-    /// <summary>
-    /// Weight in litres.
-    /// </summary>
+    /// <summary>Litre</summary>
     L,
+
+    /// <summary>Piece</summary>
+    Piece,
 }
