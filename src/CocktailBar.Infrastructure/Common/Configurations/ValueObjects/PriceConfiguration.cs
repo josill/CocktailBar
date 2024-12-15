@@ -4,7 +4,7 @@
 using CocktailBar.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CocktailBar.Infrastructure.Common.Configurations;
+namespace CocktailBar.Infrastructure.Common.Configurations.ValueObjects;
 
 public class PriceConfiguration
 {

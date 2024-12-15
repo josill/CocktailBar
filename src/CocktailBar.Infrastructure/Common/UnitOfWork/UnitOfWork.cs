@@ -65,6 +65,9 @@ public sealed class UnitOfWork : IUnitOfWork
     /// </summary>
     public IWarehouseRepository Warehouses { get; }
 
+    /// <summary>
+    /// Gets the database context.
+    /// </summary>
     public IAppDbContext Context { get; }
 
     /// <summary>

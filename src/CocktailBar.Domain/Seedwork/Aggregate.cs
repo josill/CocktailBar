@@ -4,9 +4,9 @@
 namespace CocktailBar.Domain.Seedwork;
 
 /// <summary>
-/// Base class for domain entities with generic ID type.
+/// Base class for domain aggregates with generic ID type.
 /// </summary>
-/// <typeparam name="TId">The type of the entity's identifier.</typeparam>
+/// <typeparam name="TId">The type of the aggregate's identifier.</typeparam>
 public abstract class Aggregate<TId>
 {
     #pragma warning disable SA1600
@@ -14,7 +14,7 @@ public abstract class Aggregate<TId>
     #pragma warning restore SA1600
 
     /// <summary>
-    /// Gets the unique identifier of the entity.
+    /// Gets the unique identifier of the aggregate.
     /// </summary>
     public TId Id { get; } = default!;
 
@@ -40,10 +40,10 @@ public abstract class Aggregate<TId>
     }
 
     /// <summary>
-    /// Determines whether the specified entity is equal to the current entity.
+    /// Determines whether the specified aggregate is equal to the current aggregate.
     /// </summary>
-    /// <param name="other">The entity to compare with the current entity.</param>
-    /// <returns>true if the specified entity is equal to the current entity; otherwise, false.</returns>
+    /// <param name="other">The aggregate to compare with the current aggregate.</param>
+    /// <returns>true if the specified aggregate is equal to the current aggregate; otherwise, false.</returns>
     private bool Equals(Aggregate<TId>? other)
     {
         if (ReferenceEquals(null, other)) return false;
@@ -51,22 +51,22 @@ public abstract class Aggregate<TId>
     }
 
     /// <summary>
-    /// Compares two entities for equality.
+    /// Compares two aggregates for equality.
     /// </summary>
-    /// <param name="left">The left entity to compare.</param>
-    /// <param name="right">The right entity to compare.</param>
-    /// <returns>True if the entities are equal, false otherwise.</returns>
+    /// <param name="left">The left aggregate to compare.</param>
+    /// <param name="right">The right aggregate to compare.</param>
+    /// <returns>True if the aggregates are equal, false otherwise.</returns>
     public static bool operator ==(Aggregate<TId>? left, Aggregate<TId>? right)
     {
         return Equals(left, right);
     }
 
     /// <summary>
-    /// Compares two entities for inequality.
+    /// Compares two aggregates for inequality.
     /// </summary>
-    /// <param name="left">The left entity to compare.</param>
-    /// <param name="right">The right entity to compare.</param>
-    /// <returns>True if the entities are not equal, false otherwise.</returns>
+    /// <param name="left">The left aggregate to compare.</param>
+    /// <param name="right">The right aggregate to compare.</param>
+    /// <returns>True if the aggregates are not equal, false otherwise.</returns>
     public static bool operator !=(Aggregate<TId>? left, Aggregate<TId>? right)
     {
         return !Equals(left, right);

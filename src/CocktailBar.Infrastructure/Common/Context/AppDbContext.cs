@@ -8,6 +8,9 @@ using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Domain.Aggregates.Stock;
 using CocktailBar.Domain.Aggregates.Warehouse;
 using CocktailBar.Infrastructure.Cocktails.Configuration;
+using CocktailBar.Infrastructure.Common.Configurations;
+using CocktailBar.Infrastructure.Common.Configurations.Base;
+using CocktailBar.Infrastructure.Common.Configurations.Enumerations;
 using CocktailBar.Infrastructure.Common.Seed;
 using CocktailBar.Infrastructure.Ingredients.Configuration;
 using CocktailBar.Infrastructure.Recipes.Configuration;
@@ -45,6 +48,8 @@ public class AppDbContext : DbContext, IAppDbContext
 
     private static void ApplyAggregatesConfiguration(ModelBuilder modelBuilder)
     {
+        new IngredientNameConfiguration().Configure(modelBuilder.Entity<IngredientName>());
+
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<CocktailAggregate>());
         new RecipeConfiguration().Configure(modelBuilder.Entity<RecipeAggregate>());
         new IngredientConfiguration().Configure(modelBuilder.Entity<IngredientAggregate>());
@@ -55,6 +60,6 @@ public class AppDbContext : DbContext, IAppDbContext
 
     private static void ApplySeedConfiguration(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new IngredientSeedConfiguration());
+        modelBuilder.ApplyConfiguration(new IngredientNameSeedConfiguration());
     }
 }

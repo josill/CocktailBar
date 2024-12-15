@@ -173,7 +173,7 @@ dotnet_diagnostic.SA1200.severity = none    # Using directives should be placed 
 dotnet_diagnostic.SA1201.severity = none    # Elements should appear in the correct order
 dotnet_diagnostic.SA1202.severity = warning # Elements should be ordered by access
 dotnet_diagnostic.SA1203.severity = warning # Constants should appear before fields
-dotnet_diagnostic.SA1204.severity = warning # Static elements should appear before instance elements
+dotnet_diagnostic.SA1204.severity = none    # Static elements should appear before instance elements
 dotnet_diagnostic.SA1205.severity = warning # Partial elements should declare access
 dotnet_diagnostic.SA1206.severity = warning # Declaration keywords should follow order
 dotnet_diagnostic.SA1207.severity = warning # Protected should come before internal
@@ -303,16 +303,19 @@ dotnet_diagnostic.SA1651.severity = warning # Do not use placeholder elements
 [**/CocktailBar.Domain/**.cs]
 dotnet_diagnostic.SA1600.severity = warning    # Elements should be separated by blank line
 
+[**/CocktailBar.Domain/Aggregates/Ingredient/IngredientName.cs]
+dotnet_diagnostic.SA1600.severity = none    # Elements should be separated by blank line
+
 [**/CocktailBar.Api/Program.cs]
 dotnet_diagnostic.SA1516.severity = none    # Elements should be separated by blank line
 
-[**/CocktailBar.Infrastructure/Repository/**.cs]
+[**/CocktailBar.Infrastructure/Common/Repository/**.cs]
 dotnet_diagnostic.SA1600.severity = warning    # Elements must be documented
 
-[**/CocktailBar.Infrastructure/Settings/**.cs]
+[**/CocktailBar.Infrastructure/Common/Settings/**.cs]
 dotnet_diagnostic.SA1600.severity = warning    # Elements must be documented
 
-[**/CocktailBar.Infrastructure/UnitOfWork/**.cs]
+[**/CocktailBar.Infrastructure/Common/UnitOfWork/**.cs]
 dotnet_diagnostic.SA1600.severity = warning    # Elements must be documented
 
 [**/CocktailBar.Application/Common/Context/IAppDbContext.cs]

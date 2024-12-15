@@ -27,9 +27,9 @@ public class IngredientAggregate : Aggregate<IngredientId>
     /// <param name="ingredientName">The name of the ingredient.</param>
     /// <param name="amount">The amount of the ingredient.</param>
     /// <param name="stockItemId">The unique identifier of the associated stock item.</param>
-    private IngredientAggregate(string ingredientName, Amount amount, StockItemId stockItemId)
+    private IngredientAggregate(IngredientName ingredientName, Amount amount, StockItemId stockItemId)
     {
-        Name = new IngredientName(ingredientName);
+        Name = ingredientName;
         Amount = amount;
         StockItemId = stockItemId;
     }
@@ -66,5 +66,5 @@ public class IngredientAggregate : Aggregate<IngredientId>
     /// <param name="amount">The amount of the ingredient.</param>
     /// <param name="stockItemId">The unique identifier of the associated stock item.</param>
     /// <returns>A new <see cref="IngredientAggregate"/> instance.</returns>
-    public static IngredientAggregate Create(string name, Amount amount, StockItemId stockItemId) => new(name, amount, stockItemId);
+    public static IngredientAggregate Create(IngredientName name, Amount amount, StockItemId stockItemId) => new(name, amount, stockItemId);
 }

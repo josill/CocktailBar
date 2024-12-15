@@ -3,6 +3,7 @@
 
 using CocktailBar.Domain.Aggregates.Stock;
 using CocktailBar.Infrastructure.Common.Configurations;
+using CocktailBar.Infrastructure.Common.Configurations.ValueObjects;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.StockOrders.Configuration;
