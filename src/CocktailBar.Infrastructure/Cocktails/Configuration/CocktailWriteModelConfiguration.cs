@@ -19,19 +19,10 @@ internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguratio
             .ValueGeneratedOnAdd()
             .IsRequired();
 
-        builder.Property(x => x.Name)
-            .IsRequired()
-            .HasMaxLength(100);
-        
-        builder.Property(x => x.Description)
-            .IsRequired();
-
         builder.Property(x => x.RecipeId)
             .IsRequired()
             .HasConversion(
                 id => id.Value,
                 value => new RecipeId(value));
-
-        builder.HasIndex(x => x.Name);
     }
 }

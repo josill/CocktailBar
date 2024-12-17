@@ -8,9 +8,9 @@ namespace CocktailBar.Domain.Seedwork;
 public abstract class Enumeration : Entity<Guid>, IComparable
 {
     /// <summary>
-    /// Gets the name of the enumeration.
+    /// Gets the value of the enumeration.
     /// </summary>
-    public string Name { get; }
+    public string Value { get; }
 
     #pragma warning disable SA1600
     protected Enumeration() {} // Private constructor for EF Core
@@ -21,13 +21,13 @@ public abstract class Enumeration : Entity<Guid>, IComparable
     /// </summary>
     /// <param name="id">The identifier for the enumeration.</param>
     /// <param name="name">The name of the enumeration.</param>
-    protected Enumeration(Guid id, string name) : base(id) => Name = name;
+    protected Enumeration(Guid id, string name) : base(id) => Value = name.Trim();
 
     /// <summary>
     /// Returns the string representation of the enumeration.
     /// </summary>
     /// <returns>The name of the enumeration.</returns>
-    public override string ToString() => Name;
+    public override string ToString() => Value;
 
     /// <summary>
     /// Gets all defined enumeration values for a specific enumeration type.
@@ -76,7 +76,7 @@ public abstract class Enumeration : Entity<Guid>, IComparable
     /// Returns a hash code for this enumeration.
     /// </summary>
     /// <returns>A hash code value that combines both the Name and Id.</returns>
-    public override int GetHashCode() => HashCode.Combine(Name, Id);
+    public override int GetHashCode() => HashCode.Combine(Value, Id);
 
     /// <summary>
     /// Determines whether this enumeration equals another enumeration.

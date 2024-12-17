@@ -4,6 +4,7 @@
 using CocktailBar.Application.Cocktails.Common;
 using CocktailBar.Domain.Aggregates.Cocktail;
 using CocktailBar.Domain.Aggregates.Recipe;
+using CocktailBar.Domain.Enumerations.Cocktail;
 using CocktailBar.Domain.Exceptions;
 
 namespace CocktailBar.Application.Cocktails.Commands.CreateCocktail;
@@ -16,7 +17,8 @@ public class CreateCocktailCommandHandler(IUnitOfWork unitOfWork) : IRequestHand
 {
     public async Task<ErrorOr<CocktailResult>> Handle(CreateCocktailCommand request, CancellationToken cancellationToken)
     {
-        var cocktail = CocktailAggregate.Create(request.Name, request.Description, new RecipeId(request.RecipeId));
+        // TODO: Refactor
+        var cocktail = CocktailAggregate.Create(CocktailName.Aviation, CocktailDescription.Aviation, new RecipeId(request.RecipeId));
 
         try
         {

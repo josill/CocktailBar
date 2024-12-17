@@ -3,6 +3,7 @@
 
 using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Domain.Aggregates.Stock;
+using CocktailBar.Domain.Enumerations.Ingredient;
 using CocktailBar.Domain.Seedwork;
 using CocktailBar.Domain.ValueObjects;
 

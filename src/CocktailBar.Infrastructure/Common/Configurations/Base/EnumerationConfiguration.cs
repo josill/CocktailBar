@@ -12,11 +12,11 @@ public class EnumerationConfiguration<T> : IEntityTypeConfiguration<T> where T :
             .ValueGeneratedOnAdd()
             .IsRequired();
 
-        builder.Property(x => x.Name)
+        builder.Property(x => x.Value)
             .HasMaxLength(256)
             .IsRequired();
 
-        builder.HasIndex(x => x.Name)
+        builder.HasIndex(x => x.Value)
             .IsUnique();
 
         builder.ToTable(typeof(T).Name);

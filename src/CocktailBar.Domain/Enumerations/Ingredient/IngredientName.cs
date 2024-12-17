@@ -1,9 +1,9 @@
 using CocktailBar.Domain.Seedwork;
 
-namespace CocktailBar.Domain.Aggregates.Ingredient;
+namespace CocktailBar.Domain.Enumerations.Ingredient;
 
 /// <summary>
-/// Represents the name of an ingredient in the cocktail bar system.
+/// Represents the name of an ingredient.
 /// </summary>
 public class IngredientName : Enumeration
 {

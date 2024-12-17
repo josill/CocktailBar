@@ -11,8 +11,8 @@ public record CocktailResult(Guid CocktailId, string Name, string Description, G
     {
         return new CocktailResult(
             cocktailAggregate.Id.Value,
-            cocktailAggregate.Name,
-            cocktailAggregate.Description,
+            cocktailAggregate.Name.Value,
+            cocktailAggregate.Description.Value,
             cocktailAggregate.RecipeId.Value);
     }
 }

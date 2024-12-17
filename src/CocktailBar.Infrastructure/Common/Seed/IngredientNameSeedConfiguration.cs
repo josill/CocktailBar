@@ -1,4 +1,4 @@
-using CocktailBar.Domain.Aggregates.Ingredient;
+using CocktailBar.Domain.Enumerations.Ingredient;
 using CocktailBar.Domain.Seedwork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
