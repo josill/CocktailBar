@@ -15,7 +15,7 @@ public class CreateRecipeCommandHandler(IUnitOfWork unitOfWork) : IRequestHandle
 {
     public async Task<ErrorOr<RecipeResult>> Handle(CreateRecipeCommand request, CancellationToken cancellationToken)
     {
-        var recipe = RecipeAggregate.Create(request.Name, request.Instructions, []);
+        var recipe = RecipeAggregate.Create(request.Name, request.Instructions);
 
         try
         {

@@ -13,8 +13,6 @@ public readonly record struct IngredientId(Guid Value);
 /// </summary>
 public class IngredientAggregate : Aggregate<IngredientId>
 {
-    private readonly List<Recipe.RecipeAggregate> _recipes = new();
-
     private IngredientAggregate() {} // Private constructor for EF Core
 
     /// <summary>
@@ -30,11 +28,6 @@ public class IngredientAggregate : Aggregate<IngredientId>
     /// Gets the name of the ingredient.
     /// </summary>
     public string Name { get; }
-
-    /// <summary>
-    /// Gets a read-only list of the recipes where the ingredient is used.
-    /// </summary>
-    public IEnumerable<RecipeAggregate> Recipes => _recipes.ToList();
 
     /// <summary>
     /// Creates a new instance of the <see cref="IngredientAggregate"/> class.
