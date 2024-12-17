@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Aggregates.Ingredient;
+
 namespace CocktailBar.Domain.Seedwork;
 
 /// <summary>
@@ -17,6 +19,15 @@ public abstract class Aggregate<TId>
     /// Gets the unique identifier of the entity.
     /// </summary>
     public TId Id { get; } = default!;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Aggregate{TId}"/> class.
+    /// </summary>
+    /// <param name="id">The identifier of the aggregate.</param>
+    protected Aggregate(TId id)
+    {
+        Id = id;
+    }
 
     /// <summary>
     /// Determines whether the specified object is equal to the current object.

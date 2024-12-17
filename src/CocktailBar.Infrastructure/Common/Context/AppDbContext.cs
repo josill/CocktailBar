@@ -10,6 +10,7 @@ using CocktailBar.Domain.Aggregates.Warehouse;
 using CocktailBar.Infrastructure.Cocktails.Configuration;
 using CocktailBar.Infrastructure.Ingredients.Configuration;
 using CocktailBar.Infrastructure.Recipes.Configuration;
+using CocktailBar.Infrastructure.Recipes.Seed;
 using CocktailBar.Infrastructure.StockItems.Configuration;
 using CocktailBar.Infrastructure.StockOrders.Configuration;
 using CocktailBar.Infrastructure.Warehouses.Configuration;
@@ -35,6 +36,14 @@ public class AppDbContext : DbContext, IAppDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        ApplyAggregatesConfiguration(modelBuilder);
+        ApplySeedConfiguration(modelBuilder);
+
+        base.OnModelCreating(modelBuilder);
+    }
+
+    private static void ApplyAggregatesConfiguration(ModelBuilder modelBuilder)
+    {
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<CocktailAggregate>());
         new RecipeConfiguration().Configure(modelBuilder.Entity<RecipeAggregate>());
         new IngredientConfiguration().Configure(modelBuilder.Entity<IngredientAggregate>());
@@ -42,7 +51,10 @@ public class AppDbContext : DbContext, IAppDbContext
         new StockOrderConfiguration().Configure(modelBuilder.Entity<StockOrderAggregate>());
         new StockItemConfiguration().Configure(modelBuilder.Entity<StockItemAggregate>());
         new WarehouseConfiguration().Configure(modelBuilder.Entity<WarehouseAggregate>());
+    }
 
-        base.OnModelCreating(modelBuilder);
+    private static void ApplySeedConfiguration(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new IngredientSeedConfiguration());
     }
 }

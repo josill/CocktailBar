@@ -25,6 +25,17 @@ public class IngredientAggregate : Aggregate<IngredientId>
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="IngredientAggregate"/> class.
+    /// </summary>
+    /// <param name="id">The id of the ingredient.</param>
+    /// <param name="name">The name of the ingredient.</param>
+    /// <remarks>This constructor should only be used for seeding data.</remarks>
+    private IngredientAggregate(Guid id, string name) : base(new IngredientId(id))
+    {
+        Name = name;
+    }
+
+    /// <summary>
     /// Gets the name of the ingredient.
     /// </summary>
     public string Name { get; }
@@ -35,4 +46,13 @@ public class IngredientAggregate : Aggregate<IngredientId>
     /// <param name="name">The name of the ingredient.</param>
     /// <returns>A new <see cref="IngredientAggregate"/> instance.</returns>
     public static IngredientAggregate Create(string name) => new(name);
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="IngredientAggregate"/> class.
+    /// </summary>
+    /// <param name="id">The id of the ingredient.</param>
+    /// <param name="name">The name of the ingredient.</param>
+    /// <returns>A new <see cref="IngredientAggregate"/> instance.</returns>
+    /// <remarks>This method should only be used for seeding data.</remarks>
+    public static IngredientAggregate Create(Guid id, string name) => new(id, name);
 }
