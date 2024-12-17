@@ -17,16 +17,12 @@ internal sealed class RecipeConfiguration : IEntityTypeConfiguration<RecipeAggre
                 value => new RecipeId(value))
             .ValueGeneratedOnAdd()
             .IsRequired();
-        
+
         builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(100);
-        
+
         builder.Property(x => x.Instructions)
             .IsRequired();
-        
-        builder.HasMany(x => x.Ingredients)
-            .WithMany(x => x.Recipes)
-            .UsingEntity(j => j.ToTable("RecipeIngredients"));
     }
 }

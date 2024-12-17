@@ -14,7 +14,7 @@ public readonly record struct RecipeId(Guid Value);
 /// </summary>
 public class RecipeAggregate : Aggregate<RecipeId>
 {
-    private readonly List<IngredientAggregate> _ingredients = new();
+    private readonly List<RecipeIngredientsAggregate> _ingredients = [];
 
     private RecipeAggregate() {} // Private constructor for EF Core
 
@@ -25,7 +25,7 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <param name="ingredients">The list of <see cref="IngredientAggregate"/> aggregates necessary for preparing the cocktail.</param>
     /// <param name="recipeId">The unique identifier of the recipe.</param>
-    private RecipeAggregate(string name, string instructions, IEnumerable<IngredientAggregate> ingredients, RecipeId? recipeId = null) : base()
+    private RecipeAggregate(string name, string instructions, IEnumerable<RecipeIngredientsAggregate> ingredients, RecipeId? recipeId = null) : base()
     {
         Validate(name, instructions);
         Name = name.Trim();
@@ -46,10 +46,7 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// <summary>
     /// Gets a read-only list of ingredients required for the recipe.
     /// </summary>
-    /// <remarks>
-    /// Returns a copy of the internal list to prevent external modifications.
-    /// </remarks>
-    public IEnumerable<IngredientAggregate> Ingredients => _ingredients.AsReadOnly();
+    public IEnumerable<RecipeIngredientsAggregate> Ingredients => _ingredients.AsReadOnly();
 
     /// <summary>
     /// Creates a new instance of the <see cref="RecipeAggregate"/> class.
@@ -58,14 +55,14 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <param name="ingredients">The list of <see cref="IngredientAggregate"/> aggregates necessary for preparing the cocktail.</param>
     /// <returns>A new <see cref="RecipeAggregate"/> instance.</returns>
-    public static RecipeAggregate Create(string name, string instructions, IEnumerable<IngredientAggregate> ingredients) => new(name, instructions, ingredients);
+    public static RecipeAggregate Create(string name, string instructions, IEnumerable<RecipeIngredientsAggregate> ingredients) => new(name, instructions, ingredients);
 
     /// <summary>
     /// Adds an ingredient to the recipe if it doesn't already exist.
     /// </summary>
     /// <param name="ingredientAggregate">The ingredient to add.</param>
     /// <exception cref="DomainException">Thrown when the ingredient already exists in the recipe.</exception>
-    public void AddIngredient(IngredientAggregate ingredientAggregate)
+    public void AddIngredient(RecipeIngredientsAggregate ingredientAggregate)
     {
         var existingIngredient = _ingredients.Any(i => i.Equals(ingredientAggregate));
         if (existingIngredient) throw DomainException.For<RecipeAggregate>("Ingredient is already used in the recipe.");
@@ -78,7 +75,7 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// </summary>
     /// <param name="ingredientAggregate">The ingredient to remove.</param>
     /// <exception cref="DomainException">Thrown when the ingredient doesn't exist in the recipe.</exception>
-    public void RemoveIngredient(IngredientAggregate ingredientAggregate)
+    public void RemoveIngredient(RecipeIngredientsAggregate ingredientAggregate)
     {
         var existingIngredient = _ingredients.FirstOrDefault(i => i.Equals(ingredientAggregate));
         if (existingIngredient is null) throw DomainException.For<RecipeAggregate>("Ingredient not found in the recipe.");
