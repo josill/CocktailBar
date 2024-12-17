@@ -19,12 +19,9 @@ internal sealed class IngredientConfiguration : IEntityTypeConfiguration<Ingredi
                 value => new IngredientId(value))
             .ValueGeneratedOnAdd()
             .IsRequired();
-        
-        builder.Property(x => x.StockItemId)
-            .HasConversion(
-                id => id.Value,
-                value => new StockItemId(value));
-        
-        new AmountConfiguration().Configure(builder.ComplexProperty(x => x.Amount));
+
+        builder.Property(x => x.Name)
+            .HasMaxLength(100)
+            .IsRequired();
     }
 }
