@@ -38,6 +38,7 @@ public class AppDbContext : DbContext, IAppDbContext
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<CocktailAggregate>());
         new RecipeConfiguration().Configure(modelBuilder.Entity<RecipeAggregate>());
         new IngredientConfiguration().Configure(modelBuilder.Entity<IngredientAggregate>());
+        new IngredientInRecipeConfiguration().Configure(modelBuilder.Entity<IngredientInRecipeAggregate>());
         new StockOrderConfiguration().Configure(modelBuilder.Entity<StockOrderAggregate>());
         new StockItemConfiguration().Configure(modelBuilder.Entity<StockItemAggregate>());
         new WarehouseConfiguration().Configure(modelBuilder.Entity<WarehouseAggregate>());

@@ -2,8 +2,6 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.Aggregates.Ingredient;
-using CocktailBar.Domain.Aggregates.Stock;
-using CocktailBar.Infrastructure.Common.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
