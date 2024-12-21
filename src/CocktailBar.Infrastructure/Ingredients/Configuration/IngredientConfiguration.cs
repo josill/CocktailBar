@@ -2,8 +2,6 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.Aggregates.Ingredient;
-using CocktailBar.Domain.Aggregates.Stock;
-using CocktailBar.Infrastructure.Common.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,12 +17,9 @@ internal sealed class IngredientConfiguration : IEntityTypeConfiguration<Ingredi
                 value => new IngredientId(value))
             .ValueGeneratedOnAdd()
             .IsRequired();
-        
-        builder.Property(x => x.StockItemId)
-            .HasConversion(
-                id => id.Value,
-                value => new StockItemId(value));
-        
-        new AmountConfiguration().Configure(builder.ComplexProperty(x => x.Amount));
+
+        builder.Property(x => x.Name)
+            .HasMaxLength(100)
+            .IsRequired();
     }
 }

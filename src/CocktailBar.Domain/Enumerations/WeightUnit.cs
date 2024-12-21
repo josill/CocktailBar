@@ -27,4 +27,29 @@ public enum WeightUnit
     /// Weight in litres.
     /// </summary>
     L,
+
+    /// <summary>
+    /// Weight in pieces.
+    /// </summary>
+    Piece,
+
+    /// <summary>
+    /// Weight in slices.
+    /// </summary>
+    Slice,
+
+    /// <summary>
+    /// Weight in dashes.
+    /// </summary>
+    Dash,
+
+    /// <summary>
+    /// Weight in sprigs.
+    /// </summary>
+    Sprig,
+
+    /// <summary>
+    /// Weight in leaves.
+    /// </summary>
+    Leaves,
 }
