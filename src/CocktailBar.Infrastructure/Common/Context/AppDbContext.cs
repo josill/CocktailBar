@@ -22,17 +22,17 @@ public class AppDbContext : DbContext, IAppDbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
-    public DbSet<CocktailAggregate> Cocktails { get; set; }
+    public DbSet<CocktailAggregate> Cocktails { get; init; }
 
-    public DbSet<RecipeAggregate> Recipes { get; set; }
+    public DbSet<RecipeAggregate> Recipes { get; init; }
 
-    public DbSet<IngredientAggregate> Ingredients { get; set; }
+    public DbSet<IngredientAggregate> Ingredients { get; init; }
 
-    public DbSet<StockOrderAggregate> StockOrders { get; set; }
+    public DbSet<StockOrderAggregate> StockOrders { get; init; }
 
-    public DbSet<StockItemAggregate> StockItems { get; set; }
+    public DbSet<StockItemAggregate> StockItems { get; init; }
 
-    public DbSet<WarehouseAggregate> Warehouses { get; set; }
+    public DbSet<WarehouseAggregate> Warehouses { get; init; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
