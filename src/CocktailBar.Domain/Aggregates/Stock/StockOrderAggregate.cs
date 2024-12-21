@@ -13,7 +13,7 @@ public readonly record struct StockOrderId(Guid Value);
 /// </summary>
 public class StockOrderAggregate : Aggregate<StockOrderId>
 {
-    private readonly List<StockItemAggregate> _stockItems = new();
+    private readonly List<StockItemAggregate> _stockItems = [];
 
     private StockOrderAggregate() {} // Private constructor for EF Core
 

@@ -2,7 +2,7 @@ using CocktailBar.Domain.Aggregates.Ingredient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CocktailBar.Infrastructure.Recipes.Seed;
+namespace CocktailBar.Infrastructure.Seed;
 
 public class IngredientSeedConfiguration : IEntityTypeConfiguration<IngredientAggregate>
 {

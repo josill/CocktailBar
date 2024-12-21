@@ -27,6 +27,20 @@ public class RecipeIngredientsAggregate : Aggregate<RecipeIngredientsAggregateId
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="RecipeIngredientsAggregate"/> class.
+    /// </summary>
+    /// <param name="id">The id of the relation.</param>
+    /// <param name="recipeId">The recipe id.</param>
+    /// <param name="ingredientId">The ingredient id.</param>
+    /// <param name="amount">The amount of the ingredient used in the recipe.</param>
+    private RecipeIngredientsAggregate(RecipeIngredientsAggregateId id, RecipeId recipeId, IngredientId ingredientId, Amount amount) : base(id)
+    {
+        RecipeId = recipeId;
+        IngredientId = ingredientId;
+        Amount = amount;
+    }
+
+    /// <summary>
     /// Gets the amount if the ingredient used in the recipe.
     /// </summary>
     public Amount Amount { get; }
@@ -49,4 +63,14 @@ public class RecipeIngredientsAggregate : Aggregate<RecipeIngredientsAggregateId
     /// <param name="amount">The amount of the ingredient used in the recipe.</param>
     /// <returns>a new <see cref="RecipeIngredientsAggregate"/> instance.</returns>
     public static RecipeIngredientsAggregate Create(RecipeId recipeId, IngredientId ingredientId, Amount amount) => new(recipeId, ingredientId, amount);
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="RecipeIngredientsAggregate"/> class.
+    /// </summary>
+    /// <param name="id">The id of the relation.</param>
+    /// <param name="recipeId">The recipe id.</param>
+    /// <param name="ingredientId">The ingredient id.</param>
+    /// <param name="amount">The amount of the ingredient used in the recipe.</param>
+    /// <returns>a new <see cref="RecipeIngredientsAggregate"/> instance.</returns>
+    public static RecipeIngredientsAggregate Create(RecipeIngredientsAggregateId id, RecipeId recipeId, IngredientId ingredientId, Amount amount) => new(id, recipeId, ingredientId, amount);
 }

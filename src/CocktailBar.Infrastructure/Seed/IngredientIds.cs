@@ -1,4 +1,4 @@
-namespace CocktailBar.Infrastructure.Recipes.Seed;
+namespace CocktailBar.Infrastructure.Seed;
 
 public static class IngredientIds
 {
@@ -40,6 +40,11 @@ public static class IngredientIds
     public static readonly Guid AnejoTequila = new("7f6e5d4c-3b2a-4c1f-7f6e-5d4c3b2a1f0e");
     public static readonly Guid Mezcal = new("6e5d4c3b-2a1f-4d0e-6e5d-4c3b2a1f0e9d");
 
+    // Base Spirits - Other
+    public static readonly Guid Pisco = new("a7d8e9f0-b1c2-4d3e-9f0a-1b2c3d4e5f6a");
+    public static readonly Guid Cognac = new("b8e9f0a1-c2d3-4e4f-a0b1-2c3d4e5f6a7b");
+    public static readonly Guid Absinthe = new("f2c3d4e5-a6b7-4c8d-e4f5-6a7b8c9d0e1f");
+
     // Liqueurs & Cordials
     public static readonly Guid Amaretto = new("5d4c3b2a-1f0e-4e9d-5d4c-3b2a1f0e9d8e");
     public static readonly Guid BaileysIrishCream = new("4c3b2a1f-0e9d-4f8c-4c3b-2a1f0e9d8e7d");
@@ -57,6 +62,12 @@ public static class IngredientIds
     public static readonly Guid MaraschinoLiqueur = new("2d1c0b9a-8b7c-4f60-2d1c-0b9a8b7c6d5e");
     public static readonly Guid Midori = new("1c0b9a8b-7c6d-4a59-1c0b-9a8b7c6d5e4f");
     public static readonly Guid PeachSchnapps = new("0b9a8b7c-6d5e-4b48-0b9a-8b7c6d5e4f3e");
+    public static readonly Guid OrangeCuracao = new("e8f7a6b5-4c3d-4e2f-b1a0-9d8c7b6a5e4d");
+    public static readonly Guid Cointreau = new("d7e6b5a4-3c2d-4d1e-a0b9-8c7b6a5e4d3c");
+    public static readonly Guid TripleSec = new("c6d5a4b3-2b1c-4c0d-90a8-7b6a5e4d3c2b");
+    public static readonly Guid GreenChartreuse = new("c9f0a1b2-d3e4-4f5a-b1c2-3d4e5f6a7b8c");
+    public static readonly Guid Benedictine = new("d0a1b2c3-e4f5-4a6b-c2d3-4e5f6a7b8c9d");
+    public static readonly Guid Galliano = new("e1b2c3d4-f5a6-4b7c-d3e4-5f6a7b8c9d0e");
 
     // Vermouth & Fortified Wines
     public static readonly Guid SweetVermouth = new("48a9b7c6-d5e4-4f3a-b2c1-0d9e8f7a6b5c");
@@ -64,6 +75,9 @@ public static class IngredientIds
     public static readonly Guid LilletBlanc = new("c7d6e5f4-a3b2-4c15-c7d6-e5f4a3b2c1d0");
     public static readonly Guid Port = new("d6e5f4a3-b2c1-4d04-d6e5-f4a3b2c1d0e9");
     public static readonly Guid Sherry = new("e5f4a3b2-c1d0-4e93-e5f4-a3b2c1d0e9f8");
+
+    // Wine & Sparkling
+    public static readonly Guid Prosecco = new("03d4e5f6-b7c8-4d9e-f5a6-7b8c9d0e1f2a");
 
     // Bitters
     public static readonly Guid AngosturaBitters = new("2e6c48eb-4b38-48c4-a0b2-b45e98417423");
@@ -91,6 +105,13 @@ public static class IngredientIds
     public static readonly Guid Grenadine = new("b4c3d2e1-f0a9-4b82-b4c3-d2e1f0a9b8c7");
     public static readonly Guid AgaveNectar = new("c3d2e1f0-a9b8-4c71-c3d2-e1f0a9b8c7d6");
     public static readonly Guid HoneySyrup = new("d2e1f0a9-b8c7-4d60-d2e1-f0a9b8c7d6e5");
+    public static readonly Guid OrgatSyrup = new("b5c4a3b2-1a0b-4b9c-89a7-6a5e4d3c2b1a");
+    public static readonly Guid PeachPuree = new("47b8c9d0-f1a2-4b3c-d9e0-1f2a3b4c5d6e");
+    public static readonly Guid PassionFruitSyrup = new("58c9d0e1-a2b3-4c4d-e0f1-2a3b4c5d6e7f");
+
+    // Coffee
+    public static readonly Guid FreshEspresso = new("14e5f6a7-c8d9-4e0f-a6b7-8c9d0e1f2a3b");
+    public static readonly Guid Coffee = new("27a3191d-99d4-4241-9b1c-b54b4132584b");
 
     // Fresh Ingredients
     public static readonly Guid FreshLime = new("7a6b5c4d-3e2f-4159-8b7a-6d5e4f3e2d1c");
@@ -101,6 +122,14 @@ public static class IngredientIds
     public static readonly Guid FreshCucumber = new("2e1d0c9b-8a7f-46b5-a4c3-b2a1d0e9f8a7");
     public static readonly Guid FreshGinger = new("1d0c9b8a-7f6e-45a4-93b2-a1d0e9f8a7b6");
     public static readonly Guid FreshBerries = new("0c9b8a7f-6e5d-44c3-82a1-d0e9f8a7b6c5");
+    public static readonly Guid EggWhite = new("a4b3c2d1-0908-4a8b-78a6-5e4d3c2b1a09");
+    public static readonly Guid FreshPeach = new("25f6a7b8-d9e0-4f1a-b7c8-9d0e1f2a3b4c");
+    public static readonly Guid HoneydewMelon = new("36a7b8c9-e0f1-4a2b-c8d9-0e1f2a3b4c5d");
+
+    // Dairy & Creams
+    public static readonly Guid WhippedCream = new("69d0e1f2-b3c4-4d5e-f1a2-3b4c5d6e7f8a");
+    public static readonly Guid Cream = new("70e1f2a3-c4d5-4e6f-a2b3-4c5d6e7f8a9b");
+    public static readonly Guid FreshCream = new("81f2a3b4-d5e6-4f7a-b3c4-5d6e7f8a9b0c");
 
     // Garnishes
     public static readonly Guid Olives = new("9b8a7f6e-5d4c-43b2-71a1-d0e9f8a7b6c5");
@@ -113,4 +142,5 @@ public static class IngredientIds
     public static readonly Guid Sugar = new("2a1f0e9d-8c7b-4c65-04a4-a3b2c1d0e9f8");
     public static readonly Guid Nutmeg = new("1f0e9d8c-7b6a-4b54-93b3-92a1b0c9d8e7");
     public static readonly Guid Cinnamon = new("0e9d8c7b-6a5d-4a43-82a2-81a0b9c8d7e6");
+    public static readonly Guid CoffeeBeans = new("92a3b4c5-e6f7-4a8b-c4d5-6e7f8a9b0c1d");
 }

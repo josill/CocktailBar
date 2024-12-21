@@ -1,7 +1,6 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.Seedwork;
 
@@ -29,6 +28,19 @@ public class RecipeAggregate : Aggregate<RecipeId>
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="RecipeAggregate"/> class.
+    /// </summary>
+    /// <param name="id">The id of the recipe.</param>
+    /// <param name="name">the name of the recipe.</param>
+    /// <param name="instructions">The instructions for preparing the cocktail.</param>
+    /// <remarks>This constructor should only be used for seeding data.</remarks>
+    private RecipeAggregate(Guid id, string name, string instructions) : base(new RecipeId(id))
+    {
+        Name = name;
+        Instructions = instructions;
+    }
+
+    /// <summary>
     /// Gets the name of the recipe.
     /// </summary>
     public string Name { get; }
@@ -45,6 +57,16 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <returns>A new <see cref="RecipeAggregate"/> instance.</returns>
     public static RecipeAggregate Create(string name, string instructions) => new(name, instructions);
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="RecipeAggregate"/> class.
+    /// </summary>
+    /// <param name="id">The id of the recipe.</param>
+    /// <param name="name">The name of the recipe.</param>
+    /// <param name="instructions">The instructions for preparing the cocktail.</param>
+    /// <returns>A new <see cref="RecipeAggregate"/> instance.</returns>
+    /// <remarks>This method should only be used for seeding data.</remarks>
+    public static RecipeAggregate Create(Guid id, string name, string instructions) => new(id, name, instructions);
 
     /// <summary>
     /// Validates the recipe instructions.

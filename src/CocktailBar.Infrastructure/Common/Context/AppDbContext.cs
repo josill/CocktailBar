@@ -10,7 +10,7 @@ using CocktailBar.Domain.Aggregates.Warehouse;
 using CocktailBar.Infrastructure.Cocktails.Configuration;
 using CocktailBar.Infrastructure.Ingredients.Configuration;
 using CocktailBar.Infrastructure.Recipes.Configuration;
-using CocktailBar.Infrastructure.Recipes.Seed;
+using CocktailBar.Infrastructure.Seed;
 using CocktailBar.Infrastructure.StockItems.Configuration;
 using CocktailBar.Infrastructure.StockOrders.Configuration;
 using CocktailBar.Infrastructure.Warehouses.Configuration;
@@ -55,6 +55,8 @@ public class AppDbContext : DbContext, IAppDbContext
 
     private static void ApplySeedConfiguration(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new RecipeSeedConfiguration());
         modelBuilder.ApplyConfiguration(new IngredientSeedConfiguration());
+        // modelBuilder.ApplyConfiguration(new RecipeIngredientsSeedConfiguration());
     }
 }
