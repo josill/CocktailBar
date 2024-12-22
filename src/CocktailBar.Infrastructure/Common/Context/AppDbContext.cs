@@ -26,6 +26,8 @@ public class AppDbContext : DbContext, IAppDbContext
 
     public DbSet<RecipeAggregate> Recipes { get; init; }
 
+    public DbSet<RecipeIngredientsAggregate> RecipeIngredients { get; init; }
+
     public DbSet<IngredientAggregate> Ingredients { get; init; }
 
     public DbSet<StockOrderAggregate> StockOrders { get; init; }

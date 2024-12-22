@@ -6,9 +6,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace CocktailBar.Application.Common.Interfaces.Context;
 
-public interface IAppDbContext : 
+public interface IAppDbContext :
     ICocktailsWriteContext,
     IRecipesContext,
+    IRecipeIngredientsContext,
     IIngredientsContext,
     IStockOrdersContext,
     IStockItemsContext,

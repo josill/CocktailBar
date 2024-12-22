@@ -14,7 +14,7 @@ public class RecipeIngredientsSeedConfiguration : IEntityTypeConfiguration<Recip
         builder.HasData(GetSeedData());
     }
 
-    private static IEnumerable<RecipeIngredientsAggregate> GetSeedData()
+    public static IEnumerable<RecipeIngredientsAggregate> GetSeedData()
     {
         return
         [

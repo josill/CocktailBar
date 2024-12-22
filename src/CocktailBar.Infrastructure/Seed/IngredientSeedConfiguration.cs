@@ -39,6 +39,11 @@ public class IngredientSeedConfiguration : IEntityTypeConfiguration<IngredientAg
             IngredientAggregate.Create(IngredientIds.IrishWhiskey, "Irish Whiskey"),
             IngredientAggregate.Create(IngredientIds.JapaneseWhisky, "Japanese Whisky"),
 
+            // Base Spirits - Other
+            IngredientAggregate.Create(IngredientIds.Pisco, "Pisco"),
+            IngredientAggregate.Create(IngredientIds.Cognac, "Cognac"),
+            IngredientAggregate.Create(IngredientIds.Absinthe, "Absinthe"),
+
             // Base Spirits - Rum
             IngredientAggregate.Create(IngredientIds.WhiteRum, "White Rum"),
             IngredientAggregate.Create(IngredientIds.GoldRum, "Gold Rum"),
@@ -70,6 +75,12 @@ public class IngredientSeedConfiguration : IEntityTypeConfiguration<IngredientAg
             IngredientAggregate.Create(IngredientIds.MaraschinoLiqueur, "Maraschino Liqueur"),
             IngredientAggregate.Create(IngredientIds.Midori, "Midori"),
             IngredientAggregate.Create(IngredientIds.PeachSchnapps, "Peach Schnapps"),
+            IngredientAggregate.Create(IngredientIds.OrangeCuracao, "Orange Curaçao"),
+            IngredientAggregate.Create(IngredientIds.Cointreau, "Cointreau"),
+            IngredientAggregate.Create(IngredientIds.TripleSec, "Triple Sec"),
+            IngredientAggregate.Create(IngredientIds.GreenChartreuse, "Green Chartreuse"),
+            IngredientAggregate.Create(IngredientIds.Benedictine, "Bénédictine"),
+            IngredientAggregate.Create(IngredientIds.Galliano, "Galliano"),
 
             // Vermouth & Fortified Wines
             IngredientAggregate.Create(IngredientIds.SweetVermouth, "Sweet Vermouth"),
@@ -77,6 +88,9 @@ public class IngredientSeedConfiguration : IEntityTypeConfiguration<IngredientAg
             IngredientAggregate.Create(IngredientIds.LilletBlanc, "Lillet Blanc"),
             IngredientAggregate.Create(IngredientIds.Port, "Port"),
             IngredientAggregate.Create(IngredientIds.Sherry, "Sherry"),
+
+            // Wine & Sparkling
+            IngredientAggregate.Create(IngredientIds.Prosecco, "Prosecco"),
 
             // Bitters
             IngredientAggregate.Create(IngredientIds.AngosturaBitters, "Angostura Bitters"),
@@ -104,6 +118,13 @@ public class IngredientSeedConfiguration : IEntityTypeConfiguration<IngredientAg
             IngredientAggregate.Create(IngredientIds.Grenadine, "Grenadine"),
             IngredientAggregate.Create(IngredientIds.AgaveNectar, "Agave Nectar"),
             IngredientAggregate.Create(IngredientIds.HoneySyrup, "Honey Syrup"),
+            IngredientAggregate.Create(IngredientIds.OrgatSyrup, "Orgeat Syrup"),
+            IngredientAggregate.Create(IngredientIds.PeachPuree, "Peach Purée"),
+            IngredientAggregate.Create(IngredientIds.PassionFruitSyrup, "Passion Fruit Syrup"),
+
+            // Coffee
+            IngredientAggregate.Create(IngredientIds.FreshEspresso, "Fresh Espresso"),
+            IngredientAggregate.Create(IngredientIds.Coffee, "Coffee"),
 
             // Fresh Ingredients
             IngredientAggregate.Create(IngredientIds.FreshLime, "Fresh Lime"),
@@ -114,6 +135,14 @@ public class IngredientSeedConfiguration : IEntityTypeConfiguration<IngredientAg
             IngredientAggregate.Create(IngredientIds.FreshCucumber, "Fresh Cucumber"),
             IngredientAggregate.Create(IngredientIds.FreshGinger, "Fresh Ginger"),
             IngredientAggregate.Create(IngredientIds.FreshBerries, "Fresh Berries"),
+            IngredientAggregate.Create(IngredientIds.EggWhite, "Egg White"),
+            IngredientAggregate.Create(IngredientIds.FreshPeach, "Fresh Peach"),
+            IngredientAggregate.Create(IngredientIds.HoneydewMelon, "Honeydew Melon"),
+
+            // Dairy & Creams
+            IngredientAggregate.Create(IngredientIds.WhippedCream, "Whipped Cream"),
+            IngredientAggregate.Create(IngredientIds.Cream, "Cream"),
+            IngredientAggregate.Create(IngredientIds.FreshCream, "Fresh Cream"),
 
             // Garnishes
             IngredientAggregate.Create(IngredientIds.Olives, "Olives"),
@@ -125,7 +154,8 @@ public class IngredientSeedConfiguration : IEntityTypeConfiguration<IngredientAg
             IngredientAggregate.Create(IngredientIds.Salt, "Salt"),
             IngredientAggregate.Create(IngredientIds.Sugar, "Sugar"),
             IngredientAggregate.Create(IngredientIds.Nutmeg, "Nutmeg"),
-            IngredientAggregate.Create(IngredientIds.Cinnamon, "Cinnamon")
+            IngredientAggregate.Create(IngredientIds.Cinnamon, "Cinnamon"),
+            IngredientAggregate.Create(IngredientIds.CoffeeBeans, "Coffee Beans")
         ];
     }
 }
