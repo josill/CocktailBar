@@ -3,6 +3,7 @@
 
 using CocktailBar.Api.Common.Errors;
 using CocktailBar.Application;
+using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Infrastructure;
 using CocktailBar.Infrastructure.Common.Context;
@@ -36,9 +37,19 @@ var app = builder.Build();
     {
         var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        var recipeIngredients = RecipeIngredientsSeedConfiguration.GetSeedData().ToList();
-        Console.WriteLine(recipeIngredients.Count);
-        context.RecipeIngredients.AddRange(recipeIngredients);
+        var recipe = RecipeAggregate.Create(Guid.NewGuid(), "Moscow Mule", "instructions");
+        var recipe2 = RecipeAggregate.Create(Guid.NewGuid(), "Skinny Bitch", "instructions");
+        Console.WriteLine(recipe.Id);
+        Console.WriteLine(recipe2.Id);
+        var ingredient = IngredientAggregate.Create("Vodka");
+        recipe.AddIngredient(ingredient);
+        recipe2.AddIngredient(ingredient);
+
+        // var recipeIngredients = RecipeIngredientsSeedConfiguration.GetSeedData().ToList();
+        // Console.WriteLine(recipeIngredients.Count);
+        // context.RecipeIngredients.AddRange(recipeIngredients);
+        context.Recipes.Add(recipe);
+        context.Recipes.Add(recipe2);
         context.SaveChanges();
     }
 

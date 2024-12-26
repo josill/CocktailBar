@@ -1,7 +1,6 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Domain.Seedwork;
 
 namespace CocktailBar.Domain.Aggregates.Ingredient;

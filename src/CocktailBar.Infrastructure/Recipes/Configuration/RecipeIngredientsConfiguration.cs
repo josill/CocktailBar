@@ -6,30 +6,23 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.Recipes.Configuration;
 
-internal sealed class RecipeIngredientsConfiguration : IEntityTypeConfiguration<RecipeIngredientsAggregate>
+internal sealed class RecipeIngredientsConfiguration : IEntityTypeConfiguration<RecipeIngredient>
 {
-    public void Configure(EntityTypeBuilder<RecipeIngredientsAggregate> builder)
+    public void Configure(EntityTypeBuilder<RecipeIngredient> builder)
     {
         builder.ToTable("RecipeIngredients");
 
-        builder.Property(x => x.Id)
+        builder.Property(x => x.RecipeId)
             .HasConversion(
                 id => id.Value,
-                value => new RecipeIngredientsAggregateId(value))
-            .ValueGeneratedOnAdd()
+                value => new RecipeId(value))
             .IsRequired();
 
-        builder.HasOne<RecipeAggregate>()
-            .WithMany()
-            .HasForeignKey(x => x.RecipeId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasOne<IngredientAggregate>()
-            .WithMany()
-            .HasForeignKey(x => x.IngredientId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
+        builder.Property(x => x.IngredientId)
+            .HasConversion(
+                id => id.Value,
+                value => new IngredientId(value))
+            .IsRequired();
 
         new AmountConfiguration().Configure(builder.ComplexProperty(x => x.Amount));
     }

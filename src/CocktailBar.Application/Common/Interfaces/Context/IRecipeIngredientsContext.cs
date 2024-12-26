@@ -5,5 +5,5 @@ namespace CocktailBar.Application.Common.Interfaces.Context;
 
 public interface IRecipeIngredientsContext : IDisposable
 {
-    DbSet<RecipeIngredientsAggregate> RecipeIngredients { get; }
+    DbSet<RecipeIngredient> RecipeIngredients { get; }
 }

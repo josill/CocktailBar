@@ -1,12 +1,11 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Aggregates.Ingredient;
-
 namespace CocktailBar.Domain.Seedwork;
 
 /// <summary>
-/// Base class for domain entities with generic ID type.
+/// Base class for aggregate roots. Enforces invariants and consistency for a group of related entities
+/// and serves as the sole entry point for modifications to entities within its boundary.
 /// </summary>
 /// <typeparam name="TId">The type of the entity's identifier.</typeparam>
 public abstract class Aggregate<TId>
