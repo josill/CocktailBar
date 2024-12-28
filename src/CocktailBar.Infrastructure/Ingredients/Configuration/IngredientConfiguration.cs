@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.Aggregates.Ingredient;
-using CocktailBar.Domain.Aggregates.Recipe;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

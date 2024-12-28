@@ -1,20 +1,17 @@
-using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Aggregates.Recipe;
-using CocktailBar.Domain.Enumerations;
-using CocktailBar.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.Seed;
 
-public class RecipeIngredientsSeedConfiguration : IEntityTypeConfiguration<RecipeIngredient>
+public class RecipeIngredientsSeedConfiguration : IEntityTypeConfiguration<RecipeIngredientAggregate>
 {
-    public void Configure(EntityTypeBuilder<RecipeIngredient> builder)
+    public void Configure(EntityTypeBuilder<RecipeIngredientAggregate> builder)
     {
         builder.HasData(GetSeedData());
     }
 
-    public static IEnumerable<RecipeIngredient> GetSeedData()
+    public static IEnumerable<RecipeIngredientAggregate> GetSeedData()
     {
         return
         [

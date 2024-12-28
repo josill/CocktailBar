@@ -28,8 +28,6 @@ public class AppDbContext : DbContext, IAppDbContext
 
     public DbSet<RecipeAggregate> Recipes { get; init; }
 
-    public DbSet<RecipeIngredient> RecipeIngredients { get; init; }
-
     public DbSet<IngredientAggregate> Ingredients { get; init; }
 
     public DbSet<StockOrderAggregate> StockOrders { get; init; }
@@ -43,19 +41,6 @@ public class AppDbContext : DbContext, IAppDbContext
         ApplyAggregatesConfiguration(modelBuilder);
         ApplySeedConfiguration(modelBuilder);
 
-        var recipe = RecipeAggregate.Create(
-            RecipeIds.ClassicMartini,
-            "Classic Martini",
-            """
-            1. Fill mixing glass with ice
-            2. Add 2.5 oz Tanqueray Gin (or Belvedere Vodka) and 0.5 oz Dry Vermouth
-            3. Stir for 30 seconds
-            4. Strain into chilled martini glass
-            5. Garnish with olives or lemon peel
-            """
-        );
-        recipe.AddIngredient(IngredientIds.TanquerayGin, Amount.Create(60, WeightUnit.Ml));
-
         base.OnModelCreating(modelBuilder);
     }
 
@@ -64,7 +49,7 @@ public class AppDbContext : DbContext, IAppDbContext
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<CocktailAggregate>());
         new RecipeConfiguration().Configure(modelBuilder.Entity<RecipeAggregate>());
         new IngredientConfiguration().Configure(modelBuilder.Entity<IngredientAggregate>());
-        // new RecipeIngredientsConfiguration().Configure(modelBuilder.Entity<RecipeIngredientsAggregate>());
+        new RecipeIngredientAggregateConfiguration().Configure(modelBuilder.Entity<RecipeIngredientAggregate>());
         new StockOrderConfiguration().Configure(modelBuilder.Entity<StockOrderAggregate>());
         new StockItemConfiguration().Configure(modelBuilder.Entity<StockItemAggregate>());
         new WarehouseConfiguration().Configure(modelBuilder.Entity<WarehouseAggregate>());

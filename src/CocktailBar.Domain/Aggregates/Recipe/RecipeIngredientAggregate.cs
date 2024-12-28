@@ -11,13 +11,15 @@ public readonly record struct RecipeIngredientAggregateId(Guid Value);
 /// </summary>
 public class RecipeIngredientAggregate : Aggregate<RecipeIngredientAggregateId>
 {
+    private RecipeIngredientAggregate() {} // Private constructor for EF Core
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RecipeIngredientAggregate"/> class.
     /// </summary>
     /// <param name="recipeId">The unique identifier of the recipe that this ingredient belongs to.</param>
     /// <param name="ingredientId">The unique identifier of the ingredient from the ingredient catalog.</param>
     /// <param name="amount">The quantity and unit of measurement for this ingredient in the recipe.</param>
-    private RecipeIngredientAggregate(RecipeId recipeId, IngredientId ingredientId, Amount amount)
+    private RecipeIngredientAggregate(RecipeId recipeId, IngredientId ingredientId, Amount amount) : base()
     {
         RecipeId = recipeId;
         IngredientId = ingredientId;

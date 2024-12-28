@@ -1,7 +1,6 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Aggregates.Recipe;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -26,21 +25,10 @@ internal sealed class RecipeConfiguration : IEntityTypeConfiguration<RecipeAggre
         builder.Property(x => x.Instructions)
             .IsRequired();
 
-        builder
-            .HasMany(r => r.Ingredients)
-            .WithMany()
-            .UsingEntity<RecipeIngredient>(
-                j => j
-                    .HasOne<IngredientAggregate>()
-                    .WithMany()
-                    .HasForeignKey(ri => ri.IngredientId),
-                j => j
-                    .HasOne<RecipeAggregate>()
-                    .WithMany()
-                    .HasForeignKey(ri => ri.RecipeId),
-                j =>
-                {
-                    j.ToTable("RecipeIngredients");
-                });
+        builder.HasMany(x => x.Ingredients)
+            .WithOne()
+            .HasForeignKey(x => x.RecipeId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
