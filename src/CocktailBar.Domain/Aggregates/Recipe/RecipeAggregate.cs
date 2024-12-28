@@ -14,9 +14,9 @@ public readonly record struct RecipeId(Guid Value);
 /// <summary>
 /// Represents a recipe for a cocktail, containing instructions and a list of ingredients.
 /// </summary>
-public class RecipeAggregate : Aggregate<RecipeId>
+public class RecipeAggregate : AggregateRoot<RecipeId>
 {
-    private readonly List<IngredientAggregate> _ingredients = [];
+    private readonly List<RecipeIngredientAggregate> _ingredients = [];
 
     private RecipeAggregate() {} // Private constructor for EF Core
 
@@ -58,8 +58,8 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// <summary>
     /// Gets the list of ingredients used in the recipe.
     /// </summary>
-    public IEnumerable<IngredientAggregate> Ingredients =>
-        new ReadOnlyCollection<IngredientAggregate>(_ingredients);
+    public IEnumerable<RecipeIngredientAggregate> Ingredients =>
+        new ReadOnlyCollection<RecipeIngredientAggregate>(_ingredients);
 
     /// <summary>
     /// Creates a new instance of the <see cref="RecipeAggregate"/> class.
@@ -82,25 +82,30 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// <summary>
     /// Adds a new ingredient to the recipe if it's not already included.
     /// </summary>
-    /// <param name="ingredient">The ingredient to add to the recipe.</param>
+    /// <param name="ingredientId">The ingredient id.</param>
+    /// <param name="amount">The ingredient amount.</param>
     /// <exception cref="DomainException">Thrown when the ingredient is already present in the recipe.</exception>
     public void AddIngredient(IngredientId ingredientId, Amount amount)
     {
-        var ingredient = new IngredientAggregate(ingredientId, amount);
-        if (_ingredients.Contains(ingredient))
-            throw DomainException.For<RecipeAggregate>("Ingredient is already used in the recipe");
-        _ingredients.Add(ingredient);
+        var recipeIngredient = RecipeIngredientAggregate.Create(Id, ingredientId, amount);
+        if (_ingredients.Contains(recipeIngredient))
+            throw DomainException.For<RecipeAggregate>("Ingredient is already used in the recipe!");
+
+        _ingredients.Add(recipeIngredient);
     }
 
     /// <summary>
     /// Removes an ingredient from the recipe if it exists.
     /// </summary>
-    /// <param name="ingredient">The ingredient to remove from the recipe.</param>
+    /// <param name="ingredientId">The ingredient id.</param>
+    /// <param name="amount">The ingredient amount.</param>
     /// <exception cref="DomainException">Thrown when the ingredient is not found in the recipe.</exception>
-    public void RemoveIngredient(IngredientAggregate ingredient)
+    public void RemoveIngredient(IngredientId ingredientId, Amount amount)
     {
+        var ingredient = RecipeIngredientAggregate.Create(Id, ingredientId, amount);
         if (!_ingredients.Contains(ingredient))
             throw DomainException.For<RecipeAggregate>("Ingredient not found in the recipe");
+
         _ingredients.Remove(ingredient);
     }
 

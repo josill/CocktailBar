@@ -4,11 +4,11 @@
 namespace CocktailBar.Domain.Seedwork;
 
 /// <summary>
-/// Base class for aggregate roots. Enforces invariants and consistency for a group of related entities
-/// and serves as the sole entry point for modifications to entities within its boundary.
+/// Base class for domain objects that form a consistency boundary and enforce business rules
+/// for their child entities.
 /// </summary>
-/// <typeparam name="TId">The type of the entity's identifier.</typeparam>
-public abstract class Aggregate<TId>
+/// <typeparam name="TId">The identifier type.</typeparam>
+public abstract class Aggregate<TId> where TId : notnull
 {
     #pragma warning disable SA1600
     protected Aggregate() {} // Protected constructor for inheriting classes to use with EF Core

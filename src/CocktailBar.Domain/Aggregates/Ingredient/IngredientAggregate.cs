@@ -29,7 +29,7 @@ public class IngredientAggregate : Aggregate<IngredientId>
     /// <param name="id">The id of the ingredient.</param>
     /// <param name="name">The name of the ingredient.</param>
     /// <remarks>This constructor should only be used for seeding data.</remarks>
-    private IngredientAggregate(Guid id, string name) : base(new IngredientId(id))
+    private IngredientAggregate(IngredientId id, string name) : base(id)
     {
         Name = name;
     }
@@ -53,5 +53,5 @@ public class IngredientAggregate : Aggregate<IngredientId>
     /// <param name="name">The name of the ingredient.</param>
     /// <returns>A new <see cref="IngredientAggregate"/> instance.</returns>
     /// <remarks>This method should only be used for seeding data.</remarks>
-    public static IngredientAggregate Create(Guid id, string name) => new(id, name);
+    public static IngredientAggregate Create(IngredientId id, string name) => new(id, name);
 }
