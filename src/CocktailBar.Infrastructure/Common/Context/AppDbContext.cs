@@ -36,6 +36,12 @@ public class AppDbContext : DbContext, IAppDbContext
 
     public DbSet<WarehouseAggregate> Warehouses { get; init; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+        base.OnConfiguring(optionsBuilder);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         ApplyAggregatesConfiguration(modelBuilder);
@@ -49,7 +55,7 @@ public class AppDbContext : DbContext, IAppDbContext
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<CocktailAggregate>());
         new RecipeConfiguration().Configure(modelBuilder.Entity<RecipeAggregate>());
         new IngredientConfiguration().Configure(modelBuilder.Entity<IngredientAggregate>());
-        new RecipeIngredientAggregateConfiguration().Configure(modelBuilder.Entity<RecipeIngredientAggregate>());
+        new RecipeIngredientConfiguration().Configure(modelBuilder.Entity<RecipeIngredientAggregate>());
         new StockOrderConfiguration().Configure(modelBuilder.Entity<StockOrderAggregate>());
         new StockItemConfiguration().Configure(modelBuilder.Entity<StockItemAggregate>());
         new WarehouseConfiguration().Configure(modelBuilder.Entity<WarehouseAggregate>());
@@ -57,8 +63,10 @@ public class AppDbContext : DbContext, IAppDbContext
 
     private static void ApplySeedConfiguration(ModelBuilder modelBuilder)
     {
-        // modelBuilder.ApplyConfiguration(new RecipeSeedConfiguration());
-        // modelBuilder.ApplyConfiguration(new IngredientSeedConfiguration());
+        modelBuilder.ApplyConfiguration(new RecipeSeedConfiguration());
+        modelBuilder.ApplyConfiguration(new IngredientSeedConfiguration());
+
+        // Complex properties are currently not supported in seeding. See https://github.com/dotnet/efcore/issues/31254 for more information.
         // modelBuilder.ApplyConfiguration(new RecipeIngredientsSeedConfiguration());
     }
 }

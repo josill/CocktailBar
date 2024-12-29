@@ -4,12 +4,12 @@ using CocktailBar.Domain.ValueObjects;
 
 namespace CocktailBar.Domain.Aggregates.Recipe;
 
-public readonly record struct RecipeIngredientAggregateId(Guid Value);
+public readonly record struct RecipeIngredientId(Guid Value);
 
 /// <summary>
 /// Represents the ingredient in a recipe.
 /// </summary>
-public class RecipeIngredientAggregate : Aggregate<RecipeIngredientAggregateId>
+public class RecipeIngredientAggregate : Aggregate<RecipeIngredientId>
 {
     private RecipeIngredientAggregate() {} // Private constructor for EF Core
 
@@ -20,6 +20,13 @@ public class RecipeIngredientAggregate : Aggregate<RecipeIngredientAggregateId>
     /// <param name="ingredientId">The unique identifier of the ingredient from the ingredient catalog.</param>
     /// <param name="amount">The quantity and unit of measurement for this ingredient in the recipe.</param>
     private RecipeIngredientAggregate(RecipeId recipeId, IngredientId ingredientId, Amount amount) : base()
+    {
+        RecipeId = recipeId;
+        IngredientId = ingredientId;
+        Amount = amount;
+    }
+
+    private RecipeIngredientAggregate(RecipeIngredientId id, RecipeId recipeId, IngredientId ingredientId, Amount amount) : base(id)
     {
         RecipeId = recipeId;
         IngredientId = ingredientId;
@@ -50,4 +57,15 @@ public class RecipeIngredientAggregate : Aggregate<RecipeIngredientAggregateId>
     /// <returns>A new <see cref="RecipeIngredientAggregate"/> instance.</returns>
     public static RecipeIngredientAggregate Create(RecipeId recipeId, IngredientId ingredientId, Amount amount)
         => new(recipeId, ingredientId, amount);
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="RecipeIngredientAggregate"/> class.
+    /// </summary>
+    /// <param name="id">The unique identifier of the recipe ingerdient.</param>
+    /// <param name="recipeId">The unique identifier of the recipe that this ingredient belongs to.</param>
+    /// <param name="ingredientId">The unique identifier of the ingredient from the ingredient catalog.</param>
+    /// <param name="amount">The quantity and unit of measurement for this ingredient in the recipe.</param>
+    /// <returns>A new <see cref="RecipeIngredientAggregate"/> instance.</returns>
+    public static RecipeIngredientAggregate Create(RecipeIngredientId id, RecipeId recipeId, IngredientId ingredientId, Amount amount)
+        => new(id, recipeId, ingredientId, amount);
 }

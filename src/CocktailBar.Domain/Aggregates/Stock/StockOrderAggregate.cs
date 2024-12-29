@@ -11,7 +11,7 @@ public readonly record struct StockOrderId(Guid Value);
 /// <summary>
 /// Represents a stock order containing raw materials for the bars.
 /// </summary>
-public class StockOrderAggregate : Aggregate<StockOrderId>
+public class StockOrderAggregate : AggregateRoot<StockOrderId>
 {
     private readonly List<StockItemAggregate> _stockItems = [];
 

@@ -11,7 +11,7 @@ public readonly record struct OrderId(Guid Value);
 /// Represents an order in the cocktail bar domain.
 /// This class inherits from EntityWithMetadata and uses OrderId as its identifier.
 /// </summary>
-public class OrderAggregate : Aggregate<OrderId>
+public class OrderAggregate : AggregateRoot<OrderId>
 {
     /// <summary>
     /// Private collection of order items.

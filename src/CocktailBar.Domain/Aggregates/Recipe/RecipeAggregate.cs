@@ -39,7 +39,7 @@ public class RecipeAggregate : AggregateRoot<RecipeId>
     /// <param name="name">the name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <remarks>This constructor should only be used for seeding data.</remarks>
-    private RecipeAggregate(Guid id, string name, string instructions) : base(new RecipeId(id))
+    private RecipeAggregate(RecipeId id, string name, string instructions) : base(id)
     {
         Name = name;
         Instructions = instructions;
@@ -77,7 +77,7 @@ public class RecipeAggregate : AggregateRoot<RecipeId>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <returns>A new <see cref="RecipeAggregate"/> instance.</returns>
     /// <remarks>This method should only be used for seeding data.</remarks>
-    public static RecipeAggregate Create(Guid id, string name, string instructions) => new(id, name, instructions);
+    public static RecipeAggregate Create(RecipeId id, string name, string instructions) => new(id, name, instructions);
 
     /// <summary>
     /// Adds a new ingredient to the recipe if it's not already included.
@@ -102,11 +102,11 @@ public class RecipeAggregate : AggregateRoot<RecipeId>
     /// <exception cref="DomainException">Thrown when the ingredient is not found in the recipe.</exception>
     public void RemoveIngredient(IngredientId ingredientId, Amount amount)
     {
-        var ingredient = RecipeIngredientAggregate.Create(Id, ingredientId, amount);
-        if (!_ingredients.Contains(ingredient))
-            throw DomainException.For<RecipeAggregate>("Ingredient not found in the recipe");
+        var recipeIngredient = RecipeIngredientAggregate.Create(Id, ingredientId, amount);
+        if (!_ingredients.Contains(recipeIngredient))
+            throw DomainException.For<RecipeAggregate>("Ingredient not found in the recipe!");
 
-        _ingredients.Remove(ingredient);
+        _ingredients.Remove(recipeIngredient);
     }
 
     /// <summary>

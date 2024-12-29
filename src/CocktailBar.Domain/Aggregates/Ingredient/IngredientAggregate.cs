@@ -10,7 +10,7 @@ public readonly record struct IngredientId(Guid Value);
 /// <summary>
 /// Represents an ingredient.
 /// </summary>
-public class IngredientAggregate : Aggregate<IngredientId>
+public class IngredientAggregate : AggregateRoot<IngredientId>
 {
     private IngredientAggregate() {} // Private constructor for EF Core
 

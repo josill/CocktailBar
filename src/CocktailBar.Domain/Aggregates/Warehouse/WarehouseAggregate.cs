@@ -12,7 +12,7 @@ public readonly record struct WarehouseId(Guid Value);
 /// <summary>
 /// Represents a warehouse where the stock is kept.
 /// </summary>
-public class WarehouseAggregate : Aggregate<WarehouseId>
+public class WarehouseAggregate : AggregateRoot<WarehouseId>
 {
     private readonly List<StockItemAggregate> _stockItems = new();
 

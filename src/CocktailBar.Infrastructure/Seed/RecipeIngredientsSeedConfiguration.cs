@@ -1,4 +1,7 @@
+using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Aggregates.Recipe;
+using CocktailBar.Domain.Enumerations;
+using CocktailBar.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,13 +18,13 @@ public class RecipeIngredientsSeedConfiguration : IEntityTypeConfiguration<Recip
     {
         return
         [
-            // // Classic Martini
-            // RecipeIngredientsAggregate.Create(
-            //     new RecipeIngredientsAggregateId(Guid.NewGuid()),
-            //     new RecipeId(RecipeIds.ClassicMartini),
-            //     new IngredientId(IngredientIds.TanquerayGin),
-            //     Amount.Create(60, WeightUnit.Ml)
-            // ),
+            // Classic Martini
+            RecipeIngredientAggregate.Create(
+                new RecipeIngredientId(Guid.NewGuid()),
+                RecipeIds.ClassicMartini,
+                IngredientIds.GreyGooseVodka,
+                Amount.Create(60, WeightUnit.Ml)
+            ),
             // RecipeIngredientsAggregate.Create(
             //     new RecipeIngredientsAggregateId(Guid.NewGuid()),
             //     new RecipeId(RecipeIds.ClassicMartini),

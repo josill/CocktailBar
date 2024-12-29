@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.Recipes.Configuration;
 
-internal sealed class RecipeIngredientAggregateConfiguration : IEntityTypeConfiguration<RecipeIngredientAggregate>
+internal sealed class RecipeIngredientConfiguration : IEntityTypeConfiguration<RecipeIngredientAggregate>
 {
     public void Configure(EntityTypeBuilder<RecipeIngredientAggregate> builder)
     {
@@ -15,7 +15,7 @@ internal sealed class RecipeIngredientAggregateConfiguration : IEntityTypeConfig
         builder.Property(x => x.Id)
             .HasConversion(
                 id => id.Value,
-                value => new RecipeIngredientAggregateId(value))
+                value => new RecipeIngredientId(value))
             .ValueGeneratedOnAdd()
             .IsRequired();
 
