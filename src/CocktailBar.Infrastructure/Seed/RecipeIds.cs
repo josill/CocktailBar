@@ -5,6 +5,7 @@ namespace CocktailBar.Infrastructure.Seed;
 public static class RecipeIds
 {
     public static readonly RecipeId ClassicMartini = new(Guid.Parse("f8c62fb2-7bb8-4c8d-b88c-d4a7b89f1273"));
+    // TODO: Change Guid to RecipeId
     public static readonly Guid Manhattan = new("a91e6e4d-c75f-4b6c-9147-b96558c0c8d7");
     public static readonly Guid Margarita = new("b592f953-0943-4b56-9d5a-8662acdc4e45");
     public static readonly Guid Negroni = new("c3d87e68-1a5d-4b58-8d3f-736724addec5");
