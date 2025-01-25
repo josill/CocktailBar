@@ -1,10 +1,12 @@
+using CocktailBar.Domain.Aggregates.Ingredient;
+
 namespace CocktailBar.Infrastructure.Seed;
 
 public static class IngredientIds
 {
     // Base Spirits - Vodka
-    public static readonly Guid GreyGooseVodka = new("f8c62fb2-7bb8-4c8d-b88c-d4a7b89f1273");
-    public static readonly Guid BelvedereVodka = new("80c5b839-1b17-4a66-a894-07f675070b9c");
+    public static readonly IngredientId GreyGooseVodka = new(Guid.Parse("f8c62fb2-7bb8-4c8d-b88c-d4a7b89f1273"));
+    public static readonly IngredientId BelvedereVodka = new(Guid.Parse("80c5b839-1b17-4a66-a894-07f675070b9c"));
     public static readonly Guid AbsolutVodka = new("6a7c8b3f-451c-4e9a-b795-ec5883714a9a");
     public static readonly Guid StolichnayaVodka = new("d1a3e2c4-1f34-4b5d-9c6b-8a7f0e912d3b");
     public static readonly Guid CitrusVodka = new("b9f5d8e7-6c2a-4b3d-9e8f-7a1c6d4b3e2a");

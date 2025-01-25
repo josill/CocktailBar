@@ -32,11 +32,8 @@ public abstract class ValueObject<T>
     /// <param name="left">The first value object to compare.</param>
     /// <param name="right">The second value object to compare.</param>
     /// <returns>true if the value objects are not equal; otherwise, false.</returns>
-    public static bool operator !=(ValueObject<T>? left, ValueObject<T>? right)
-    {
-        return !(left == right);
-    }
-    
+    public static bool operator !=(ValueObject<T>? left, ValueObject<T>? right) => !(left == right);
+
     /// <summary>
     /// Adds two value objects together if they support addition.
     /// </summary>
@@ -48,10 +45,10 @@ public abstract class ValueObject<T>
     {
         if (left is IAddableValueObject<T> addableLeft) return addableLeft.Add((T)right);
         if (left is IArithmeticValueObject<T> arithmeticLeft) return arithmeticLeft.Add((T)right);
-        
+
         throw DomainException.For<T>($"Addition is not supported for value objects of type {typeof(T).Name}");
     }
-    
+
     /// <summary>
     /// Subtracts two value objects together if they support subtraction.
     /// </summary>
@@ -61,10 +58,9 @@ public abstract class ValueObject<T>
     /// <exception cref="NotSupportedException">Thrown when the value objects don't support addition.</exception>
     public static T operator -(ValueObject<T> left, ValueObject<T> right)
     {
-        // TODO: Should allow also IArithmeticValueObject
         if (left is ISubtractableValueObject<T> subtractableLeft) return subtractableLeft.Subtract((T)right);
         if (left is IArithmeticValueObject<T> arithmeticLeft) return arithmeticLeft.Subtract((T)right);
-        
+
         throw DomainException.For<T>($"Subtraction is not supported for value objects of type {typeof(T).Name}");
     }
 
@@ -100,7 +96,7 @@ public abstract class ValueObject<T>
                 }
             });
     }
-    
+
     /// <summary>
     /// Gets the components of the value object used for equality comparison.
     /// </summary>

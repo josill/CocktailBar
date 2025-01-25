@@ -13,7 +13,7 @@ public readonly record struct StockOrderId(Guid Value);
 /// </summary>
 public class StockOrderAggregate : Aggregate<StockOrderId>
 {
-    private readonly List<StockItemAggregate> _stockItems = [];
+    private readonly List<StockItem> _stockItems = [];
 
     private StockOrderAggregate() {} // Private constructor for EF Core
 
@@ -25,7 +25,7 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
     /// <param name="orderedAtDate">The date and time when the order was placed.</param>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
     /// <param name="stockItems">The stock items associated with the order.</param>
-    private StockOrderAggregate(string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItemAggregate>? stockItems = null)
+    private StockOrderAggregate(string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null)
     {
         OrderNumber = orderNumber.Trim(); // TODO: toLower as well?
         Price = price;
@@ -60,7 +60,7 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
     /// <remarks>
     /// Returns a copy of the internal list to prevent external modifications.
     /// </remarks>
-    public IEnumerable<StockItemAggregate> StockItems => _stockItems.AsReadOnly().ToList();
+    public IEnumerable<StockItem> StockItems => _stockItems.AsReadOnly().ToList();
 
     /// <summary>
     /// Creates a new instance of the <see cref="StockOrderAggregate"/> class.
@@ -71,32 +71,32 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
     /// <param name="stockItems">The stock items associated with the order.</param>
     /// <returns>A new <see cref="StockOrderAggregate"/> instance.</returns>
-    public static StockOrderAggregate Create(string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItemAggregate>? stockItems = null)
+    public static StockOrderAggregate Create(string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null)
         => new(orderNumber, price, orderedAtDate, orderArriveDate, stockItems);
 
     /// <summary>
     /// Adds a stock item to the order if it doesn't already exist.
     /// </summary>
-    /// <param name="stockItemAggregate">The stock item to add.</param>
+    /// <param name="stockItem">The stock item to add.</param>
     /// <exception cref="DomainException">Thrown when the stock item already exists in the order.</exception>
-    public void AddStockItem(StockItemAggregate stockItemAggregate)
+    public void AddStockItem(StockItem stockItem)
     {
-        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItemAggregate));
+        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
         if (stockItemAlreadyExists) throw DomainException.For<StockOrderAggregate>("Stock item is already in the order.");
 
-        _stockItems.Add(stockItemAggregate);
+        _stockItems.Add(stockItem);
     }
 
     /// <summary>
     /// Removes a stock item from the order.
     /// </summary>
-    /// <param name="stockItemAggregate">The stock item to remove.</param>
+    /// <param name="stockItem">The stock item to remove.</param>
     /// <exception cref="DomainException">Thrown when the stock item doesn't exist in the order.</exception>
-    public void RemoveStockItem(StockItemAggregate stockItemAggregate)
+    public void RemoveStockItem(StockItem stockItem)
     {
-        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItemAggregate));
+        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
         if (stockItemAlreadyExists) throw DomainException.For<StockOrderAggregate>("Stock item not found in the order.");
 
-        _stockItems.Remove(stockItemAggregate);
+        _stockItems.Remove(stockItem);
     }
 }

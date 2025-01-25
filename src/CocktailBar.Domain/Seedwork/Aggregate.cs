@@ -1,85 +1,22 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
-using CocktailBar.Domain.Aggregates.Ingredient;
-
 namespace CocktailBar.Domain.Seedwork;
 
 /// <summary>
-/// Base class for domain entities with generic ID type.
+/// Base class for domain objects that form a consistency boundary and enforce business rules
+/// for their child entities.
 /// </summary>
-/// <typeparam name="TId">The type of the entity's identifier.</typeparam>
-public abstract class Aggregate<TId>
+/// <typeparam name="TId">The identifier type.</typeparam>
+public abstract class Aggregate<TId> : Entity<TId> where TId : notnull
 {
     #pragma warning disable SA1600
-    protected Aggregate() {} // Protected constructor for inheriting classes to use with EF Core
+    protected Aggregate() { } // Protected constructor for inheriting classes to use with EF Core
     #pragma warning restore SA1600
-
-    /// <summary>
-    /// Gets the unique identifier of the entity.
-    /// </summary>
-    public TId Id { get; } = default!;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Aggregate{TId}"/> class.
     /// </summary>
     /// <param name="id">The identifier of the aggregate.</param>
-    protected Aggregate(TId id)
-    {
-        Id = id;
-    }
-
-    /// <summary>
-    /// Determines whether the specified object is equal to the current object.
-    /// </summary>
-    /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-    public override bool Equals(object? obj)
-    {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == this.GetType() && Equals((Aggregate<TId>)obj);
-    }
-
-    /// <summary>
-    /// Serves as the default hash function.
-    /// </summary>
-    /// <returns>A hash code for the current object.</returns>
-    public override int GetHashCode()
-    {
-        return Id is null ? 0 : EqualityComparer<TId>.Default.GetHashCode(Id);
-    }
-
-    /// <summary>
-    /// Determines whether the specified entity is equal to the current entity.
-    /// </summary>
-    /// <param name="other">The entity to compare with the current entity.</param>
-    /// <returns>true if the specified entity is equal to the current entity; otherwise, false.</returns>
-    private bool Equals(Aggregate<TId>? other)
-    {
-        if (ReferenceEquals(null, other)) return false;
-        return ReferenceEquals(this, other) || EqualityComparer<TId>.Default.Equals(Id, other.Id);
-    }
-
-    /// <summary>
-    /// Compares two entities for equality.
-    /// </summary>
-    /// <param name="left">The left entity to compare.</param>
-    /// <param name="right">The right entity to compare.</param>
-    /// <returns>True if the entities are equal, false otherwise.</returns>
-    public static bool operator ==(Aggregate<TId>? left, Aggregate<TId>? right)
-    {
-        return Equals(left, right);
-    }
-
-    /// <summary>
-    /// Compares two entities for inequality.
-    /// </summary>
-    /// <param name="left">The left entity to compare.</param>
-    /// <param name="right">The right entity to compare.</param>
-    /// <returns>True if the entities are not equal, false otherwise.</returns>
-    public static bool operator !=(Aggregate<TId>? left, Aggregate<TId>? right)
-    {
-        return !Equals(left, right);
-    }
+    protected Aggregate(TId id) : base(id) { }
 }

@@ -30,9 +30,15 @@ public class AppDbContext : DbContext, IAppDbContext
 
     public DbSet<StockOrderAggregate> StockOrders { get; init; }
 
-    public DbSet<StockItemAggregate> StockItems { get; init; }
+    public DbSet<StockItem> StockItems { get; init; }
 
     public DbSet<WarehouseAggregate> Warehouses { get; init; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+        base.OnConfiguring(optionsBuilder);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -47,9 +53,9 @@ public class AppDbContext : DbContext, IAppDbContext
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<CocktailAggregate>());
         new RecipeConfiguration().Configure(modelBuilder.Entity<RecipeAggregate>());
         new IngredientConfiguration().Configure(modelBuilder.Entity<IngredientAggregate>());
-        new RecipeIngredientsConfiguration().Configure(modelBuilder.Entity<RecipeIngredientsAggregate>());
+        new RecipeIngredientConfiguration().Configure(modelBuilder.Entity<RecipeIngredient>());
         new StockOrderConfiguration().Configure(modelBuilder.Entity<StockOrderAggregate>());
-        new StockItemConfiguration().Configure(modelBuilder.Entity<StockItemAggregate>());
+        new StockItemConfiguration().Configure(modelBuilder.Entity<StockItem>());
         new WarehouseConfiguration().Configure(modelBuilder.Entity<WarehouseAggregate>());
     }
 
@@ -57,6 +63,8 @@ public class AppDbContext : DbContext, IAppDbContext
     {
         modelBuilder.ApplyConfiguration(new RecipeSeedConfiguration());
         modelBuilder.ApplyConfiguration(new IngredientSeedConfiguration());
+
+        // Complex properties are currently not supported in seeding. See https://github.com/dotnet/efcore/issues/31254 for more information.
         // modelBuilder.ApplyConfiguration(new RecipeIngredientsSeedConfiguration());
     }
 }

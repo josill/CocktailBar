@@ -24,5 +24,11 @@ internal sealed class RecipeConfiguration : IEntityTypeConfiguration<RecipeAggre
 
         builder.Property(x => x.Instructions)
             .IsRequired();
+
+        builder.HasMany(x => x.Ingredients)
+            .WithOne()
+            .HasForeignKey(x => x.RecipeId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
