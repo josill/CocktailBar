@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.Recipes.Configuration;
 
-internal sealed class RecipeIngredientConfiguration : IEntityTypeConfiguration<RecipeIngredientAggregate>
+internal sealed class RecipeIngredientConfiguration : IEntityTypeConfiguration<RecipeIngredient>
 {
-    public void Configure(EntityTypeBuilder<RecipeIngredientAggregate> builder)
+    public void Configure(EntityTypeBuilder<RecipeIngredient> builder)
     {
         builder.ToTable("RecipeIngredients");
 

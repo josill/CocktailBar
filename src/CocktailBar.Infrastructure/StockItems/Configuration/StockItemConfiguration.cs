@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.StockItems.Configuration;
 
-internal sealed class StockItemConfiguration : IEntityTypeConfiguration<StockItemAggregate>
+internal sealed class StockItemConfiguration : IEntityTypeConfiguration<StockItem>
 {
-    public void Configure(EntityTypeBuilder<StockItemAggregate> builder)
+    public void Configure(EntityTypeBuilder<StockItem> builder)
     {
         builder.Property(x => x.Id)
             .HasConversion(

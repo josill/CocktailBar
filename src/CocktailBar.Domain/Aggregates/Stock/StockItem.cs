@@ -12,17 +12,17 @@ public readonly record struct StockItemId(Guid Value);
 /// <summary>
 /// Represents a stock item in the stock order.
 /// </summary>
-public class StockItemAggregate : Entity<StockItemId>
+public class StockItem : Entity<StockItemId>
 {
-    private StockItemAggregate() {} // Private constructor for EF Core
+    private StockItem() {} // Private constructor for EF Core
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="StockItemAggregate"/> class.
+    /// Initializes a new instance of the <see cref="StockItem"/> class.
     /// </summary>
     /// <param name="ingredientId">Unique identifier of the associated ingredient.</param>
     /// <param name="stockOrderId">Unique identifier of the associated stock order.</param>
     /// <param name="warehouseId">Unique identifier of the associated warehouse.</param>
-    private StockItemAggregate(IngredientId ingredientId, StockOrderId stockOrderId, WarehouseId warehouseId)
+    private StockItem(IngredientId ingredientId, StockOrderId stockOrderId, WarehouseId warehouseId)
     {
         IngredientId = ingredientId;
         StockOrderId = stockOrderId;
@@ -45,12 +45,12 @@ public class StockItemAggregate : Entity<StockItemId>
     public WarehouseId WarehouseId { get; }
 
     /// <summary>
-    /// Creates a new instance of the <see cref="StockItemAggregate"/> class.
+    /// Creates a new instance of the <see cref="StockItem"/> class.
     /// </summary>
     /// <param name="ingredientId">Unique identifier of the associated ingredient.</param>
     /// <param name="stockOrderId">Unique identifier of the associated stock order.</param>
     /// <param name="warehouseId">Unique identifier of the associated warehouse.</param>
-    /// <returns>A new <see cref="StockItemAggregate"/> instance.</returns>
-    public static StockItemAggregate Create(IngredientId ingredientId, StockOrderId stockOrderId, WarehouseId warehouseId)
+    /// <returns>A new <see cref="StockItem"/> instance.</returns>
+    public static StockItem Create(IngredientId ingredientId, StockOrderId stockOrderId, WarehouseId warehouseId)
         => new(ingredientId, stockOrderId, warehouseId);
 }

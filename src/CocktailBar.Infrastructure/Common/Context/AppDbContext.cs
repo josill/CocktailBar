@@ -7,8 +7,6 @@ using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Domain.Aggregates.Stock;
 using CocktailBar.Domain.Aggregates.Warehouse;
-using CocktailBar.Domain.Enumerations;
-using CocktailBar.Domain.ValueObjects;
 using CocktailBar.Infrastructure.Cocktails.Configuration;
 using CocktailBar.Infrastructure.Ingredients.Configuration;
 using CocktailBar.Infrastructure.Recipes.Configuration;
@@ -32,7 +30,7 @@ public class AppDbContext : DbContext, IAppDbContext
 
     public DbSet<StockOrderAggregate> StockOrders { get; init; }
 
-    public DbSet<StockItemAggregate> StockItems { get; init; }
+    public DbSet<StockItem> StockItems { get; init; }
 
     public DbSet<WarehouseAggregate> Warehouses { get; init; }
 
@@ -55,9 +53,9 @@ public class AppDbContext : DbContext, IAppDbContext
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<CocktailAggregate>());
         new RecipeConfiguration().Configure(modelBuilder.Entity<RecipeAggregate>());
         new IngredientConfiguration().Configure(modelBuilder.Entity<IngredientAggregate>());
-        new RecipeIngredientConfiguration().Configure(modelBuilder.Entity<RecipeIngredientAggregate>());
+        new RecipeIngredientConfiguration().Configure(modelBuilder.Entity<RecipeIngredient>());
         new StockOrderConfiguration().Configure(modelBuilder.Entity<StockOrderAggregate>());
-        new StockItemConfiguration().Configure(modelBuilder.Entity<StockItemAggregate>());
+        new StockItemConfiguration().Configure(modelBuilder.Entity<StockItem>());
         new WarehouseConfiguration().Configure(modelBuilder.Entity<WarehouseAggregate>());
     }
 

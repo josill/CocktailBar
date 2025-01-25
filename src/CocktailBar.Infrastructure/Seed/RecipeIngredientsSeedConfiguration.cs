@@ -7,19 +7,19 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.Seed;
 
-public class RecipeIngredientsSeedConfiguration : IEntityTypeConfiguration<RecipeIngredientAggregate>
+public class RecipeIngredientsSeedConfiguration : IEntityTypeConfiguration<RecipeIngredient>
 {
-    public void Configure(EntityTypeBuilder<RecipeIngredientAggregate> builder)
+    public void Configure(EntityTypeBuilder<RecipeIngredient> builder)
     {
         builder.HasData(GetSeedData());
     }
 
-    public static IEnumerable<RecipeIngredientAggregate> GetSeedData()
+    public static IEnumerable<RecipeIngredient> GetSeedData()
     {
         return
         [
             // Classic Martini
-            RecipeIngredientAggregate.Create(
+            RecipeIngredient.Create(
                 new RecipeIngredientId(Guid.NewGuid()),
                 RecipeIds.ClassicMartini,
                 IngredientIds.GreyGooseVodka,

@@ -12,7 +12,7 @@ public readonly record struct CocktailId(Guid Value);
 /// <summary>
 /// Represents a cocktail in the domain model.
 /// </summary>
-public class CocktailAggregate : AggregateRoot<CocktailId>
+public class CocktailAggregate : Aggregate<CocktailId>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CocktailAggregate"/> class.
