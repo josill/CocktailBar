@@ -29,6 +29,7 @@ public class IngredientAggregate : Aggregate<IngredientId>
     /// <param name="id">The id of the ingredient.</param>
     /// <param name="name">The name of the ingredient.</param>
     /// <remarks>This constructor should only be used for seeding data.</remarks>
+    // TODO: is it possible to lose this seeding constructor?
     private IngredientAggregate(IngredientId id, string name) : base(id)
     {
         Name = name;

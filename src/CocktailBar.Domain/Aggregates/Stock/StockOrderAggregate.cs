@@ -27,7 +27,7 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
     /// <param name="stockItems">The stock items associated with the order.</param>
     private StockOrderAggregate(string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null)
     {
-        OrderNumber = orderNumber.Trim(); // TODO: toLower as well?
+        OrderNumber = orderNumber.Trim().ToLower();
         Price = price;
         OrderedAtDate = orderedAtDate;
         OrderArriveDate = orderArriveDate;
