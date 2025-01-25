@@ -12,7 +12,7 @@ public readonly record struct StockItemId(Guid Value);
 /// <summary>
 /// Represents a stock item in the stock order.
 /// </summary>
-public class StockItemAggregate : Aggregate<StockItemId>
+public class StockItemAggregate : Entity<StockItemId>
 {
     private StockItemAggregate() {} // Private constructor for EF Core
 
