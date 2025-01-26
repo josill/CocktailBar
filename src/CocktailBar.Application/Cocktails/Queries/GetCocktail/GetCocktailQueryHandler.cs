@@ -13,18 +13,18 @@ namespace CocktailBar.Application.Cocktails.Queries.GetCocktail;
 public class GetCocktailQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetCocktailQuery, ErrorOr<CocktailResult>>
 {
     public async Task<ErrorOr<CocktailResult>> Handle(GetCocktailQuery request, CancellationToken cancellationToken)
-    { 
+    {
         try
         {
             var cocktail = await unitOfWork.Cocktails.GetByIdAsync<CocktailAggregate>(new CocktailId(request.CocktailId));
             if (cocktail is null) throw NotFoundException.For<CocktailAggregate>($"Cocktail with the specified id: {request.CocktailId} not found!");
 
-            var result = CocktailResult.From(cocktail!);
+            var result = CocktailResult.From(cocktail);
             return result;
         }
         catch (Exception e)
         {
-            throw SomethingWentWrongException.For<CocktailAggregate>($"Error retrieving the cocktail entity: {e.Message}");
+            throw SomethingWentWrongException.For<CocktailAggregate>($"Error retrieving the cocktail: {e.Message}");
         }
     }
 }

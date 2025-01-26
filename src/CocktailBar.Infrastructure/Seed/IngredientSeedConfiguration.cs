@@ -18,11 +18,11 @@ public class IngredientSeedConfiguration : IEntityTypeConfiguration<IngredientAg
             // Base Spirits - Vodka
             IngredientAggregate.Create(IngredientIds.GreyGooseVodka, "Grey Goose Vodka"),
             IngredientAggregate.Create(IngredientIds.BelvedereVodka, "Belvedere Vodka"),
-            // IngredientAggregate.Create(IngredientIds.AbsolutVodka, "Absolut Vodka"),
-            // IngredientAggregate.Create(IngredientIds.StolichnayaVodka, "Stolichnaya Vodka"),
-            // IngredientAggregate.Create(IngredientIds.CitrusVodka, "Citrus Vodka"),
-            // IngredientAggregate.Create(IngredientIds.VanillaVodka, "Vanilla Vodka"),
-            //
+            IngredientAggregate.Create(IngredientIds.AbsolutVodka, "Absolut Vodka"),
+            IngredientAggregate.Create(IngredientIds.StolichnayaVodka, "Stolichnaya Vodka"),
+            IngredientAggregate.Create(IngredientIds.CitrusVodka, "Citrus Vodka"),
+            IngredientAggregate.Create(IngredientIds.VanillaVodka, "Vanilla Vodka"),
+
             // // Base Spirits - Gin
             // IngredientAggregate.Create(IngredientIds.TanquerayGin, "Tanqueray Gin"),
             // IngredientAggregate.Create(IngredientIds.BeefeaterGin, "Beefeater Gin"),

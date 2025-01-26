@@ -15,22 +15,27 @@ public interface IUnitOfWork : IAsyncDisposable
     /// Gets the repository for managing cocktail aggregates.
     /// </summary>
     ICocktailRepository Cocktails { get; }
-    
+
     /// <summary>
     /// Gets the repository for managing recipe aggregates.
     /// </summary>
     IRecipeRepository Recipes { get; }
-    
+
+    /// <summary>
+    /// Gets the repository for manging ingredient aggergates.
+    /// </summary>
+    IIngredientRepository Ingredients { get; }
+
     /// <summary>
     /// Gets the repository for managing stock order aggregates.
     /// </summary>
     IStockOrderRepository StockOrders { get; }
-    
+
     /// <summary>
     /// Gets the repository for managing stock items aggregates.
     /// </summary>
     IStockItemRepository StockItems { get; }
-    
+
     /// <summary>
     /// Gets the repository for managing warehouse aggregates.
     /// </summary>

@@ -30,6 +30,18 @@ public class WarehouseAggregate : Aggregate<WarehouseId>
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="WarehouseAggregate"/> class.
+    /// </summary>
+    /// <param name="id">The id of the warehouse.</param>
+    /// <param name="name">The name of the warehouse.</param>
+    /// <param name="stockItems">The stock items stored in the warehouse.</param>
+    private WarehouseAggregate(WarehouseId id, string name, List<StockItem>? stockItems = null) : base(id)
+    {
+        Name = name.Trim();
+        if (stockItems is not null) _stockItems = stockItems;
+    }
+
+    /// <summary>
     /// Gets the name of the warehouse.
     /// </summary>
     public string Name { get; }
@@ -50,6 +62,17 @@ public class WarehouseAggregate : Aggregate<WarehouseId>
     /// <returns>A new <see cref="WarehouseAggregate"/> instance.</returns>
     public static WarehouseAggregate Create(string name, List<StockItem>? stockItems = null)
         => new(name, stockItems);
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="WarehouseAggregate"/> class.
+    /// </summary>
+    /// <param name="id">The id of the warehouse.</param>
+    /// <param name="name">The name of the warehouse.</param>
+    /// <param name="stockItems">Optional initial list of stock items.</param>
+    /// <returns>A new <see cref="WarehouseAggregate"/> instance.</returns>
+    /// <remarks>This method should only be used for seeding data.</remarks>
+    public static WarehouseAggregate Create(WarehouseId id, string name, List<StockItem>? stockItems = null)
+        => new(id, name, stockItems);
 
     /// <summary>
     /// Adds a stock item to the warehouse if it doesn't already exist.

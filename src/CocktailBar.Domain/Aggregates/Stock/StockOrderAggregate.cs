@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Domain.Aggregates.Ingredient;
+using CocktailBar.Domain.Aggregates.Warehouse;
 using CocktailBar.Domain.Exceptions;
 using CocktailBar.Domain.Seedwork;
 
@@ -57,9 +59,6 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
     /// <summary>
     /// Gets a read-only list of stock items in the order.
     /// </summary>
-    /// <remarks>
-    /// Returns a copy of the internal list to prevent external modifications.
-    /// </remarks>
     public IEnumerable<StockItem> StockItems => _stockItems.AsReadOnly().ToList();
 
     /// <summary>
@@ -77,12 +76,14 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
     /// <summary>
     /// Adds a stock item to the order if it doesn't already exist.
     /// </summary>
-    /// <param name="stockItem">The stock item to add.</param>
+    /// <param name="ingredientId">The ID of the ingredient to add.</param>
+    /// <param name="warehouseId">The ID of the warehouse.</param>
     /// <exception cref="DomainException">Thrown when the stock item already exists in the order.</exception>
-    public void AddStockItem(StockItem stockItem)
+    public void AddStockItem(IngredientId ingredientId, WarehouseId warehouseId)
     {
-        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
-        if (stockItemAlreadyExists) throw DomainException.For<StockOrderAggregate>("Stock item is already in the order.");
+        var stockItem = StockItem.Create(ingredientId, Id, warehouseId);
+        if (_stockItems.Contains(stockItem))
+            throw DomainException.For<StockOrderAggregate>("Stock item is already in the order.");
 
         _stockItems.Add(stockItem);
     }
@@ -90,12 +91,14 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
     /// <summary>
     /// Removes a stock item from the order.
     /// </summary>
-    /// <param name="stockItem">The stock item to remove.</param>
+    /// <param name="ingredientId">The ID of the ingredient to add.</param>
+    /// <param name="warehouseId">The ID of the warehouse.</param>
     /// <exception cref="DomainException">Thrown when the stock item doesn't exist in the order.</exception>
-    public void RemoveStockItem(StockItem stockItem)
+    public void RemoveStockItem(IngredientId ingredientId, WarehouseId warehouseId)
     {
-        var stockItemAlreadyExists = _stockItems.Any(i => i.Equals(stockItem));
-        if (stockItemAlreadyExists) throw DomainException.For<StockOrderAggregate>("Stock item not found in the order.");
+        var stockItem = StockItem.Create(ingredientId, Id, warehouseId);
+        if (!_stockItems.Contains(stockItem))
+            throw DomainException.For<StockOrderAggregate>("Stock item does not exist in the order.");
 
         _stockItems.Remove(stockItem);
     }
