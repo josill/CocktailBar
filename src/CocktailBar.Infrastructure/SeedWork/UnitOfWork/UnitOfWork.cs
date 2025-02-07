@@ -7,7 +7,7 @@ using CocktailBar.Application.Common.Interfaces.Context;
 using CocktailBar.Application.Common.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace CocktailBar.Infrastructure.Common.UnitOfWork;
+namespace CocktailBar.Infrastructure.SeedWork.UnitOfWork;
 
 /// <summary>
 /// Implements the Unit of Work pattern to manage database transactions and context access.
@@ -26,6 +26,7 @@ public sealed class UnitOfWork : IUnitOfWork
     public UnitOfWork(
         ICocktailRepository cocktailsRepository,
         IRecipeRepository recipesRepository,
+        IIngredientRepository ingredientsRepository,
         IStockOrderRepository stockOrdersRepository,
         IStockItemRepository stockItemsRepository,
         IWarehouseRepository warehousesRepository,
@@ -33,6 +34,7 @@ public sealed class UnitOfWork : IUnitOfWork
     {
         Cocktails = cocktailsRepository;
         Recipes = recipesRepository;
+        Ingredients = ingredientsRepository;
         StockOrders = stockOrdersRepository;
         StockItems = stockItemsRepository;
         Warehouses = warehousesRepository;
@@ -49,6 +51,11 @@ public sealed class UnitOfWork : IUnitOfWork
     /// Gets the repository for managing cocktail entities.
     /// </summary>
     public IRecipeRepository Recipes { get; }
+
+    /// <summary>
+    /// Gets the repository for manging ingredient entities.
+    /// </summary>
+    public IIngredientRepository Ingredients { get; }
 
     /// <summary>
     /// Gets the repository for managing stock order entities.

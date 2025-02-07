@@ -6,6 +6,6 @@ using CocktailBar.Application.Common.Interfaces.Repository;
 
 namespace CocktailBar.Infrastructure.Recipes.Repository;
 
-public class RecipeRepository(IAppDbContext context) : Common.Repository.Repository(context), IRecipeRepository
+public class RecipeRepository(IAppDbContext context) : SeedWork.Repository.Repository(context), IRecipeRepository
 {
 }

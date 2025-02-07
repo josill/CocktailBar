@@ -6,6 +6,6 @@ using CocktailBar.Application.Common.Interfaces.Repository;
 
 namespace CocktailBar.Infrastructure.StockOrders.Repository;
 
-public class StockOrderRepository(IAppDbContext context) : Common.Repository.Repository(context), IStockOrderRepository
+public class StockOrderRepository(IAppDbContext context) : SeedWork.Repository.Repository(context), IStockOrderRepository
 {
 }

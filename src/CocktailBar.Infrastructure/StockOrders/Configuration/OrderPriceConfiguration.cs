@@ -2,7 +2,7 @@
 // Licensed under the MIT license.
 
 using CocktailBar.Domain.Aggregates.Stock;
-using CocktailBar.Infrastructure.Common.Configurations;
+using CocktailBar.Infrastructure.SeedWork.Configurations;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CocktailBar.Infrastructure.StockOrders.Configuration;

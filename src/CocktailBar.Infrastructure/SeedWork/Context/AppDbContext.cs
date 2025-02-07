@@ -16,7 +16,7 @@ using CocktailBar.Infrastructure.StockOrders.Configuration;
 using CocktailBar.Infrastructure.Warehouses.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace CocktailBar.Infrastructure.Common.Context;
+namespace CocktailBar.Infrastructure.SeedWork.Context;
 
 public class AppDbContext : DbContext, IAppDbContext
 {
@@ -63,6 +63,7 @@ public class AppDbContext : DbContext, IAppDbContext
     {
         modelBuilder.ApplyConfiguration(new RecipeSeedConfiguration());
         modelBuilder.ApplyConfiguration(new IngredientSeedConfiguration());
+        modelBuilder.ApplyConfiguration(new WarehouseSeedConfiguration());
 
         // Complex properties are currently not supported in seeding. See https://github.com/dotnet/efcore/issues/31254 for more information.
         // modelBuilder.ApplyConfiguration(new RecipeIngredientsSeedConfiguration());

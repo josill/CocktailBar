@@ -19,10 +19,11 @@ public class StockItem : Entity<StockItemId>
     /// <summary>
     /// Initializes a new instance of the <see cref="StockItem"/> class.
     /// </summary>
+    /// <param name="id">Unique identifier of the stock item.</param>
     /// <param name="ingredientId">Unique identifier of the associated ingredient.</param>
     /// <param name="stockOrderId">Unique identifier of the associated stock order.</param>
     /// <param name="warehouseId">Unique identifier of the associated warehouse.</param>
-    private StockItem(IngredientId ingredientId, StockOrderId stockOrderId, WarehouseId warehouseId)
+    private StockItem(StockItemId id, IngredientId ingredientId, StockOrderId stockOrderId, WarehouseId warehouseId) : base(id)
     {
         IngredientId = ingredientId;
         StockOrderId = stockOrderId;
@@ -52,5 +53,8 @@ public class StockItem : Entity<StockItemId>
     /// <param name="warehouseId">Unique identifier of the associated warehouse.</param>
     /// <returns>A new <see cref="StockItem"/> instance.</returns>
     public static StockItem Create(IngredientId ingredientId, StockOrderId stockOrderId, WarehouseId warehouseId)
-        => new(ingredientId, stockOrderId, warehouseId);
+    {
+        var id = new StockItemId(Guid.NewGuid());
+        return new StockItem(id, ingredientId, stockOrderId, warehouseId);
+    }
 }

@@ -17,7 +17,6 @@ internal sealed class StockItemConfiguration : IEntityTypeConfiguration<StockIte
             .HasConversion(
                 id => id.Value,
                 value => new StockItemId(value))
-            .ValueGeneratedOnAdd()
             .IsRequired();
 
         builder.Property(x => x.IngredientId)

@@ -33,7 +33,7 @@ public class RecipesController(ISender mediatr) : ApiController
 
         return result.Match(Ok, HandleErrors);
     }
-    
+
     /// <summary>
     /// Creates a new cocktail recipe in the system.
     /// </summary>
@@ -44,7 +44,7 @@ public class RecipesController(ISender mediatr) : ApiController
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(CreateRecipeRequest request)
     {
-        var command = new CreateRecipeCommand(request.Name, request.Instructions);
+        var command = new CreateRecipeCommand(request.Name, request.Instructions, request.Ingredients);
         var result = await mediatr.Send(command);
 
         return result.Match(

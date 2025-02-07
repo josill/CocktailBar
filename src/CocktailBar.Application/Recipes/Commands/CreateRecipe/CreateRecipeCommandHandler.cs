@@ -3,8 +3,11 @@
 
 using CocktailBar.Application.Common.Interfaces;
 using CocktailBar.Application.Recipes.Common;
+using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Aggregates.Recipe;
+using CocktailBar.Domain.Enumerations;
 using CocktailBar.Domain.Exceptions;
+using Amount = CocktailBar.Domain.ValueObjects.Amount;
 
 namespace CocktailBar.Application.Recipes.Commands.CreateRecipe;
 
@@ -16,6 +19,11 @@ public class CreateRecipeCommandHandler(IUnitOfWork unitOfWork) : IRequestHandle
     public async Task<ErrorOr<RecipeResult>> Handle(CreateRecipeCommand request, CancellationToken cancellationToken)
     {
         var recipe = RecipeAggregate.Create(request.Name, request.Instructions);
+        foreach (var ing in request.Ingredients)
+        {
+            var amount = Amount.Create(ing.Amount.Value, Enum.Parse<WeightUnit>(ing.Amount.Unit));
+            recipe.AddIngredient(new IngredientId(ing.Id), amount);
+        }
 
         try
         {

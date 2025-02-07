@@ -1,6 +1,8 @@
 // Copyright (c) 2024 Jonathan Sillak. All rights reserved.
 // Licensed under the MIT license.
 
+using CocktailBar.Application.Common.Interfaces.Querying;
+
 namespace CocktailBar.Application.Common.Interfaces;
 
 /// <summary>
@@ -15,6 +17,15 @@ public interface IRepository
     /// <param name="id">The primary key value.</param>
     /// <returns>The aggregate if found; otherwise, null.</returns>
     Task<T?> GetByIdAsync<T>(object id) where T : class;
+
+    /// <summary>
+    /// Retrieves the paged list.
+    /// </summary>
+    /// <param name="page">The page number.</param>
+    /// <param name="pageSize">The page size.</param>
+    /// <typeparam name="T">The type of aggregate root.</typeparam>
+    /// <returns>The paginated list of items.</returns>
+    Task<IPaginatedList<T>> GetPagedListAsync<T>(int page, int pageSize) where T : class;
 
     /// <summary>
     /// Retrieves all aggregates of the specified type.

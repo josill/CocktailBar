@@ -16,13 +16,12 @@ internal sealed class CocktailsWriteModelConfiguration : IEntityTypeConfiguratio
             .HasConversion(
                 id => id.Value,
                 value => new CocktailId(value))
-            .ValueGeneratedOnAdd()
             .IsRequired();
 
         builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(100);
-        
+
         builder.Property(x => x.Description)
             .IsRequired();
 

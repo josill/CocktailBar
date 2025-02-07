@@ -1,6 +1,6 @@
 using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Aggregates.Recipe;
-using CocktailBar.Infrastructure.Common.Configurations;
+using CocktailBar.Infrastructure.SeedWork.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

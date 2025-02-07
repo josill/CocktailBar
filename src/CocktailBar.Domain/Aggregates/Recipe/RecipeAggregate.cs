@@ -23,26 +23,15 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// <summary>
     /// Initializes a new instance of the <see cref="RecipeAggregate"/> class.
     /// </summary>
-    /// <param name="name">The name of the recipe.</param>
-    /// <param name="instructions">The instructions for preparing the cocktail.</param>
-    private RecipeAggregate(string name, string instructions)
-    {
-        Validate(name, instructions);
-        Name = name.Trim();
-        Instructions = instructions.Trim();
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RecipeAggregate"/> class.
-    /// </summary>
     /// <param name="id">The id of the recipe.</param>
     /// <param name="name">the name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <remarks>This constructor should only be used for seeding data.</remarks>
     private RecipeAggregate(RecipeId id, string name, string instructions) : base(id)
     {
-        Name = name;
-        Instructions = instructions;
+        Validate(name, instructions);
+        Name = name.Trim();
+        Instructions = instructions.Trim();
     }
 
     /// <summary>
@@ -67,7 +56,11 @@ public class RecipeAggregate : Aggregate<RecipeId>
     /// <param name="name">The name of the recipe.</param>
     /// <param name="instructions">The instructions for preparing the cocktail.</param>
     /// <returns>A new <see cref="RecipeAggregate"/> instance.</returns>
-    public static RecipeAggregate Create(string name, string instructions) => new(name, instructions);
+    public static RecipeAggregate Create(string name, string instructions)
+    {
+        var id = new RecipeId(Guid.NewGuid());
+        return new RecipeAggregate(id, name, instructions);
+    }
 
     /// <summary>
     /// Creates a new instance of the <see cref="RecipeAggregate"/> class.
@@ -110,7 +103,7 @@ public class RecipeAggregate : Aggregate<RecipeId>
     }
 
     /// <summary>
-    /// Validates the recipe instructions.
+    /// Validates the recipe name and instructions.
     /// </summary>
     /// <param name="name">The name to validate.</param>
     /// <param name="instructions">The instructions to validate.</param>
