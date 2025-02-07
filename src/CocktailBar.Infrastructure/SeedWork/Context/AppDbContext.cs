@@ -42,13 +42,13 @@ public class AppDbContext : DbContext, IAppDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        ApplyAggregatesConfiguration(modelBuilder);
+        ApplyEntityConfiguration(modelBuilder);
         ApplySeedConfiguration(modelBuilder);
 
         base.OnModelCreating(modelBuilder);
     }
 
-    private static void ApplyAggregatesConfiguration(ModelBuilder modelBuilder)
+    private static void ApplyEntityConfiguration(ModelBuilder modelBuilder)
     {
         new CocktailsWriteModelConfiguration().Configure(modelBuilder.Entity<CocktailAggregate>());
         new RecipeConfiguration().Configure(modelBuilder.Entity<RecipeAggregate>());

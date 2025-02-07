@@ -14,7 +14,7 @@ public readonly record struct WarehouseId(Guid Value);
 /// </summary>
 public class WarehouseAggregate : Aggregate<WarehouseId>
 {
-    private readonly List<StockItem> _stockItems = new();
+    private readonly List<StockItem> _stockItems = [];
 
     private WarehouseAggregate() {} // Private constructor for EF Core
 
