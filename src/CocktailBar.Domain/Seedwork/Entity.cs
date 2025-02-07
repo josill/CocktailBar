@@ -48,7 +48,7 @@ public abstract class Entity<TId> where TId : notnull
     /// <returns>A hash code for the current object.</returns>
     public override int GetHashCode()
     {
-        return Id is null ? 0 : EqualityComparer<TId>.Default.GetHashCode(Id);
+        return EqualityComparer<TId>.Default.GetHashCode(Id);
     }
 
     /// <summary>

@@ -19,7 +19,7 @@ public class RecipeIngredient : Entity<RecipeIngredientId>
     /// <param name="recipeId">The unique identifier of the recipe that this ingredient belongs to.</param>
     /// <param name="ingredientId">The unique identifier of the ingredient from the ingredient catalog.</param>
     /// <param name="amount">The quantity and unit of measurement for this ingredient in the recipe.</param>
-    private RecipeIngredient(RecipeId recipeId, IngredientId ingredientId, Amount amount) : base()
+    private RecipeIngredient(RecipeId recipeId, IngredientId ingredientId, Amount amount)
     {
         RecipeId = recipeId;
         IngredientId = ingredientId;

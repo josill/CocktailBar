@@ -15,7 +15,6 @@ internal sealed class IngredientConfiguration : IEntityTypeConfiguration<Ingredi
             .HasConversion(
                 id => id.Value,
                 value => new IngredientId(value))
-            .ValueGeneratedOnAdd()
             .IsRequired();
 
         builder.Property(x => x.Name)

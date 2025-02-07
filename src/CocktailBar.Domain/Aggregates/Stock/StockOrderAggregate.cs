@@ -22,18 +22,20 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
     /// <summary>
     /// Initializes a new instance of the <see cref="StockOrderAggregate"/> class.
     /// </summary>
+    /// <param name="id">Unique identifier of the stock order.</param>
     /// <param name="orderNumber">The number of the order.</param>
     /// <param name="price">The price of the order.</param>
     /// <param name="orderedAtDate">The date and time when the order was placed.</param>
     /// <param name="orderArriveDate">The date and time when the order arrived.</param>
     /// <param name="stockItems">The stock items associated with the order.</param>
-    private StockOrderAggregate(string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null)
+    private StockOrderAggregate(StockOrderId id, string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null) : base(id)
     {
+        Validate(orderNumber, orderedAtDate, orderArriveDate);
         OrderNumber = orderNumber.Trim().ToLower();
         Price = price;
         OrderedAtDate = orderedAtDate;
         OrderArriveDate = orderArriveDate;
-        if (stockItems is not null) _stockItems = stockItems;
+        if (stockItems is not null && stockItems.Count > 0) _stockItems = stockItems;
     }
 
     /// <summary>
@@ -71,7 +73,10 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
     /// <param name="stockItems">The stock items associated with the order.</param>
     /// <returns>A new <see cref="StockOrderAggregate"/> instance.</returns>
     public static StockOrderAggregate Create(string orderNumber, StockOrderPrice price, DateTime orderedAtDate, DateTime orderArriveDate, List<StockItem>? stockItems = null)
-        => new(orderNumber, price, orderedAtDate, orderArriveDate, stockItems);
+    {
+        var id = new StockOrderId(Guid.NewGuid());
+        return new StockOrderAggregate(id, orderNumber, price, orderedAtDate, orderArriveDate, stockItems);
+    }
 
     /// <summary>
     /// Adds a stock item to the order if it doesn't already exist.
@@ -101,5 +106,19 @@ public class StockOrderAggregate : Aggregate<StockOrderId>
             throw DomainException.For<StockOrderAggregate>("Stock item does not exist in the order.");
 
         _stockItems.Remove(stockItem);
+    }
+
+    /// <summary>
+    /// Validates the stock order number, order and arrive at date.
+    /// </summary>
+    /// <param name="orderNumber">The order number to validate.</param>
+    /// <param name="orderedAtDate">The ordered at date to validate.</param>
+    /// <param name="orderArriveDate">The order arrive date to validate.</param>
+    /// <exception cref="DomainException">Thrown when validation fails.</exception>
+    private static void Validate(string orderNumber, DateTime orderedAtDate, DateTime orderArriveDate)
+    {
+        if (string.IsNullOrWhiteSpace(orderNumber)) throw DomainException.For<StockOrderAggregate>("Stock order number can not be empty.");
+        if (orderedAtDate > DateTime.Now) throw DomainException.For<StockOrderAggregate>("Stock order ordered at date has to be in the past.");
+        if (orderArriveDate < DateTime.Now) throw DomainException.For<StockOrderAggregate>("Stock order arrive arrive date has to be in the future.");
     }
 }

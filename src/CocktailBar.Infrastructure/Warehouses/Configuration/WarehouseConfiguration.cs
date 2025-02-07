@@ -15,9 +15,8 @@ internal sealed class WarehouseConfiguration : IEntityTypeConfiguration<Warehous
             .HasConversion(
                 id => id.Value,
                 value => new WarehouseId(value))
-            .ValueGeneratedOnAdd()
             .IsRequired();
-        
+
         builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(100);
