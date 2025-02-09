@@ -20,7 +20,6 @@ public class RecipeIngredientsSeedConfiguration : IEntityTypeConfiguration<Recip
         [
             // Classic Martini
             RecipeIngredient.Create(
-                new RecipeIngredientId(Guid.NewGuid()),
                 RecipeIds.ClassicMartini,
                 IngredientIds.GreyGooseVodka,
                 Amount.Create(60, WeightUnit.Ml)
