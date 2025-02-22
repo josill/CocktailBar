@@ -1,4 +1,4 @@
-# CocktailBar
+# Rich Domain Model Design and Persistence in .NET and EF Core
 
 A demo backend service for managing cocktail recipes and inventory to demonstrate the design of Rich Domain Model design and configuration using .NET and EF Core.
 
