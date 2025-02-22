@@ -19,14 +19,7 @@ public class RecipeIngredient : Entity<RecipeIngredientId>
     /// <param name="recipeId">The unique identifier of the recipe that this ingredient belongs to.</param>
     /// <param name="ingredientId">The unique identifier of the ingredient from the ingredient catalog.</param>
     /// <param name="amount">The quantity and unit of measurement for this ingredient in the recipe.</param>
-    private RecipeIngredient(RecipeId recipeId, IngredientId ingredientId, Amount amount) : base()
-    {
-        RecipeId = recipeId;
-        IngredientId = ingredientId;
-        Amount = amount;
-    }
-
-    private RecipeIngredient(RecipeIngredientId id, RecipeId recipeId, IngredientId ingredientId, Amount amount) : base(id)
+    private RecipeIngredient(RecipeId recipeId, IngredientId ingredientId, Amount amount)
     {
         RecipeId = recipeId;
         IngredientId = ingredientId;
@@ -57,15 +50,4 @@ public class RecipeIngredient : Entity<RecipeIngredientId>
     /// <returns>A new <see cref="RecipeIngredient"/> instance.</returns>
     public static RecipeIngredient Create(RecipeId recipeId, IngredientId ingredientId, Amount amount)
         => new(recipeId, ingredientId, amount);
-
-    /// <summary>
-    /// Creates a new instance of the <see cref="RecipeIngredient"/> class.
-    /// </summary>
-    /// <param name="id">The unique identifier of the recipe ingerdient.</param>
-    /// <param name="recipeId">The unique identifier of the recipe that this ingredient belongs to.</param>
-    /// <param name="ingredientId">The unique identifier of the ingredient from the ingredient catalog.</param>
-    /// <param name="amount">The quantity and unit of measurement for this ingredient in the recipe.</param>
-    /// <returns>A new <see cref="RecipeIngredient"/> instance.</returns>
-    public static RecipeIngredient Create(RecipeIngredientId id, RecipeId recipeId, IngredientId ingredientId, Amount amount)
-        => new(id, recipeId, ingredientId, amount);
 }

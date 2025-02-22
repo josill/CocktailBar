@@ -7,12 +7,12 @@ public static class IngredientIds
     // Base Spirits - Vodka
     public static readonly IngredientId GreyGooseVodka = new(Guid.Parse("f8c62fb2-7bb8-4c8d-b88c-d4a7b89f1273"));
     public static readonly IngredientId BelvedereVodka = new(Guid.Parse("80c5b839-1b17-4a66-a894-07f675070b9c"));
-    // TODO: change Guid to IngredientId
-    public static readonly Guid AbsolutVodka = new("6a7c8b3f-451c-4e9a-b795-ec5883714a9a");
-    public static readonly Guid StolichnayaVodka = new("d1a3e2c4-1f34-4b5d-9c6b-8a7f0e912d3b");
-    public static readonly Guid CitrusVodka = new("b9f5d8e7-6c2a-4b3d-9e8f-7a1c6d4b3e2a");
-    public static readonly Guid VanillaVodka = new("c4b3a2d1-8e7f-4c6b-9d5a-2b3e4f5c6d7a");
+    public static readonly IngredientId AbsolutVodka = new(Guid.Parse("6a7c8b3f-451c-4e9a-b795-ec5883714a9a"));
+    public static readonly IngredientId StolichnayaVodka = new(Guid.Parse("d1a3e2c4-1f34-4b5d-9c6b-8a7f0e912d3b"));
+    public static readonly IngredientId CitrusVodka = new(Guid.Parse("b9f5d8e7-6c2a-4b3d-9e8f-7a1c6d4b3e2a"));
+    public static readonly IngredientId VanillaVodka = new(Guid.Parse("c4b3a2d1-8e7f-4c6b-9d5a-2b3e4f5c6d7a"));
 
+    // TODO: change Guid to IngredientId
     // Base Spirits - Gin
     public static readonly Guid TanquerayGin = new("e8d7c6b5-a4f3-4e2d-9b8a-7c6d5e4f3a2b");
     public static readonly Guid BeefeaterGin = new("f7e6d5c4-b3a2-4d1e-8c7b-6a5b4c3d2e1f");

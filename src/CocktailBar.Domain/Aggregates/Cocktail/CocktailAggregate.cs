@@ -17,10 +17,11 @@ public class CocktailAggregate : Aggregate<CocktailId>
     /// <summary>
     /// Initializes a new instance of the <see cref="CocktailAggregate"/> class.
     /// </summary>
+    /// <param name="id">Unique identifier of the cocktail.</param>
     /// <param name="name">The name of the cocktail.</param>
     /// <param name="description">The description of the cocktail.</param>
     /// <param name="recipeId">The unique identifier of the associated recipe.</param>
-    public CocktailAggregate(string name, string description, RecipeId recipeId)
+    private CocktailAggregate(CocktailId id, string name, string description, RecipeId recipeId) : base(id)
     {
         Validate(name, description);
         Name = name.Trim();
@@ -52,18 +53,11 @@ public class CocktailAggregate : Aggregate<CocktailId>
     /// <param name="description">The description of the cocktail.</param>
     /// <param name="recipeId">The unique identifier of the associated recipe.</param>
     /// <returns>A new <see cref="CocktailAggregate"/> instance.</returns>
-    public static CocktailAggregate Create(
-        string name, string description, RecipeId recipeId) => new(name, description, recipeId);
-
-    /// <summary>
-    /// Creates a new instance of the <see cref="CocktailAggregate"/> class from the <see cref="CocktailReadModel"/> class.
-    /// </summary>
-    /// <param name="cocktail">The cocktail read model.</param>
-    /// <returns>A new <see cref="CocktailAggregate"/> instance.</returns>
-    public static CocktailAggregate From(CocktailReadModel cocktail) => new(
-        cocktail.Name,
-        cocktail.Description,
-        new RecipeId(cocktail.RecipeId));
+    public static CocktailAggregate Create(string name, string description, RecipeId recipeId)
+    {
+        var id = new CocktailId(Guid.NewGuid());
+        return new CocktailAggregate(id, name, description, recipeId);
+    }
 
     /// <summary>
     /// Validates the cocktail's name and description.

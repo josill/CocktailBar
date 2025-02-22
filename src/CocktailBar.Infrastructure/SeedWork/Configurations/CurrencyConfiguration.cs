@@ -4,7 +4,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TeixeiraSoftware.Finance;
 
-namespace CocktailBar.Infrastructure.Common.Configurations;
+namespace CocktailBar.Infrastructure.SeedWork.Configurations;
 
 public class CurrencyConfiguration
 {

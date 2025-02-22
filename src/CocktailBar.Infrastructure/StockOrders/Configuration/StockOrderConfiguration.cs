@@ -15,7 +15,6 @@ internal sealed class StockOrderConfiguration : IEntityTypeConfiguration<StockOr
             .HasConversion(
                 id => id.Value,
                 value => new StockOrderId(value))
-            .ValueGeneratedOnAdd()
             .IsRequired();
 
         builder.Property(x => x.OrderNumber)
@@ -24,10 +23,10 @@ internal sealed class StockOrderConfiguration : IEntityTypeConfiguration<StockOr
 
         builder.Property(x => x.OrderedAtDate)
             .IsRequired();
-            
+
         builder.Property(x => x.OrderArriveDate)
             .IsRequired();
-        
+
         new OrderPriceConfiguration().Configure(builder.ComplexProperty(x => x.Price));
     }
 }
