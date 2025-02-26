@@ -7,6 +7,8 @@ using CocktailBar.Domain.Aggregates.Ingredient;
 using CocktailBar.Domain.Aggregates.Recipe;
 using CocktailBar.Domain.Aggregates.Stock;
 using CocktailBar.Domain.Aggregates.Warehouse;
+using CocktailBar.Domain.Enumerations;
+using CocktailBar.Domain.ValueObjects;
 using CocktailBar.Infrastructure.Cocktails.Configuration;
 using CocktailBar.Infrastructure.Ingredients.Configuration;
 using CocktailBar.Infrastructure.Recipes.Configuration;
@@ -25,6 +27,8 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<CocktailAggregate> Cocktails { get; init; }
 
     public DbSet<RecipeAggregate> Recipes { get; init; }
+
+    public DbSet<RecipeIngredient> RecipeIngredients { get; init; }
 
     public DbSet<IngredientAggregate> Ingredients { get; init; }
 
@@ -63,6 +67,7 @@ public class AppDbContext : DbContext, IAppDbContext
     {
         modelBuilder.ApplyConfiguration(new RecipeSeedConfiguration());
         modelBuilder.ApplyConfiguration(new IngredientSeedConfiguration());
+        // modelBuilder.ApplyConfiguration(new RecipeIngredientsSeedConfiguration());
         modelBuilder.ApplyConfiguration(new WarehouseSeedConfiguration());
 
         // Complex properties are currently not supported in seeding. See https://github.com/dotnet/efcore/issues/31254 for more information.

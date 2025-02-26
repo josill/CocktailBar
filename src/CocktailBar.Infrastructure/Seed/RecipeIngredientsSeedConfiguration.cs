@@ -22,7 +22,7 @@ public class RecipeIngredientsSeedConfiguration : IEntityTypeConfiguration<Recip
             RecipeIngredient.Create(
                 RecipeIds.ClassicMartini,
                 IngredientIds.GreyGooseVodka,
-                Amount.Create(60, WeightUnit.Ml)
+                Amount.Create(400, WeightUnit.Ml)
             ),
             // RecipeIngredientsAggregate.Create(
             //     new RecipeIngredientsAggregateId(Guid.NewGuid()),

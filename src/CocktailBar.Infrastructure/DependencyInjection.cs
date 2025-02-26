@@ -12,6 +12,7 @@ using CocktailBar.Domain.Aggregates.Warehouse;
 using CocktailBar.Infrastructure.Cocktails.Repository;
 using CocktailBar.Infrastructure.Ingredients.Repository;
 using CocktailBar.Infrastructure.Recipes.Repository;
+using CocktailBar.Infrastructure.Seed;
 using CocktailBar.Infrastructure.SeedWork.Context;
 using CocktailBar.Infrastructure.SeedWork.Settings;
 using CocktailBar.Infrastructure.SeedWork.UnitOfWork;
@@ -86,6 +87,8 @@ public static class DependencyInjection
            dbContext.Database.EnsureDeleted();
            dbContext.Database.EnsureCreated();
            dbContext.Database.Migrate();
+
+           ComplexTypeSeeder.Seed(dbContext).GetAwaiter().GetResult();
        }
 
        return services;
